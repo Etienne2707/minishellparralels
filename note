@@ -1,0 +1,22 @@
+gcc *.c *.h -lreadline  
+
+gerer en priorite les $ rapelle en "" ou normak mais pas ne ''
+cherhcer dans env si valeur donne 
+" = 34;
+' = 39;
+
+counter - coutner len - coumter
+
+				value = malloc(sizeof(char) * strlen(env) - strlen(str) + 1);
+				c = 0;
+				while (env[i++] != '\0')
+				{
+					printf("%c", env[i]);
+					value[c] = env[i];
+					c++;
+				}
+
+SRC =	$(SRC_DIR)/main.c			\
+		$(SRC_DIR)/utils.c			\
+		$(SRC_DIR)/token.c			\
+		$(SRC_DIR)/split.c		\
