@@ -19,7 +19,6 @@ char    *ft_remove_quote(char *str, int q)
     }
     if (c == 0)
         return (str);
-    printf("%d/n", ft_strlen(str) - c + (c % 2) + 1);
     dest  = malloc(sizeof(char) * ft_strlen(str) - c + (c % 2) + 1);
     if (!dest)
         return (NULL);
@@ -48,7 +47,6 @@ char    *ft_remove_quote(char *str, int q)
         i++;
     }
     dest[k] = '\0';
-    printf("%s\n", dest);
     return (dest);
 }
 
@@ -123,7 +121,6 @@ int check_quote(char *str, char *find)
 
     i = 0;
     find = ft_strjoin("$", find);
-
     k = ft_strstr2(str, find);
     if (check_in_quote(str, k) != 1)
         return (0);

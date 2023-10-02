@@ -33,7 +33,6 @@ char**  get_arg(char *cmd, t_token *token)
     while (token->arg[i] != 0)
     {
         token->arg[i] = ft_remove_quote(token->arg[i],34);
-        printf("je suis l'argument n%d = %s\n", i , token->arg[i]);
         i++;
     }
     return (token->arg);
@@ -92,11 +91,19 @@ int init_struct(char **cmd, t_token *token)
         token[i].cmdr = get_cmdr(cmd[i], &token[i]);
         token[i].arg = get_arg(cmd[i], &token[i]);
         i++;
-    }
+    }    
+    
+    k = 0;
     i = 0;
-    while (i < k)
+    while(cmd[i] != 0)
     {
-        printf("\n%s\n", token[i].cmdr);    
+        printf("cmd[%d] = %s\n", i, token[i].cmdr);
+        k = 0;
+        while (token[i].arg[k] != 0)
+        {
+            printf("arg = %s\n", token[i].arg[k]);
+            k++;
+        }
         i++;
     }
     return (1);
@@ -105,5 +112,10 @@ int init_struct(char **cmd, t_token *token)
 int token(char **cmd, t_token *token)
 {
     init_struct(cmd, token);
+    int i;
+    int k;
+    int c;
+
+
     return (1);
 }

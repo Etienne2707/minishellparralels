@@ -39,7 +39,6 @@ char	*get_value(char *env, char *str, char *cmd)
 	}
 
 	value[c] = '\0';
-    printf("la value = %s\n", value);
     if (check_quote(cmd,str) == 0)
 		return (NULL);
 	return (value);
@@ -83,7 +82,6 @@ char*	get_dollars(char *str, int pos, char **envp)
 	}
 	value[c] = '\0';
 	c = i - c;
-    printf("la value = %s\n", value );
 	return (change_value(value, str, swap_value(value, envp, str), c));
 }
 
@@ -99,7 +97,6 @@ char*	checkdollars(char *str, char **envp)
         lea = str;
 		if (str[i] == '$')
 		{
-            printf("le compteur  = %d\n", i);
 			str = get_dollars(str, i, envp);
             
             if (!str)

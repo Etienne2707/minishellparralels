@@ -5,7 +5,6 @@ int ft_compare(char *str, char *str2, int size)
     int i = 0;
     if (!str)
     {
-        write(1, "aide", 4);
         return (-1);
     }
     while (str[i] == str2[i] && i < size -1 && str2[i] != '\0' && str[i] != '\0')

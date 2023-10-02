@@ -12,7 +12,7 @@ int is_in_string(char *str, char c, char pos, int k)
 		{
 			
 			i++;
-			while (str[i] != 39)
+			while (str[i] != 39 && str[i] != '\0')
 			{
 				if (pos == c && i == k)
 					return (1);
@@ -23,7 +23,7 @@ int is_in_string(char *str, char c, char pos, int k)
 		{
 			
 			i++;
-			while (str[i] != 34)
+			while (str[i] != 34 && str[i] != '\0')
 			{
 				if (pos == c && i == k)
 					return (1);

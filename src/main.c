@@ -37,7 +37,6 @@ int	Syntax_Error(char *str, t_token *token, char **envp)
 
 	i = 0;
 	str = checkdollars(str, envp);
-	printf("je suis %s\n", str);
 	cmd = ft_split(str, '|');	
 	if ((check_pipe(cmd, str)) == -1)
 		return (-1);
