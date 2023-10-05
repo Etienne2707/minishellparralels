@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/09/27 18:11:35 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:07:24 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ char *ft_strnjoin(char  *s1, char  *s2, int c);
 char*	checkdollars(char *str, char **envp);
 int check_quote(char *str, char *find);
 char    *ft_remove_quote(char *str, int q);
+int check_in_quote(char *str, int index);
+
+
 
 
 

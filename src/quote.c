@@ -9,6 +9,7 @@ char    *ft_remove_quote(char *str, int q)
 
     k = 0;
     c = 0;
+    
     while(str[k] != '\0')
     {
         if (str[k] == 34 || str[k] == 39)
@@ -31,7 +32,6 @@ char    *ft_remove_quote(char *str, int q)
             i++;
             while (str[i] != 39 && str[i] != '\0')
             {
-                
                 dest[k++] = str[i++];
                
             }
@@ -40,9 +40,16 @@ char    *ft_remove_quote(char *str, int q)
         {
             i++;
             while (str[i] != 34 && str[i] != '\0')
-            {
+            {               
+                printf("dest[k] == %c\n", str[i]);
+
                 dest[k++] = str[i++];
             }
+        }
+        else if(str[i] != ' ')
+        {
+            while (str[i] != ' ' &&  str[i] != 39 && str[i] != 34 && str[i] != '\0')
+                dest[k++] = str[i++];
         }
         i++;
     }
@@ -87,6 +94,7 @@ int check_in_quote(char *str, int index)
     int k;
 
     i = 0;
+    printf("%s\n  %d", str, str[index]);
     while (str[i] != '\0')
     {
         if (str[i] == 34)
@@ -124,7 +132,6 @@ int check_quote(char *str, char *find)
     k = ft_strstr2(str, find);
     if (check_in_quote(str, k) != 1)
         return (0);
-
     return (1);
 }
 
