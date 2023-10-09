@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/05 17:07:24 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/09 18:59:53 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <stdlib.h>
+
+enum					e_token
+{
+	CMD,
+    ARG,
+	PIPE,
+	R_INPUT,
+	R_OUTPUT,
+	R_DINPUT,
+	R_DOUTPUT,
+	REDIRECT_TMP
+};
 
 typedef struct s_token {
     char *cmdr;

@@ -103,7 +103,7 @@ int check_in_quote(char *str, int index)
             while (str[i] != 34 && str[i] != '\0')
                 i++;
             if (str[i] == '\0')
-                return (-1);
+                return (0);
             if (index > k && index < i)
                 return (1);
         } 
@@ -113,13 +113,13 @@ int check_in_quote(char *str, int index)
             k = i;
             while (str[++i] != 39 && str[i] != '\0')
             if (str[i] == '\0')
-                return (-1);
+                return (0);
             if (index > k && index < i)
                 return (0);
         }
         i++;
     }
-    return (1);
+    return (-1);
 }
 
 int check_quote(char *str, char *find)
@@ -130,7 +130,7 @@ int check_quote(char *str, char *find)
     i = 0;
     find = ft_strjoin("$", find);
     k = ft_strstr2(str, find);
-    if (check_in_quote(str, k) != 1)
+    if (check_in_quote(str, k) == 0)
         return (0);
     return (1);
 }

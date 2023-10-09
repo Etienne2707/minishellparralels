@@ -58,8 +58,7 @@ char	*get_cmdr(char *cmd, t_token *token)
 			return (NULL);
 		}
 		k = i;
-		while (cmd[i + c] != '\0' && cmd[i + c] != ' ' || (cmd[i + c] >= 'a'
-				&& cmd[i + c] <= 'z'))
+		while ((cmd[i + c] != '\0' && (cmd[i + c] != ' ')))
             {
                 //printf("valeur de retour %d && %d\n", check_in_quote(cmd, i + c), cmd[i+c]);
                 //if (cmd[i + c] == ' ' && check_in_quote(cmd, i + c) == -1)
@@ -75,7 +74,7 @@ char	*get_cmdr(char *cmd, t_token *token)
 		str[i++] = cmd[k++];
 	str[i] = '\0';
     str = ft_remove_quote(str, 0);
-    printf("%s\n", str);
+    printf("la string %s\n", str);
 	token->start_arg = k;
 	return (str);
 }
