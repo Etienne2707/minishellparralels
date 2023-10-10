@@ -1,4 +1,8 @@
-#include "minishell.h"
+//#include "minishell.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
 
 int is_in_string(char *str, char c, char pos, int k)
 {
@@ -139,10 +143,5 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	makelengthmalloc(str, dest, c);
 	wordinput(str, dest, c);
-/*	while (dest[i] != 0)
-	{
-		printf("%s\n", dest[i]);
-		i++;
-	}*/
 	return (dest);
 }

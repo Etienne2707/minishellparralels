@@ -105,7 +105,6 @@ char*	checkdollars(char *str, char **envp)
         
 		i++;
 	}
-	
 	return (str);
 	
 }

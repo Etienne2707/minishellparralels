@@ -94,24 +94,25 @@ int check_in_quote(char *str, int index)
     int k;
 
     i = 0;
-    printf("%s\n  %d", str, str[index]);
+    
     while (str[i] != '\0')
     {
         if (str[i] == 34)
         {
             k = i;
-            while (str[i] != 34 && str[i] != '\0')
-                i++;
+            while (str[++i] != 34 && str[++i] != '\0')
             if (str[i] == '\0')
                 return (0);
-            if (index > k && index < i)
+                                                                                                     if (index > k && index < i)
+            {
                 return (1);
+            }
         } 
        if (str[i] == 39)
         {
 
             k = i;
-            while (str[++i] != 39 && str[i] != '\0')
+            while (str[++i] != 39 && str[++i] != '\0')
             if (str[i] == '\0')
                 return (0);
             if (index > k && index < i)
@@ -132,6 +133,7 @@ int check_quote(char *str, char *find)
     k = ft_strstr2(str, find);
     if (check_in_quote(str, k) == 0)
         return (0);
+    free(find);
     return (1);
 }
 

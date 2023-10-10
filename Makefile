@@ -11,6 +11,9 @@ SRC =	$(SRC_DIR)/main.c			\
 		$(SRC_DIR)/utils2.c			\
 		$(SRC_DIR)/dollars.c		\
 		$(SRC_DIR)/quote.c		\
+		$(SRC_DIR)/redirection.c		\
+		$(SRC_DIR)/list.c	
+
 
 		
 

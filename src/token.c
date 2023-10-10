@@ -25,59 +25,20 @@ char	**get_arg(char *cmd, t_token *token)
 	int		i;
 	char	*temp;
 
-	i = token->start_arg;
+	i = 0;
 	temp = (ft_strnrcpy(cmd, temp, i));
 	token->arg = ft_split(temp, ' ');
+	redirection(token, token->arg);
 	i = 0;
 	while (token->arg[i] != 0)
 	{
 		token->arg[i] = ft_remove_quote(token->arg[i], 34);
 		i++;
 	}
+	free(temp);
 	return (token->arg);
 }
 
-char	*get_cmdr(char *cmd, t_token *token)
-{
-	int		i;
-	int		c;
-	int		k;
-	char	*str;
-
-	i = 0;
-	c = 0;
-	token->start_arg = 0;
-	while (cmd[i] != '\0')
-	{
-		while (cmd[i] == ' ')
-			i++;
-		if (cmd[i] != 34 && cmd[i] != 39 && cmd[i] != '<' && cmd[i] != '>'
-			&& cmd[i] != '-' && (cmd[i] < 'a' || cmd[i] > 'z') && (cmd[i] < '0'
-				|| cmd[i] > '9'))
-		{
-			return (NULL);
-		}
-		k = i;
-		while ((cmd[i + c] != '\0' && (cmd[i + c] != ' ')))
-            {
-                //printf("valeur de retour %d && %d\n", check_in_quote(cmd, i + c), cmd[i+c]);
-                //if (cmd[i + c] == ' ' && check_in_quote(cmd, i + c) == -1)
-                c++;
-            }
-			
-		break ;
-	}
-	i = 0;
-	printf("valeur : %d\n", c);
-	str = malloc(sizeof(char) * c + 1);
-	while (i < c)
-		str[i++] = cmd[k++];
-	str[i] = '\0';
-    str = ft_remove_quote(str, 0);
-    printf("la string %s\n", str);
-	token->start_arg = k;
-	return (str);
-}
 
 int	init_struct(char **cmd, t_token *token)
 {
@@ -94,7 +55,6 @@ int	init_struct(char **cmd, t_token *token)
 	i = 0;
 	while (cmd[i] != 0)
 	{
-		token[i].cmdr = get_cmdr(cmd[i], &token[i]);
 		token[i].arg = get_arg(cmd[i], &token[i]);
 		i++;
 	}
@@ -102,13 +62,15 @@ int	init_struct(char **cmd, t_token *token)
 	i = 0;
 	while (cmd[i] != 0)
 	{
-		printf("cmd[%d] = %s\n", i, token[i].cmdr);
+		printf("cmd[%d]\n", i);
 		k = 0;
 		while (token[i].arg[k] != 0)
 		{
 			printf("arg = %s\n", token[i].arg[k]);
 			k++;
 		}
+		printf("outfile : %d\n", token[i].outfile);
+		printf("infile : %d\n", token[i].infile);
 		i++;
 	}
 	return (1);
