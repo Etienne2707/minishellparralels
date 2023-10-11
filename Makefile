@@ -22,9 +22,9 @@ SRC =	$(SRC_DIR)/main.c			\
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(BIN_DIR)%.o)
 
 
-LIB_PATH = ./libft
+LIB_PATH = ./test
 
-LIB = -Llibft -lft
+LIB = -Llibft 
 
 INCLUDES = ./includes
 
