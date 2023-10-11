@@ -32,7 +32,7 @@ char	*ft_strnrcpy(char *str, char *temp, int c)
 		i = 0;
 		while (token->arg[i] != 0)
 		{
-			token->arg[i] = ft_remove_quote(token->arg[i], 34);
+			token->arg[i] = ft_remove_quote(token->arg[i]);
 			i++;
 		}
 		free(temp);

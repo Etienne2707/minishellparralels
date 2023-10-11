@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char    *ft_remove_quote(char *str, int q)
+char    *ft_remove_quote(char *str)
 {
     int k;
     int i;

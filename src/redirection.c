@@ -24,7 +24,7 @@ void    get_heredoc(t_token *token, char **arg)
     {
         if (strcmp("<<", arg[i]) == 0)
         {
-            token->delimiter[nbh++] = arg[i + 1];
+            token->delimiter[nbh++] = ft_remove_quote(arg[i + 1]);
         }
         i++;
     }
