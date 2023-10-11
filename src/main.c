@@ -71,13 +71,13 @@ int	main(int ac, char **argv, char **envp)
 	int i;
 	char *str;
 
-	token = NULL;
 	str = NULL;
 	pars = NULL;
 	str = readline("Minishell > ");
 	while (-1)
 	{
 		//printf("%s\n", str);
+		
 		check_str(str, token, envp, &pars);
 		if (strcmp(str, "exit") == 0)
 			return (0);

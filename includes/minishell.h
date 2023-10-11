@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/10 20:14:40 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:45:08 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_pars
 	int	infile;
 	int outfile;
 	int	append;
-	char	*delimiter;
+	char	**delimiter;
 	struct s_pars	*next;
 	struct s_pars	*prev;
 	  
@@ -52,7 +52,7 @@ typedef struct s_token
 	int	infile;
 	int outfile;
 	int	append;
-	char	*delimiter;
+	char	**delimiter;
 	int				start_arg;
 }					t_token;
 
@@ -74,4 +74,5 @@ char				*ft_remove_quote(char *str, int q);
 int					check_in_quote(char *str, int index);
 void    list_am(t_token *token ,t_pars  **pars);
 int    redirection(t_token *token, char **arg);
+char    *add_space(char *str);
 #endif
