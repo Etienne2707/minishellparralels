@@ -76,6 +76,7 @@ int    redirection(t_token *token, char **arg)
     token->append = 0;
     token->outfile = 0;
     token->infile = 0;
+    token->delimiter = NULL;
     get_heredoc(token,arg);
     while (arg[i] != 0)
     {

@@ -40,52 +40,47 @@ char	*ft_strnrcpy(char *str, char *temp, int c)
 	}
 
 
-	int	init_struct(char **cmd, t_token *token)
-	{
-		int	i;
-		int	k;
+int	init_struct(char **cmd, t_token *token)
+{
+	int	i;
+	int	k;
 
-		i = 0;
-		while (cmd[i] != 0)
-			i++;
-		k = i;
-		token = malloc(sizeof(t_token) * i);
-		if (!token)
-			return (0);
-		i = 0;
-		while (cmd[i] != 0)
-		{
-			token[i].arg = get_arg(cmd[i], &token[i]);
-			i++;
-		}
+	i = 0;
+	while (cmd[i] != 0)
+		i++;
+	k = i;
+	token = malloc(sizeof(t_token) * i);
+	if (!token)
+		return (0);
+	i = 0;
+	while (cmd[i] != 0)
+	{
+		token[i].arg = get_arg(cmd[i], &token[i]);
+		i++;
+	}
+	k = 0;
+	i = 0;
+	while (cmd[i] != 0)
+	{
+		printf("cmd[%d]\n", i);
 		k = 0;
-		i = 0;
-		while (cmd[i] != 0)
+		while (token[i].arg[k] != 0)
 		{
-			printf("cmd[%d]\n", i);
-			k = 0;
-			while (token[i].arg[k] != 0)
+			printf("arg = %s\n", token[i].arg[k]);
+			k++;
+		}
+		printf("outfile : %d\n", token[i].outfile);
+		printf("infile : %d\n", token[i].infile);
+		printf("append : %d\n", token[i].append);
+		k = 0;
+		if (token[i].delimiter != NULL)
+			while (token[i].delimiter[k] != 0)
 			{
-				printf("arg = %s\n", token[i].arg[k]);
+				printf("heredoc[%d] : %s \n", k,token[i].delimiter[k]);
 				k++;
 			}
-			printf("outfile : %d\n", token[i].outfile);
-			printf("infile : %d\n", token[i].infile);
-			printf("append : %d\n", token[i].append);
-			k = 0;
-			if (token[i].delimiter != NULL)
-				while (token[i].delimiter[k] != 0)
-				{
-					printf("heredoc[%d] : %s \n", k,token[i].delimiter[k]);
-					k++;
-				}
-			i++;
-		}
-		return (1);
+		i++;
 	}
-
-int	token(char **cmd, t_token *token)
-{
-	init_struct(cmd, token);
+	// /get_list(cmd,token);
 	return (1);
 }

@@ -41,10 +41,13 @@ int	Syntax_Error(char *str, t_token *token, char **envp)
 	cmd = ft_split(str, '|');
 	if ((check_pipe(cmd, str)) == -1)
 		return (-1);
-	//if ((no_authorize(str)) == -1)
+	if (syntax_check(str) == 0)
+			return (-1);
+	if ((no_authorize(str)) == -1)
 	//	return (-1);
 	free(str);
 	init_struct(cmd, token);
+	//get_list(cmd,token);
 	return (1);
 	
 }
@@ -77,7 +80,7 @@ int	main(int ac, char **argv, char **envp)
 	while (-1)
 	{
 		//printf("%s\n", str);
-		
+		add_history(str);
 		check_str(str, token, envp, &pars);
 		if (strcmp(str, "exit") == 0)
 			return (0);

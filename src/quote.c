@@ -41,8 +41,6 @@ char    *ft_remove_quote(char *str)
             i++;
             while (str[i] != 34 && str[i] != '\0')
             {               
-                printf("dest[k] == %c\n", str[i]);
-
                 dest[k++] = str[i++];
             }
         }
@@ -90,38 +88,110 @@ int	ft_strstr2( char *str,  char *to_find)
 
 int check_in_quote(char *str, int index)
 {
+    if(check_dquote(str, index) == 1 || check_squote(str, index) == 1)
+        return (1);
+    return (-1);
+}
+
+int check_dquote(char *str, int index)
+{
+
     int i;
     int k;
-
-    i = 0;
     
+    i = 0;
     while (str[i] != '\0')
     {
-        if (str[i] == 34)
+        if (str[i] == 34 && (check_squote(str,i) == -1))
         {
             k = i;
-            while (str[++i] != 34 && str[++i] != '\0')
+            i++;
+            while (str[i] != 34 && str[i] != '\0' && (check_squote(str,i) == -1))
+                i++;
             if (str[i] == '\0')
-                return (0);
-                                                                                                     if (index > k && index < i)
-            {
-                return (1);
-            }
-        } 
-       if (str[i] == 39)
-        {
-
-            k = i;
-            while (str[++i] != 39 && str[++i] != '\0')
-            if (str[i] == '\0')
-                return (0);
+                return (-1);
             if (index > k && index < i)
-                return (0);
+                return (1);
         }
         i++;
     }
     return (-1);
 }
+
+int check_dquote2(char *str, int index)
+{
+
+    int i;
+    int k;
+    
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == 34)
+        {
+            k = i;
+            i++;
+            while (str[i] != 34 && str[i] != '\0' )
+                i++;
+            if (str[i] == '\0')
+                return (-1);
+            if (index > k && index < i)
+                return (1);
+        }
+        i++;
+    }
+    return (-1);
+}
+
+
+
+int check_squote(char *str, int index)
+{
+
+    int i;
+    int k;
+    
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == 39 && check_dquote2(str,i) == -1)
+        {
+            k = i;
+            i++;
+            while (str[i] != 39 && str[i] != '\0' && check_dquote2(str,i) == -1)
+                i++;
+            if (str[i] == '\0')
+                return (-1);
+            if (index > k && index < i)
+                return (1);
+        }
+        i++;
+    }
+    return (-1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int check_quote(char *str, char *find)
 {

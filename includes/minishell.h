@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/11 17:41:29 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:53:24 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <readline/readline.h>
+# include<readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -74,5 +75,9 @@ char				*ft_remove_quote(char *str);
 int					check_in_quote(char *str, int index);
 void    list_am(t_token *token ,t_pars  **pars);
 int    redirection(t_token *token, char **arg);
+int	get_list(char **cmd, t_token *token);
 char    *add_space(char *str);
+int	init_token(char **cmd, t_token *token);
+int syntax_check(char *str);
+int	get_list(char **cmd, t_token *token);
 #endif
