@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/12 14:53:24 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/13 18:33:12 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,20 @@ typedef struct s_token
 	int	append;
 	char	**delimiter;
 	int				start_arg;
+	int last_o;
+	int last_i;
 }					t_token;
+
+typedef struct s_expand
+{
+	char *value;
+	int v_len;
+	int start;
+	char *env;
+	char e_len;
+	
+}				t_expand;
+
 
 int					main(int ac, char **argv, char **envp);
 int					have_digit(char *str, int i);

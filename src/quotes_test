@@ -1,0 +1,29 @@
+
+173 = start
+ "hola"
+ 'hola'
+ ''hola''
+ ''h'o'la''
+ "''h'o'la''"
+ "'"h'o'la"'"
+"'hola'"
+ "'hola'"
+ '"hola"'
+ '''ho"''''l"a'''
+ hola""""""""""""
+ hola"''''''''''"
+ hola''''''''''''
+ hola'""""""""""'
+e"cho hola"
+e'cho hola'
+ "hola     " | cat -e
+ ""hola
+ "" hola
+ ""             hola
+ ""hola
+ ""hola
+ hola""bonjour
+"e"'c'ho 'b'"o"nj"o"'u'r
+""e"'c'ho 'b'"o"nj"o"'u'r"
+197 = end 
+

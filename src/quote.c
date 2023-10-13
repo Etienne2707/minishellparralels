@@ -1,5 +1,26 @@
 #include "minishell.h"
 
+char    *string_woquotes(char *str, char *dest)
+{
+    int i;
+    int k;
+
+    i = 0;
+    k = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == 34 && check_in_quote(str, i) == -1)
+            i++;
+        else if (str[i] == 39 && check_in_quote(str, i) == -1)
+            i++;
+        else
+            dest[k++] = str[i++];
+
+    }
+    dest[k] = '\0';
+    return (dest);
+}
+
 char    *ft_remove_quote(char *str)
 {
     int k;
@@ -12,46 +33,17 @@ char    *ft_remove_quote(char *str)
     
     while(str[k] != '\0')
     {
-        if (str[k] == 34 || str[k] == 39)
-        {
+       // printf("element = %d = %d\n", str[k], check_in_quote(str, k));
+        if ((str[k] == 34 || str[k] == 39) && check_in_quote(str, k) == -1)
             c++;
-        }
         k++;
     }
-    if (c == 0)
+    if (c == 0 || c == 1)
         return (str);
-    dest  = malloc(sizeof(char) * ft_strlen(str) - c + (c % 2) + 1);
+    dest = malloc(sizeof(char) * ft_strlen(str) - c + 1);
     if (!dest)
         return (NULL);
-    k = 0;
-    i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == 39)
-        {
-            i++;
-            while (str[i] != 39 && str[i] != '\0')
-            {
-                dest[k++] = str[i++];
-               
-            }
-        }
-        else if (str[i] == 34)
-        {
-            i++;
-            while (str[i] != 34 && str[i] != '\0')
-            {               
-                dest[k++] = str[i++];
-            }
-        }
-        else if(str[i] != ' ')
-        {
-            while (str[i] != ' ' &&  str[i] != 39 && str[i] != 34 && str[i] != '\0')
-                dest[k++] = str[i++];
-        }
-        i++;
-    }
-    dest[k] = '\0';
+    dest = string_woquotes(str,dest);
     return (dest);
 }
 
@@ -88,81 +80,28 @@ int	ft_strstr2( char *str,  char *to_find)
 
 int check_in_quote(char *str, int index)
 {
-    if(check_dquote(str, index) == 1 || check_squote(str, index) == 1)
-        return (1);
-    return (-1);
-}
-
-int check_dquote(char *str, int index)
-{
-
     int i;
-    int k;
-    
-    i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == 34 && (check_squote(str,i) == -1))
-        {
-            k = i;
-            i++;
-            while (str[i] != 34 && str[i] != '\0' && (check_squote(str,i) == -1))
-                i++;
-            if (str[i] == '\0')
-                return (-1);
-            if (index > k && index < i)
-                return (1);
-        }
-        i++;
-    }
-    return (-1);
-}
+    int start;
 
-int check_dquote2(char *str, int index)
-{
-
-    int i;
-    int k;
-    
     i = 0;
     while (str[i] != '\0')
     {
         if (str[i] == 34)
         {
-            k = i;
             i++;
-            while (str[i] != 34 && str[i] != '\0' )
+            start = i;
+            while ((str[i] != 34) && str[i] != '\0')
                 i++;
-            if (str[i] == '\0')
-                return (-1);
-            if (index > k && index < i)
+            if (index >= start && index < i)
                 return (1);
         }
-        i++;
-    }
-    return (-1);
-}
-
-
-
-int check_squote(char *str, int index)
-{
-
-    int i;
-    int k;
-    
-    i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == 39 && check_dquote2(str,i) == -1)
+        else if (str[i] == 39)
         {
-            k = i;
             i++;
-            while (str[i] != 39 && str[i] != '\0' && check_dquote2(str,i) == -1)
+            start = i;
+            while ((str[i] != 39) && str[i] != '\0')
                 i++;
-            if (str[i] == '\0')
-                return (-1);
-            if (index > k && index < i)
+            if (index >= start && index < i)
                 return (1);
         }
         i++;
@@ -171,24 +110,9 @@ int check_squote(char *str, int index)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /*if(check_dquote(str, index) == 1 || check_squote(str, index) == 1)
+        return (1);
+    return (-1);*/  
 
 
 
@@ -201,7 +125,7 @@ int check_quote(char *str, char *find)
     i = 0;
     find = ft_strjoin("$", find);
     k = ft_strstr2(str, find);
-    if (check_in_quote(str, k) == 0)
+    if (check_in_quote(str, k) == 1)
         return (0);
     free(find);
     return (1);

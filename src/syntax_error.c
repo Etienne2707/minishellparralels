@@ -91,32 +91,76 @@ int	syntax_charac(char *str)
 	return (0);
 }
 
-int	syntax_quote(char *str)
+int nb_d_quotes(char *str)
 {
-	int	i;
-	int	c;
+    int i;
+    int c;
 
-	i = 0;
-	c = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 34 && check_in_quote(str, i) == -1)
-			c++;
-		i++;
-	}
-	if ((c % 2) != 0)
-		return (0);
-	i = 0;
-	c = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 39 && check_in_quote(str, i) == -1)
-			c++;
-		i++;
-	}
-	if ((c % 2) != 0)
-		return (0);
-	return (1);
+    i = 0;
+    c = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == 34)
+            c++;
+        i++;
+    }
+    return (c);
+}
+
+int nb_s_quotes(char *str)
+{
+    int i;
+    int c;
+
+    i = 0;
+    c = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == 39)
+            c++;
+        i++;
+    }
+    return (c);
+}
+
+
+int syntax_quote(char *str)
+{
+   int i;
+   int s;
+   int d;
+
+   i = 0;
+   d = nb_d_quotes(str);
+   s = nb_s_quotes(str);
+   while (str[i] != '\0')
+   {
+        if (str[i] == 34)
+        {
+            i++;
+            while ((str[i]) != 34 && str[i] != '\0')
+            {
+                if (str[i] == 39)
+                    s--;
+                i++;
+            }
+        }
+        else if (str[i] == 39)
+        {
+            i++;
+            while ((str[i]) != 39 && str[i] != '\0')
+            {
+                if (str[i] == 34)
+                    d--;
+                i++;
+            }
+        }
+        i++;
+   }
+   if ((d % 2 != 0) || (s % 2 != 0))
+        return (0);
+   return (1);
+
 }
 
 int	syntax_check(char *str)
@@ -124,10 +168,14 @@ int	syntax_check(char *str)
 	int i;
 
 	i = 0;
+   // printf("peut etre pas les quotes");
+
 	if (syntax_quote(str) == 0)
 		return (0);
+   // printf("pas les quotes");
 	if (syntax_charac(str) == -1)
 		return (0);
+   // printf("c'est l'aautre");
     if (syntax_red(str) == -1)
         return (0);
     return (1);

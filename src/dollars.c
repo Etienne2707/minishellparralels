@@ -1,4 +1,45 @@
+
 #include "minishell.h"
+char*	add_dquote(char *str)
+{
+	int i;
+	char *new;
+
+	new = malloc(sizeof(char ) * ft_strlen(str) + 3);
+	if (!new)
+		return (NULL);
+	new[0] = 34;
+	new[1] = '\0';
+	new = ft_strjoin(new,str);
+	new[ft_strlen(new)] = 34;
+	new[ft_strlen(new) + 1] = '\0';
+	return (new);
+}
+
+
+char	*remove_dol(char *str, char *value)
+{
+	int i;
+	char *new;
+	int c;
+
+	i = 0;
+	c = 0;
+	new = malloc(sizeof(char ) * ft_strlen(str) - ft_strlen(value) + 1);
+	if (!new)
+		return (NULL);
+	while (str[i] != '$' && check_in_quote(str, i) == -1 && str[i] != '\0')
+	{
+		new[c++] = str[i++];
+	}
+	i = i + ft_strlen(value) + 1;
+	while (str[i] != '\0')
+	{
+		new[c++] = str[i++];
+	}
+	new[c] = '\0';
+	return (new);
+}
 
 char	*change_value(char *value, char *str, char *swap, int c)
 {
@@ -9,7 +50,7 @@ char	*change_value(char *value, char *str, char *swap, int c)
 	i = 0;
 	k = 0;
 	if (!swap)
-		return (NULL);
+		return (remove_dol(str, value));
 	new = malloc(sizeof(char) * ft_strlen(swap) + (ft_strlen(str) - ft_strlen(value) + 1));
 	if (!new)
 		return (NULL);
@@ -39,10 +80,12 @@ char	*get_value(char *env, char *str, char *cmd)
 	}
 
 	value[c] = '\0';
+	value = add_dquote(value);
     if (check_quote(cmd,str) == 0)
 		return (NULL);
 	return (value);
 }
+
 	char	*swap_value(char *value, char **envp, char *str)
 	{
 		int i;
@@ -68,7 +111,8 @@ char*	get_dollars(char *str, int pos, char **envp)
 	char *new;
 
 	i = pos + 1;
-	while (str[pos] != ' ' && str[pos] != 39 && str[pos] != 34 && str[pos] != '}' && str[pos] != '_' && (str[pos] < '0' || str[pos] > '9') && str[pos] != '\0')
+	pos++;
+	while (str[pos] != ' ' && str[pos] != '$' && str[pos] != 39 && str[pos] != 34 && str[pos] != '}' && str[pos] != '_' && (str[pos] < '0' || str[pos] > '9') && str[pos] != '\0')
 		pos++;
 	value = malloc(sizeof(char) * pos - i + 1);
 	if (!value)
@@ -82,10 +126,11 @@ char*	get_dollars(char *str, int pos, char **envp)
 	}
 	value[c] = '\0';
 	c = i - c;
-	return (change_value(value, str, swap_value(value, envp, str), c));
+	return(change_value(value, str, swap_value(value, envp, str), c));
 }
 
-char*	checkdollars(char *str, char **envp)
+
+char*	ft_dollars(char *str, char **envp)
 {
 	int i;
 	char *lea;
@@ -98,7 +143,6 @@ char*	checkdollars(char *str, char **envp)
 		if (str[i] == '$')
 		{
 			str = get_dollars(str, i, envp);
-            
             if (!str)
 	        	str = lea;
 		}

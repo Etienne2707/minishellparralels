@@ -36,13 +36,14 @@ int	Syntax_Error(char *str, t_token *token, char **envp)
 	char **cmd;
 
 	i = 0;
-	str = checkdollars(str, envp);
+	if (syntax_check(str) == 0)
+			return (-1);
+	str = ft_dollars(str, envp);
 	str = add_space(str);
 	cmd = ft_split(str, '|');
 	if ((check_pipe(cmd, str)) == -1)
 		return (-1);
-	if (syntax_check(str) == 0)
-			return (-1);
+	
 	if ((no_authorize(str)) == -1)
 	//	return (-1);
 	free(str);
@@ -65,6 +66,16 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 	return (1);
 }
 
+void	free_all(t_token *token, char *str)
+{
+	free(str);
+	int i;
+
+	i = 0;
+	while (token->cmdr[i] != 0)
+		free(token->cmdr[i++]);
+}
+
 int	main(int ac, char **argv, char **envp)
 {
 	t_token *token;
@@ -83,7 +94,9 @@ int	main(int ac, char **argv, char **envp)
 		add_history(str);
 		check_str(str, token, envp, &pars);
 		if (strcmp(str, "exit") == 0)
-			return (0);
+		{
+			free_all(token,str);
+		};
 		str = readline("Minishell > ");
 	}
 	return (1);
