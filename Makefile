@@ -14,7 +14,8 @@ SRC =	$(SRC_DIR)/main.c			\
 		$(SRC_DIR)/redirection.c		\
 		$(SRC_DIR)/list.c		\
 		$(SRC_DIR)/syntax_error.c		\
-
+		$(SRC_DIR)/ft_malloc.c		\
+		$(SRC_DIR)/free.c		\
 
 
 		

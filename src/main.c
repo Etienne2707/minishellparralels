@@ -30,24 +30,29 @@ int	check_pipe(char **cmd, char *str)
 	
 }
 
-int	Syntax_Error(char *str, t_token *token, char **envp)
+int	Syntax_Error(char *str, t_token *token, char **envp, t_pars **pars)
 {
 	int	i;
 	char **cmd;
+	char *dest;
 
 	i = 0;
 	if (syntax_check(str) == 0)
 			return (-1);
-	str = ft_dollars(str, envp);
-	str = add_space(str);
-	cmd = ft_split(str, '|');
-	if ((check_pipe(cmd, str)) == -1)
+	dest = malloc_cpy(dest,str);
+	dest = ft_dollars(dest, envp, dest);
+	dest = add_space(dest);
+	cmd = ft_split(dest, '|');
+	if ((check_pipe(cmd, dest)) == -1)
 		return (-1);
-	
-	if ((no_authorize(str)) == -1)
-	//	return (-1);
-	free(str);
-	init_struct(cmd, token);
+	free(dest);
+	init_struct(cmd, token, pars);
+	while (cmd[i] != 0)
+	{
+		free(cmd[i]);
+		i++;
+	}
+	free(cmd);
 	//get_list(cmd,token);
 	return (1);
 	
@@ -58,7 +63,7 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 {
 
 	//list_am(token,pars);
-    if ((Syntax_Error(str, token, envp)) == -1)
+    if ((Syntax_Error(str, token, envp, pars)) == -1)
 	{
 		write(1, "Syntax Error\n", 13);
 		return (-1);
@@ -95,8 +100,9 @@ int	main(int ac, char **argv, char **envp)
 		check_str(str, token, envp, &pars);
 		if (strcmp(str, "exit") == 0)
 		{
-			free_all(token,str);
-		};
+			free(str);
+			return (0);
+		}
 		str = readline("Minishell > ");
 	}
 	return (1);

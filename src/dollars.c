@@ -3,65 +3,101 @@
 char*	add_dquote(char *str)
 {
 	int i;
+	int k;
 	char *new;
 
+	k = 0;
+	i = 0;
+	printf("%d\n", ft_strlen(str));
 	new = malloc(sizeof(char ) * ft_strlen(str) + 3);
 	if (!new)
 		return (NULL);
-	new[0] = 34;
-	new[1] = '\0';
-	new = ft_strjoin(new,str);
-	new[ft_strlen(new)] = 34;
-	new[ft_strlen(new) + 1] = '\0';
-	return (new);
-}
-
-
-char	*remove_dol(char *str, char *value)
-{
-	int i;
-	char *new;
-	int c;
-
-	i = 0;
-	c = 0;
-	new = malloc(sizeof(char ) * ft_strlen(str) - ft_strlen(value) + 1);
-	if (!new)
-		return (NULL);
-	while (str[i] != '$' && check_in_quote(str, i) == -1 && str[i] != '\0')
-	{
-		new[c++] = str[i++];
-	}
-	i = i + ft_strlen(value) + 1;
+	new[k++] = 34;
 	while (str[i] != '\0')
 	{
-		new[c++] = str[i++];
+		new[k++] = str[i++];
 	}
-	new[c] = '\0';
+	new[k++] = 34;
+	new[k] = '\0';
+	free(str);
 	return (new);
 }
 
-char	*change_value(char *value, char *str, char *swap, int c)
+int dollars_in_quote(char *str, int index)
 {
-	char	*new;
+    int i;
+    int start;
+
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == 34)
+        {
+            i++;
+            start = i;
+            while ((str[i] != 34) && str[i] != '\0')
+                i++;
+            if (index >= start && index < i)
+                return (1);
+        }
+        else if (str[i] == 39)
+        {
+            i++;
+            start = i;
+            while ((str[i] != 39) && str[i] != '\0')
+                i++;
+            if (index >= start && index < i)
+                return (-1);
+        }
+        i++;
+    }
+    return (1);
+}
+
+char	*strcpyn(char *dest, char *src, int index, int size)
+{
 	int i;
-	int k;
 
 	i = 0;
-	k = 0;
-	if (!swap)
-		return (remove_dol(str, value));
-	new = malloc(sizeof(char) * ft_strlen(swap) + (ft_strlen(str) - ft_strlen(value) + 1));
+	while (size > 1  && src[index] != '\0')
+	{
+		dest[i] = src[index];
+		index++;
+		i++;
+		size--;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char *change_value(char *env, char *str, int index)
+{
+	int size;
+	char *new;
+	int i;
+
+	i = 0;
+	size = index + 1;
+	while (str[size] != '\0' && str[size] != 32 && str[size] != '$' && str[size] != 39)
+		size++;
+	new = malloc(sizeof(char *) * (ft_strlen(str) - (size - index)) + ft_strlen(env) + 1);
 	if (!new)
 		return (NULL);
-	new = ft_strlcpy(new,str,c);
-	new = ft_strjoin(new,swap);
-	new = ft_strnjoin(new, str, c + ft_strlen(value));
+	new = strncpy(new,str,index);
+	while (env[i] != '\0')
+		new[index++] = env[i++];
+	while (str[size] != '\0')
+	{
+		new[index] = str[size];
+		size++;
+		index++;
+	}
+	new[index] = '\0';
+	free(env);
 	return (new);
 }
 
-
-char	*get_value(char *env, char *str, char *cmd)
+char	*get_env(char *env, char *str)
 {
 	int i;
 	int c;
@@ -71,22 +107,23 @@ char	*get_value(char *env, char *str, char *cmd)
 	c = 0;
 	if(ft_compare(str, env, ft_strlen(str)) != 0)
 		return (NULL);
-	value = malloc(sizeof(char) * ft_strlen(env) - ft_strlen(str));
+	value = malloc(sizeof(char) * ft_strlen(env) - ft_strlen(str) + 1);
+	if (!value)
+		return (NULL);
 	while (env[i] != '\0')
 	{
 		value[c] = env[i];
 		i++;
 		c++;
 	}
-
+	
 	value[c] = '\0';
 	value = add_dquote(value);
-    if (check_quote(cmd,str) == 0)
-		return (NULL);
+	free(str);
 	return (value);
 }
 
-	char	*swap_value(char *value, char **envp, char *str)
+char	*swap_value(char *value, char **envp, char *str)
 	{
 		int i;
 		char *temp;
@@ -94,61 +131,52 @@ char	*get_value(char *env, char *str, char *cmd)
 		i = 0;
 		while (envp[i] != NULL)
 		{
-			if ((temp = get_value(envp[i], value,str)) != NULL)
+			temp = get_env(envp[i],value);
+			if (temp != NULL)
 				return (temp);
-			
 			i++;
 		}
+		free(temp);
 		return (NULL);
 	}
 
-
-char*	get_dollars(char *str, int pos, char **envp)
+char	*get_value(char *str, int index)
 {
 	int i;
-	int c;
 	char *value;
-	char *new;
 
-	i = pos + 1;
-	pos++;
-	while (str[pos] != ' ' && str[pos] != '$' && str[pos] != 39 && str[pos] != 34 && str[pos] != '}' && str[pos] != '_' && (str[pos] < '0' || str[pos] > '9') && str[pos] != '\0')
-		pos++;
-	value = malloc(sizeof(char) * pos - i + 1);
+	i = index + 1;
+	while (str[i] != '\0' && str[i] != 32 && str[i] != '$' && str[i] != 39)
+		i++;
+	value = malloc(sizeof(char) * (i - index) + 1);
 	if (!value)
 		return (NULL);
-	c = 0;
-	while (i < pos)
-	{
-		value[c] = str[i];
-		i++;
-		c++;
-	}
-	value[c] = '\0';
-	c = i - c;
-	return(change_value(value, str, swap_value(value, envp, str), c));
+	value = strcpyn(value,str, index + 1, i - index);	
+	return (value);
+
 }
 
-
-char*	ft_dollars(char *str, char **envp)
+char*	ft_dollars(char *str, char **envp, char *dest)
 {
 	int i;
-	char *lea;
+	char *temp;
 
 	i = 0;
-	
-	while(str[i] != '\0')
+	dest = NULL;
+	while (str[i] != 0)
 	{
-        lea = str;
-		if (str[i] == '$')
+		if (str[i] == '$' && dollars_in_quote(str,i) == 1)
 		{
-			str = get_dollars(str, i, envp);
-            if (!str)
-	        	str = lea;
+			temp = swap_value(get_value(str, i),envp,str);
+			if (temp != NULL)
+			{
+				dest = change_value(temp,str,i);
+			}
 		}
-        
 		i++;
 	}
-	return (str);
-	
+	if (!dest)
+		return (str);
+	free(str);
+	return (dest);
 }

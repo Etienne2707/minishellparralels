@@ -40,7 +40,7 @@ char	*ft_strnrcpy(char *str, char *temp, int c)
 	}
 
 
-int	init_struct(char **cmd, t_token *token)
+int	init_struct(char **cmd, t_token *token, t_pars **pars)
 {
 	int	i;
 	int	k;
@@ -56,31 +56,10 @@ int	init_struct(char **cmd, t_token *token)
 	while (cmd[i] != 0)
 	{
 		token[i].arg = get_arg(cmd[i], &token[i]);
+		get_list(&token[i], pars);
 		i++;
 	}
-	k = 0;
-	i = 0;
-	while (cmd[i] != 0)
-	{
-		printf("cmd[%d]\n", i);
-		k = 0;
-		while (token[i].arg[k] != 0)
-		{
-			printf("arg = %s\n", token[i].arg[k]);
-			k++;
-		}
-		printf("outfile : %d\n", token[i].outfile);
-		printf("infile : %d\n", token[i].infile);
-		printf("append : %d\n", token[i].append);
-		k = 0;
-		if (token[i].delimiter != NULL)
-			while (token[i].delimiter[k] != 0)
-			{
-				printf("heredoc[%d] : %s \n", k,token[i].delimiter[k]);
-				k++;
-			}
-		i++;
-	}
-	// /get_list(cmd,token);
+	printf("%d\n",i);
+	print_list(pars);
 	return (1);
 }

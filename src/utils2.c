@@ -41,6 +41,7 @@ char *ft_strjoin(char  *s1, char  *s2)
 
     i = ft_strlen(s1);
     k = ft_strlen(s2);
+    printf("je suis le malloc de str %d\n", i + k + 1);
     str = malloc(sizeof(char) * i + k + 1);
     if (!str)
         return (NULL);
@@ -91,8 +92,7 @@ char *ft_strnjoin(char  *s1, char  *s2, int c)
     return (str);
 }
 
-
-char    *add_space(char *str)
+char    *add_space(char *st)
 {
     int i;
     int c;
@@ -100,40 +100,43 @@ char    *add_space(char *str)
 
     i = 0;
     c = 0;
-    while (str[i])
+    if (!st)
+        return NULL;
+    while (st[i])
     {
 
-        //printf("je suis %d\n", check_in_quote(str, i));
-        if ((str[i] == '>' || str[i] == '<') && (check_in_quote(str, i)  == -1))
+        //printf("je suis %d\n", check_in_quote(st, i));
+        if ((st[i] == '>' || st[i] == '<') && (check_in_quote(st, i)  == -1))
         {
             i++;
             c++;
         }
-        if (str[i] == '>' || str[i] == '<')
+        if (st[i] == '>' || st[i] == '<')
             i++;
         i++;
     }
 
     c *= 2;
-    dest = malloc(sizeof(char ) * ft_strlen(str) + c + 1);
+    dest = malloc(sizeof(char ) * ft_strlen(st) + c + 1);
     if (!dest)
         return (NULL);
     i = 0;
     c = 0;
-    while (str[i] != '\0')
+    while (st[i] != '\0')
     {
-     //    printf("valeur retour %d\n", check_in_quote(str, i));
+     //    printf("valeur retour %d\n", check_in_quote(st, i));
 
-        if ((str[i] == '<' || str[i] == '>') && (check_in_quote(str, i)  == -1))
+        if ((st[i] == '<' || st[i] == '>') && (check_in_quote(st, i)  == -1))
         {
             dest[c++] = 32;
-            while (str[i] == '<' || str[i] == '>' && str[i] != '\0')
-                dest[c++] = str[i++];
+            while (st[i] == '<' || st[i] == '>' && st[i] != '\0')
+                dest[c++] = st[i++];
             dest[c++] = 32;
         }
-        dest[c++] = str[i++];
+        dest[c++] = st[i++];
     }
     dest[c] = '\0';
+    free(st);
     return (dest);
 }
  /*if ((str[i] == '<' || str[i] == '>') && str[i + 1] != '>' && str[i + 1] != '>' && (check_in_quote(str, i) == -1))

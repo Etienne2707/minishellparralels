@@ -66,6 +66,18 @@ int	only_special(char *str)
 	return (-1);
 }
 
+char	*malloc_cpy(char *dest, char *src)
+{
+	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!dest)
+		return (NULL);
+	dest = strcpy(dest, src);
+	dest[ft_strlen(src)] = '\0';
+	return (dest);
+
+
+}
+
 int	no_authorize(char *str)
 {
 	int i;

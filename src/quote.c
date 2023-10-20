@@ -44,6 +44,7 @@ char    *ft_remove_quote(char *str)
     if (!dest)
         return (NULL);
     dest = string_woquotes(str,dest);
+    free(str);
     return (dest);
 }
 

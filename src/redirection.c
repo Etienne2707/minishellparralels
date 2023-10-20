@@ -119,7 +119,7 @@ int nb_infile(t_token *token, char **arg)
 }
 
 
-int    redirection(t_token *token, char **arg)
+int     redirection(t_token *token, char **arg)
 {
     int i;
     int k;
@@ -131,7 +131,6 @@ int    redirection(t_token *token, char **arg)
     token->delimiter = NULL;
     get_heredoc(token,arg);
     token->last_o = nb_outfile(token, arg);
-    printf("nb = %d\n", token->last_o);
     token->last_i = nb_infile(token,arg);
     while (arg[i] != 0)
     {

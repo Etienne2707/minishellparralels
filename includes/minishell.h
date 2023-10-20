@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/13 18:33:12 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/20 02:51:58 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ typedef struct s_expand
 	
 }				t_expand;
 
+typedef struct s_malloc
+{
+    void *allocation;
+    struct s_malloc *next;
+} 			t_malloc;
 
 int					main(int ac, char **argv, char **envp);
 int					have_digit(char *str, int i);
@@ -76,7 +81,7 @@ int					check_start_end(char *str);
 int					only_special(char *str);
 int					no_authorize(char *str);
 char				**ft_split(const char *s, char c);
-int					init_struct(char **cmd, t_token *token);
+int					init_struct(char **cmd, t_token *token, t_pars **pars);
 int					ft_strlen(char *str);
 int					ft_compare(char *str, char *str2, int size);
 char				*ft_strlcpy(char *dest, char *src, unsigned int size);
@@ -88,9 +93,13 @@ char				*ft_remove_quote(char *str);
 int					check_in_quote(char *str, int index);
 void    list_am(t_token *token ,t_pars  **pars);
 int    redirection(t_token *token, char **arg);
-int	get_list(char **cmd, t_token *token);
 char    *add_space(char *str);
 int	init_token(char **cmd, t_token *token);
 int syntax_check(char *str);
-int	get_list(char **cmd, t_token *token);
+void	get_list(t_token *token, t_pars **pars);
+void    free_token(t_token **token, int i);
+char*	ft_dollars(char *str, char **envp, char *dest);
+int *ft_malloc(size_t size);
+char	*malloc_cpy(char *dest, char *src);
+
 #endif
