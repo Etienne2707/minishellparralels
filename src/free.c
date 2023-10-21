@@ -29,3 +29,38 @@ void    free_token(t_token **token, int k)
         k--;
     }
 }
+
+
+
+void free_maillon(t_pars *pars)
+{
+    int i;
+
+    i = 0;
+    while (pars->cmd[i] != 0)
+    {
+        free(pars->cmd[i]);
+        i++;
+    }
+     free(pars->cmd);
+     i = 0;
+    if (pars->delimiter != NULL)
+    while (pars->delimiter[i] != 0)
+    {
+        free(pars->delimiter[i]);
+        i++;
+    }
+    free(pars->delimiter);
+    free(pars);
+}
+
+void    ft_free_list(t_pars **pars)
+{
+    if (*pars == NULL)
+        return ;
+    t_pars *next;
+
+    next = (*pars)->next;
+    free_maillon((*pars));
+    ft_free_list(&next);  
+}

@@ -70,13 +70,27 @@ char	*strcpyn(char *dest, char *src, int index, int size)
 	return (dest);
 }
 
-char *change_value(char *env, char *str, int index)
+int	get_index(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '$' && dollars_in_quote(str,i) == 1)
+	{
+		i++;
+	}
+	return (i);
+	
+}
+char *change_value(char *env, char *str)
 {
 	int size;
 	char *new;
 	int i;
+	int index;
 
 	i = 0;
+	index = get_index(str);
 	size = index + 1;
 	while (str[size] != '\0' && str[size] != 32 && str[size] != '$' && str[size] != 39)
 		size++;
@@ -123,6 +137,33 @@ char	*get_env(char *env, char *str)
 	return (value);
 }
 
+char	*remove_dol(char *str, char *value)
+{
+	int i;
+	char *new;
+	int c;
+
+	i = 0;
+	c = 0;
+	printf("%s et %d\n", str, ft_strlen(str));
+	new = malloc(sizeof(char ) * ft_strlen(str) - ft_strlen(value) + 1);
+	if (!new)
+		return (NULL);
+	while (str[i] != '$' && dollars_in_quote(str, i) == 1 && str[i] != '\0')
+	{
+		new[c++] = str[i++];
+	}
+	i = i + ft_strlen(value) + 1;
+	while (str[i] != '\0')
+	{
+		new[c++] = str[i++];
+	}
+	new[c] = '\0';
+	free(value);
+	printf("%s voici new \n",new);
+	return (new);
+}
+
 char	*swap_value(char *value, char **envp, char *str)
 	{
 		int i;
@@ -160,23 +201,23 @@ char*	ft_dollars(char *str, char **envp, char *dest)
 {
 	int i;
 	char *temp;
+	char *tmp;
 
 	i = 0;
-	dest = NULL;
+	dest = str;
 	while (str[i] != 0)
 	{
 		if (str[i] == '$' && dollars_in_quote(str,i) == 1)
 		{
-			temp = swap_value(get_value(str, i),envp,str);
+			temp = swap_value(get_value(str, i),envp,dest);
 			if (temp != NULL)
 			{
-				dest = change_value(temp,str,i);
+				dest = change_value(temp,dest);
 			}
+			else 
+				dest = remove_dol(dest,get_value(str,i));
 		}
 		i++;
 	}
-	if (!dest)
-		return (str);
-	free(str);
 	return (dest);
 }

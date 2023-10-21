@@ -100,9 +100,12 @@ int	main(int ac, char **argv, char **envp)
 		check_str(str, token, envp, &pars);
 		if (strcmp(str, "exit") == 0)
 		{
+			
 			free(str);
 			return (0);
 		}
+		ft_free_list(&pars);
+		pars = NULL;
 		str = readline("Minishell > ");
 	}
 	return (1);
