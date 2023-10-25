@@ -1,35 +1,5 @@
 #include "minishell.h"
 
-
-int	check_pipe(char **cmd, char *str)
-{
-	int i;
-	int k;
-	int c;
-
-	i = 0;
-	c = 0;
-	if (check_start_end(str) == -1)
-		return (-1);
-	while(cmd[i] != 0)
-	{
-		k = 0;
-		c = 0;
-		while (cmd[i][k] != '\0')
-		{
-			if (cmd[i][k] != ' ')
-				c++;
-			k++;
-			
-		}
-		if (c == 0)
-				return (-1);
-		i++;
-	}
-	return (1);
-	
-}
-
 int	Syntax_Error(char *str, t_token *token, char **envp, t_pars **pars)
 {
 	int	i;
@@ -41,6 +11,7 @@ int	Syntax_Error(char *str, t_token *token, char **envp, t_pars **pars)
 			return (-1);
 	dest = malloc_cpy(dest,str);
 	dest = ft_dollars(dest, envp, dest);
+	printf("%s\n", dest);
 	dest = add_space(dest);
 	cmd = ft_split(dest, '|');
 	if ((check_pipe(cmd, dest)) == -1)
@@ -53,16 +24,13 @@ int	Syntax_Error(char *str, t_token *token, char **envp, t_pars **pars)
 		i++;
 	}
 	free(cmd);
-	//get_list(cmd,token);
-	return (1);
-	
+	return (1);	
 }
 
 
 int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 {
 
-	//list_am(token,pars);
     if ((Syntax_Error(str, token, envp, pars)) == -1)
 	{
 		write(1, "Syntax Error\n", 13);
@@ -71,14 +39,37 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 	return (1);
 }
 
-void	free_all(t_token *token, char *str)
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	free(str);
+	unsigned int	i;
+
+	i = 0;
+	while (src[i] != '\0' && i < n)
+	{
+		dest[i] = src[i];
+		++i;
+	}
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
+}
+
+
+char *ft_strcpy(char *dest, char *src)
+{
 	int i;
 
 	i = 0;
-	while (token->cmdr[i] != 0)
-		free(token->cmdr[i++]);
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 int	main(int ac, char **argv, char **envp)
@@ -95,12 +86,10 @@ int	main(int ac, char **argv, char **envp)
 	str = readline("Minishell > ");
 	while (-1)
 	{
-		//printf("%s\n", str);
 		add_history(str);
 		check_str(str, token, envp, &pars);
-		if (strcmp(str, "exit") == 0)
+		if (ft_strcmp(str, "exit") == 0)
 		{
-			
 			free(str);
 			return (0);
 		}

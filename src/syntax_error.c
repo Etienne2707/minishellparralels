@@ -80,7 +80,7 @@ int	syntax_charac(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] != ' ' && str[i] != '$' && str[i] != '|' && str[i] != '>' && str[i] != 39 && str[i] != 34 && str[i] != '-' && str[i] != '<')
+		if ((str[i] != ' ' && str[i] != '$' &&  str[i] != '.' && str[i] != '=' && str[i] != '|' && str[i] != '>' && str[i] != 39 && str[i] != 34 && str[i] != '-' && str[i] != '<')
 			&& (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
 			&& (str[i] < '0' || str[i] > '9') && check_in_quote(str,i) != 1)
             {
@@ -168,15 +168,40 @@ int	syntax_check(char *str)
 	int i;
 
 	i = 0;
-   // printf("peut etre pas les quotes");
-
 	if (syntax_quote(str) == 0)
 		return (0);
-   // printf("pas les quotes");
 	if (syntax_charac(str) == -1)
 		return (0);
-   // printf("c'est l'aautre");
     if (syntax_red(str) == -1)
         return (0);
     return (1);
 }
+
+int	check_pipe(char **cmd, char *str)
+{
+	int i;
+	int k;
+	int c;	
+
+	i = 0;
+	c = 0;
+	if (check_start_end(str) == -1)
+		return (-1);
+	while(cmd[i] != 0)
+	{
+		k = 0;
+		c = 0;
+		while (cmd[i][k] != '\0')
+		{
+			if (cmd[i][k] != ' ')
+				c++;
+			k++;
+		}
+		if (c == 0)
+				return (-1);
+		i++;
+	}
+	return (1);
+	
+}
+

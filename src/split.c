@@ -1,4 +1,4 @@
-//#include "minishell.h"
+#include "minishell.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -37,7 +37,7 @@ int is_in_string(char *str, char c, char pos, int k)
 		i++;
 	}
 	return (0);
-}
+} // a remplacer par is_in_quote
 
 int	charset_verif(char *str, char c, char d, int i)
 {

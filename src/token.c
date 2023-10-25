@@ -5,7 +5,7 @@ char	*ft_strnrcpy(char *str, char *temp, int c)
 	int		i;
 	char	tmp;
 
-	temp = malloc(sizeof(char) * strlen(str) - c + 1);
+	temp = malloc(sizeof(char) * ft_strlen(str) - c + 1);
 	if (!temp)
 		return (NULL);
 	i = 0;
@@ -59,7 +59,6 @@ int	init_struct(char **cmd, t_token *token, t_pars **pars)
 		get_list(&token[i], pars);
 		i++;
 	}
-	printf("%d\n",i);
 	print_list(pars);
 	return (1);
 }

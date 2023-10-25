@@ -18,48 +18,34 @@ char **put_arg_list(char **dest, char **str)
 
     i = 0;
     c = 0;
-    
     while (str[i] != 0)
     {
-        if (strcmp(">>", str[i]) == 0 || strcmp("<<", str[i]) == 0 || strcmp(">", str[i]) == 0 || strcmp("<", str[i]) == 0)
+        if (ft_strcmp(">>", str[i]) == 0 || ft_strcmp("<<", str[i]) == 0 || ft_strcmp(">", str[i]) == 0 || ft_strcmp("<", str[i]) == 0)
             i = i + 2;
-        if (str[i] != 0)
+        if (str[i] != 0 && ft_strcmp(">>", str[i]) != 0 && ft_strcmp("<<", str[i]) != 0 && ft_strcmp(">", str[i]) != 0 && ft_strcmp("<", str[i]) != 0)
         {
             i++;
             c++;
         }
     }
-
+    // Couper en deux 
     dest = malloc(sizeof(char *) * (c + 1));
-
     if (!dest)
         return (NULL);
-
     i = 0;
     c = 0;
-
     while (str[i] != 0)
     {
-        if (strcmp(">>", str[i]) == 0 || strcmp("<<", str[i]) == 0 || strcmp(">", str[i]) == 0 || strcmp("<", str[i]) == 0)
+        if (ft_strcmp(">>", str[i]) == 0 || ft_strcmp("<<", str[i]) == 0 || ft_strcmp(">", str[i]) == 0 || ft_strcmp("<", str[i]) == 0)
             i = i + 2;
-
-        if (str[i] != 0)
+        if (str[i] != 0 && ft_strcmp(">>", str[i]) != 0 && ft_strcmp("<<", str[i]) != 0 && ft_strcmp(">", str[i]) != 0 && ft_strcmp("<", str[i]) != 0)
         {
             dest[c] = malloc_cpy(dest[c], str[i]);
             i++;
             c++;
         }
     }
-
     dest[c] = 0;
-    i = 0;
-
-    while (dest[i] != 0)
-    {
-        printf("voici : %s\n", dest[i]);
-        i++;
-    }
-
     return dest;
 }
 

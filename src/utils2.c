@@ -9,7 +9,6 @@ int ft_compare(char *str, char *str2, int size)
     }
     while (str[i] == str2[i] && i < size -1 && str2[i] != '\0' && str[i] != '\0')
             i++;
-   // printf("voici str = %d je suis la valeur avant %c apres %c\n", size,str2[i ],  str2[i + 1]);
     if (str2[i + 1] != '=')
         return (-1);
     else
@@ -41,7 +40,6 @@ char *ft_strjoin(char  *s1, char  *s2)
 
     i = ft_strlen(s1);
     k = ft_strlen(s2);
-    printf("je suis le malloc de str %d\n", i + k + 1);
     str = malloc(sizeof(char) * i + k + 1);
     if (!str)
         return (NULL);
@@ -104,8 +102,6 @@ char    *add_space(char *st)
         return NULL;
     while (st[i])
     {
-
-        //printf("je suis %d\n", check_in_quote(st, i));
         if ((st[i] == '>' || st[i] == '<') && (check_in_quote(st, i)  == -1))
         {
             i++;
@@ -124,8 +120,6 @@ char    *add_space(char *st)
     c = 0;
     while (st[i] != '\0')
     {
-     //    printf("valeur retour %d\n", check_in_quote(st, i));
-
         if ((st[i] == '<' || st[i] == '>') && (check_in_quote(st, i)  == -1))
         {
             dest[c++] = 32;
@@ -139,10 +133,14 @@ char    *add_space(char *st)
     free(st);
     return (dest);
 }
- /*if ((str[i] == '<' || str[i] == '>') && str[i + 1] != '>' && str[i + 1] != '>' && (check_in_quote(str, i) == -1))
-        {
-     //       printf("valeur de retour de check ; %d",check_in_quote(str, str[i]));
-            dest[++c] = 32;
-        }
-        else if ((str[i] == '<' || str[i] == '>') && str[i + 1] == '>' && str[i + 1] == '>' && (check_in_quote(str, i) == -1))
-            i++;*/
+
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
+}

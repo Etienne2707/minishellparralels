@@ -16,6 +16,10 @@ SRC =	$(SRC_DIR)/main.c			\
 		$(SRC_DIR)/syntax_error.c		\
 		$(SRC_DIR)/ft_malloc.c		\
 		$(SRC_DIR)/free.c		\
+		$(SRC_DIR)/dollars2.c		\
+		$(SRC_DIR)/redirection_utils.c		\
+
+
 
 
 		

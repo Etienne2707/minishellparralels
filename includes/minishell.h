@@ -75,31 +75,73 @@ typedef struct s_malloc
     struct s_malloc *next;
 } 			t_malloc;
 
+
+
+
 int					main(int ac, char **argv, char **envp);
+
+
+// Syntax_Error 
 int					have_digit(char *str, int i);
-int					check_start_end(char *str);
 int					only_special(char *str);
 int					no_authorize(char *str);
+int					have_digit(char *str, int i);
+
+// Expand
+char				*checkdollars(char *str, char **envp);
+char*	ft_dollars(char *str, char **envp, char *dest);
+int dollars_in_quote(char *str, int index);
+int	get_index(char *str);
+char *change_value(char *env, char *str);
+
+
+// List
+void    list_am(t_token *token ,t_pars  **pars);
+void	get_list(t_token *token, t_pars **pars);
+void print_list(t_pars **pars);
+
+
+// Utils
+char				*ft_strlcpy(char *dest, char *src, unsigned int size);
 char				**ft_split(const char *s, char c);
-int					init_struct(char **cmd, t_token *token, t_pars **pars);
 int					ft_strlen(char *str);
 int					ft_compare(char *str, char *str2, int size);
 char				*ft_strlcpy(char *dest, char *src, unsigned int size);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strnjoin(char *s1, char *s2, int c);
-char				*checkdollars(char *str, char **envp);
-int					check_quote(char *str, char *find);
-char				*ft_remove_quote(char *str);
-int					check_in_quote(char *str, int index);
-void    list_am(t_token *token ,t_pars  **pars);
-int    redirection(t_token *token, char **arg);
-char    *add_space(char *str);
-int	init_token(char **cmd, t_token *token);
-int syntax_check(char *str);
-void	get_list(t_token *token, t_pars **pars);
-void    free_token(t_token **token, int i);
-char*	ft_dollars(char *str, char **envp, char *dest);
-int *ft_malloc(size_t size);
+int	ft_strcmp(char *s1, char *s2);
 char	*malloc_cpy(char *dest, char *src);
+char *ft_strcpy(char *dest, char *src);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*strcpyn(char *dest, char *src, int index, int size);
+
+
+// String_Check
+int					check_start_end(char *str);
+char				*ft_remove_quote(char *str);
+int					check_quote(char *str, char *find);
+int					check_in_quote(char *str, int index);
+char    *add_space(char *str);
+int syntax_check(char *str);
+char*	add_dquote(char *str);
+int	check_pipe(char **cmd, char *str);
+
+
+// Struct
+int					init_struct(char **cmd, t_token *token, t_pars **pars);
+int	init_token(char **cmd, t_token *token);
+void    free_token(t_token **token, int i);
+
+
+
+// Redirection
+int    redirection(t_token *token, char **arg);
+int nb_infile(t_token *token, char **arg);
+int nb_outfile(t_token *token, char **arg);
+
+
+// Free
+int *ft_malloc(size_t size);
+void    ft_free_list(t_pars **pars);
 
 #endif
