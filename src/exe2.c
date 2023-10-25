@@ -6,19 +6,36 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/10/25 19:46:48 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/10/25 20:57:33 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	find_char(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	exe_cmd(char **cmd_args, char *envp[])
 {
 	char	**path;
 	char	*cmd_path;
 
-	if (cmd_args[0][0] == '/' && access(cmd_args[0], F_OK | X_OK) == 0)
+	if (find_char(cmd_args[0], '/'))
+	{
 		execve(cmd_args[0], cmd_args, envp);
+		exit(127);
+	}
 	path = ft_split(find_path(envp), ':');
 	cmd_path = get_right_cmd_path(path, cmd_args[0]);
 	if (cmd_path == NULL)
@@ -29,6 +46,7 @@ void	exe_cmd(char **cmd_args, char *envp[])
 		exit(127);
 	}
 	execve(cmd_path, cmd_args, envp);
+	exit(127);
 }
 /*
 static void	init_pars(t_pars *pars, char *cmd, int outfile, int infile)
