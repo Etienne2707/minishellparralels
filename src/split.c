@@ -1,49 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 17:17:23 by educlos           #+#    #+#             */
+/*   Updated: 2023/10/25 17:17:24 by educlos          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-
-int is_in_string(char *str, char c, char pos, int k)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		
-		if (str[i] == 39)
-		{
-			
-			i++;
-			while (str[i] != 39 && str[i] != '\0')
-			{
-				if (pos == c && i == k)
-					return (1);
-				i++;
-			}
-		}
-		else if (str[i] == 34)
-		{
-			
-			i++;
-			while (str[i] != 34 && str[i] != '\0')
-			{
-				if (pos == c && i == k)
-					return (1);
-				i++;
-			}
-		}
-		i++;
-	}
-	return (0);
-} // a remplacer par is_in_quote
 
 int	charset_verif(char *str, char c, char d, int i)
 {
 	if (c == d)
 	{
-		if (is_in_string(str, c, d, i) != 1)
+		if (check_in_quote(str, i) != 1)
 		{
 			return (1);
 		}
@@ -64,9 +37,9 @@ int	wordcount(char *str, char d)
 	{
 		while (str[i] != '\0' && (charset_verif(str, str[i], d, i) == 1))
 			i++;
-		if (str[i] != '\0' && charset_verif(str, str[i], d , i)  == 0)
+		if (str[i] != '\0' && charset_verif(str, str[i], d, i) == 0)
 			c++;
-		while (str[i] != '\0' && charset_verif(str, str[i], d , i) == 0)
+		while (str[i] != '\0' && charset_verif(str, str[i], d, i) == 0)
 			i++;
 	}
 	return (c + 1);
@@ -83,16 +56,16 @@ void	makelengthmalloc(char *str, char **dest, char c)
 	while (str[i] != '\0')
 	{
 		k = 0;
-		while (str[i] != '\0' && charset_verif(str, str[i], c , i) == 1)
+		while (str[i] != '\0' && charset_verif(str, str[i], c, i) == 1)
 			i++;
-		while (str[i] != '\0' && charset_verif(str, str[i], c , i) == 0)
+		while (str[i] != '\0' && charset_verif(str, str[i], c, i) == 0)
 		{
 			i++;
 			k++;
 		}
 		if (k != 0)
 		{
-			dest[j] = malloc (sizeof(char) * (k + 1));
+			dest[j] = malloc(sizeof(char) * (k + 1));
 			if (!dest[j])
 				return ;
 		}
@@ -130,15 +103,15 @@ void	wordinput(char *str, char **dest, char c)
 
 char	**ft_split(const char *s, char c)
 {
-	char	**dest;
+	char **dest;
 	char *str;
 	int i;
-	
+
 	str = (char *)s;
 	i = 0;
 	if (str == 0 && str[0] == '\0')
 		return (NULL);
-	dest = malloc(sizeof(char *) * wordcount(str,c));
+	dest = malloc(sizeof(char *) * wordcount(str, c));
 	if (!dest)
 		return (NULL);
 	makelengthmalloc(str, dest, c);

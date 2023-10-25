@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 17:13:06 by educlos           #+#    #+#             */
+/*   Updated: 2023/10/25 18:36:31 by educlos          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -52,12 +64,12 @@ int	check_start_end(char *str)
 int	only_special(char *str)
 {
 	int	i;
-	int	c;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != '<' && str[i] != '>' && str[i] != '|' && str[i] != ' ' && str[i] != 39 && str[i] != 34)
+		if (str[i] != '<' && str[i] != '>' && str[i] != '|' && str[i] != ' '
+			&& str[i] != 39 && str[i] != 34)
 			return (0);
 		i++;
 	}
@@ -72,28 +84,22 @@ char	*malloc_cpy(char *dest, char *src)
 	dest = ft_strcpy(dest, src);
 	dest[ft_strlen(src)] = '\0';
 	return (dest);
-
-
 }
 
 int	no_authorize(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] != ' ' && str[i] != '.' && str[i] != '$' && str[i] != '|' && str[i] != '>' && str[i] != 39 && str[i] != 34 && str[i] != '-' && str[i] != '<')
-			&& (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
+		if ((str[i] != ' ' && str[i] != '.' && str[i] != '$' && str[i] != '|'
+				&& str[i] != '>' && str[i] != 39 && str[i] != 34
+				&& str[i] != '-' && str[i] != '<') && (str[i] < 'a'
+				|| str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
 			&& (str[i] < '0' || str[i] > '9'))
 			return (-1);
 		i++;
 	}
 	return (0);
 }
-
-
-
-
-
-

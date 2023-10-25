@@ -35,7 +35,7 @@ LIB = -Llibft
 
 INCLUDES = ./includes
 
-CFLAGS =-I$(INCLUDES) -g3
+CFLAGS =-I$(INCLUDES) -g3 -Wall -Werror -Wextra
 
 all :	$(BIN_DIR) $(NAME)
 

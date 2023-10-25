@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
+/*   Updated: 2023/10/25 18:36:13 by educlos          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	Syntax_Error(char *str, t_token *token, char **envp, t_pars **pars)
+int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 {
-	int	i;
-	char **cmd;
-	char *dest;
+	int		i;
+	char	**cmd;
+	char	*dest;
 
 	i = 0;
+	dest = NULL;
 	if (syntax_check(str) == 0)
-			return (-1);
-	dest = malloc_cpy(dest,str);
+		return (-1);
+	dest = malloc_cpy(dest, str);
 	dest = ft_dollars(dest, envp, dest);
-	printf("%s\n", dest);
 	dest = add_space(dest);
 	cmd = ft_split(dest, '|');
 	if ((check_pipe(cmd, dest)) == -1)
@@ -24,14 +36,12 @@ int	Syntax_Error(char *str, t_token *token, char **envp, t_pars **pars)
 		i++;
 	}
 	free(cmd);
-	return (1);	
+	return (1);
 }
-
 
 int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 {
-
-    if ((Syntax_Error(str, token, envp, pars)) == -1)
+	if ((syntax_error(str, token, envp, pars)) == -1)
 	{
 		write(1, "Syntax Error\n", 13);
 		return (-1);
@@ -57,10 +67,9 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-
-char *ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (src[i] != '\0')
@@ -74,15 +83,15 @@ char *ft_strcpy(char *dest, char *src)
 
 int	main(int ac, char **argv, char **envp)
 {
-	t_token *token;
+	t_token	*token;
 	t_pars	*pars;
+	char	*str;
+
 	(void)ac;
 	(void)argv;
-	int i;
-	char *str;
-
 	str = NULL;
 	pars = NULL;
+	token = NULL;
 	str = readline("Minishell > ");
 	while (-1)
 	{
