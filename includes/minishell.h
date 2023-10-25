@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/20 02:51:58 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/25 19:46:20 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 # define MINISHELL_H
 
 # include <readline/readline.h>
-# include<readline/history.h>
+# include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
+# include "../libft/libft.h"
+# include <errno.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
 
 typedef struct s_pars
 {
@@ -32,19 +37,6 @@ typedef struct s_pars
 	struct s_pars	*prev;
 	  
 }					t_pars;
-
-
-enum				e_token
-{
-	CMD,
-	ARG,
-	PIPE,
-	R_INPUT,
-	R_OUTPUT,
-	R_DINPUT,
-	R_DOUTPUT,
-	REDIRECT_TMP
-};
 
 typedef struct s_token
 {
@@ -69,17 +61,7 @@ typedef struct s_expand
 	
 }				t_expand;
 
-typedef struct s_malloc
-{
-    void *allocation;
-    struct s_malloc *next;
-} 			t_malloc;
-
-
-
-
 int					main(int ac, char **argv, char **envp);
-
 
 // Syntax_Error 
 int					have_digit(char *str, int i);
@@ -94,54 +76,55 @@ int dollars_in_quote(char *str, int index);
 int	get_index(char *str);
 char *change_value(char *env, char *str);
 
-
 // List
 void    list_am(t_token *token ,t_pars  **pars);
 void	get_list(t_token *token, t_pars **pars);
 void print_list(t_pars **pars);
 
-
 // Utils
-char				*ft_strlcpy(char *dest, char *src, unsigned int size);
 char				**ft_split(const char *s, char c);
-int					ft_strlen(char *str);
 int					ft_compare(char *str, char *str2, int size);
-char				*ft_strlcpy(char *dest, char *src, unsigned int size);
-char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strnjoin(char *s1, char *s2, int c);
-int	ft_strcmp(char *s1, char *s2);
 char	*malloc_cpy(char *dest, char *src);
 char *ft_strcpy(char *dest, char *src);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 char	*strcpyn(char *dest, char *src, int index, int size);
-
 
 // String_Check
 int					check_start_end(char *str);
 char				*ft_remove_quote(char *str);
 int					check_quote(char *str, char *find);
 int					check_in_quote(char *str, int index);
-char    *add_space(char *str);
-int syntax_check(char *str);
+char	*add_space(char *str);
+int	syntax_check(char *str);
 char*	add_dquote(char *str);
 int	check_pipe(char **cmd, char *str);
-
 
 // Struct
 int					init_struct(char **cmd, t_token *token, t_pars **pars);
 int	init_token(char **cmd, t_token *token);
 void    free_token(t_token **token, int i);
 
-
-
 // Redirection
 int    redirection(t_token *token, char **arg);
 int nb_infile(t_token *token, char **arg);
 int nb_outfile(t_token *token, char **arg);
 
-
 // Free
 int *ft_malloc(size_t size);
 void    ft_free_list(t_pars **pars);
+
+//Exec
+char	*find_path(char **envp);
+char	*get_right_cmd_path(char **paths, char *cmd);
+void	free_tab(char **tab);
+void	print_err(char *str);
+void	check_status(int status);
+void	child1(char *argv[], char *envp[], int *pipefd);
+void	child2(char *argv[], char *envp[], int *pipefd);
+void	exe_cmd(char **cmd_args, char *envp[]);
+
+int		count_cmd(t_pars *pars);
+int		executor(t_pars *pars, char *envp[]);
 
 #endif

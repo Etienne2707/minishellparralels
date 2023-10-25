@@ -116,6 +116,7 @@ void	print_list(t_pars **pars)
 	while (current != NULL)
 	{
 		i = 0;
+		
 		while (current->cmd[i] != NULL)
 		{
 			printf("cmdlist = %s   ", current->cmd[i]);

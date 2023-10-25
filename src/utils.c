@@ -6,23 +6,11 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:06 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:36:31 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/25 19:34:58 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
 
 int	strlen_no_space(char *str)
 {

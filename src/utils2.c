@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:12:59 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:38:01 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/25 19:37:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_compare(char *str, char *str2, int size)
 	else
 		return (str[i] - str2[i]);
 }
-
+/*
 char	*ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
@@ -74,7 +74,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	str[i] = 0;
 	return (str);
-}
+}*/
 
 char	*ft_strnjoin(char *s1, char *s2, int c)
 {
@@ -154,7 +154,7 @@ char	*add_space(char *st)
 	free(st);
 	return (dest);
 }
-
+/*
 int	ft_strcmp(char *s1, char *s2)
 {
 	int i;
@@ -163,4 +163,4 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
 		i++;
 	return (s1[i] - s2[i]);
-}
+}*/

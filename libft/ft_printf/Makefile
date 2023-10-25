@@ -5,60 +5,47 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/24 16:55:24 by mle-duc           #+#    #+#              #
-#    Updated: 2023/10/25 19:43:25 by mle-duc          ###   ########.fr        #
+#    Created: 2023/02/24 16:39:13 by mle-duc           #+#    #+#              #
+#    Updated: 2023/04/09 02:49:26 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			minishell
+NAME =		libftprintf.a
 
-CC =			cc
+CC =		cc
 
-RM =			rm -f
+RM =		rm -f
 
-INC_DIR =		./includes
+SRCS =		ft_printf.c \
+			ft_print_char.c \
+			ft_print_hexa.c \
+			ft_print_percent.c \
+			ft_print_ptr.c \
+			ft_print_str.c \
+			ft_print_unsigned.c \
+			ft_print_nb.c \
+			ft_printf_utils.c
 
-LIBFT_DIR =		./libft
+OBJS =		${SRCS:.c=.o}
 
-SRCS =			$(addprefix src/, \
-				dollars.c \
-				dollars2.c \
-				free.c \
-				ft_malloc.c \
-				list.c \
-				quote.c \
-				redirection.c \
-				redirection_utils.c \
-				split.c \
-				syntax_error.c \
-				syntax_utils.c \
-				token.c \
-				utils.c \
-				utils2.c \
-				utils3.c \
-				path.c \
-				executor.c \
-				exe2.c \
-				pars.c \
-				main.c)
+CFLAGS =	-Werror -Wextra -Wall
 
-OBJS =			${SRCS:.c=.o}
-
-CFLAGS =		-g3 -Wall -Werror -Wextra
-
-LIBFT_PATH =	libft/libft.a
+LIBFT_PATH = ../libft.a
 
 all: ${NAME}
 
 .c.o:
-	${CC} ${CFLAGS} -I $(INC_DIR) -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}: ${OBJS}
+${NAME}: ${OBJS} libft
+	ar -rcs ${NAME} ${OBJS}
+
+libft:
 	make -C libft
-	@$(CC) $(OBJS) ${CFLAGS} -L$(LIBFT_DIR) -lft -o $(NAME) -lreadline
+	cp ${LIBFT_PATH} ${NAME}
 
 clean:
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${OBJSBONUS}
 	make clean -C libft
 
 fclean: clean
@@ -67,4 +54,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft

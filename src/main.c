@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:36:13 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/25 19:48:52 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	main(int ac, char **argv, char **envp)
 	{
 		add_history(str);
 		check_str(str, token, envp, &pars);
+		executor(pars, envp);
 		if (ft_strcmp(str, "exit") == 0)
 		{
 			free(str);
