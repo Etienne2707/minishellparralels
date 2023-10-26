@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:45:44 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/26 15:39:20 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ char	**get_arg(char *cmd, t_token *token)
 int	init_struct(char **cmd, t_token *token, t_pars **pars)
 {
 	int	i;
-	int	k;
 
 	i = 0;
 	while (cmd[i] != 0)
 		i++;
-	k = i;
 	token = malloc(sizeof(t_token) * i);
 	if (!token)
 		return (0);

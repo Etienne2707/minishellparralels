@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:51:21 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/26 15:39:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,6 @@ int	syntax_quote(char *str)
 
 int	syntax_check(char *str)
 {
-	int	i;
-
-	i = 0;
 	if (syntax_quote(str) == 0)
 		return (0);
 	if (syntax_charac(str) == -1)

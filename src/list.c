@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:50 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:39:29 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/26 15:38:23 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_pars	*get_info(t_token *token)
 	new = (t_pars *)malloc(sizeof(t_pars));
 	if (!new)
 		return (NULL);
+	new->cmd = NULL;
 	new->cmd = put_arg_list(new->cmd, token->arg);
 	new->delimiter = token->delimiter;
 	new->outfile = token->outfile;
