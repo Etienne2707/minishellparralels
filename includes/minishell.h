@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 19:46:20 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/10/27 12:24:41 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char*	ft_dollars(char *str, char **envp, char *dest);
 int dollars_in_quote(char *str, int index);
 int	get_index(char *str);
 char *change_value(char *env, char *str);
+int	is_solo_dol(char *str, int index);
 
 // List
 void    list_am(t_token *token ,t_pars  **pars);

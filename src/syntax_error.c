@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/26 15:39:05 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/10/27 15:38:27 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,10 +177,10 @@ int	syntax_check(char *str)
 {
 	if (syntax_quote(str) == 0)
 		return (0);
-	if (syntax_charac(str) == -1)
-		return (0);
-	if (syntax_red(str) == -1)
-		return (0);
+	//if (syntax_charac(str) == -1)
+	//	return (0);
+	//if (syntax_red(str) == -1)
+//		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 17:22:37 by educlos          ###   ########.fr       */
+/*   Updated: 2023/10/27 16:02:01 by educlos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	get_index(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '$' && dollars_in_quote(str, i) == 1)
+	while (is_solo_dol(str, i) != 1)
 	{
 		i++;
 	}
