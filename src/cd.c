@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:40:53 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/15 08:44:09 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 17:17:07 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	get_path(char **envp, char *path_to_find)
 		path_to_find = ft_substr(path_to_find, 0, ft_strlen(path_to_find) - 1);
 		ft_putstr_fd(path_to_find, 2);
 		free(path_to_find);
-		ft_putstr_fd(" not set", 2);
+		ft_putstr_fd(" not set\n", 2);
 	}
 	return (path);
 }
@@ -46,13 +46,44 @@ static void	err_msg(char **cmd)
 	ft_putstr_fd(" aucun fichier ou dossier de ce type\n", 2);
 }
 
-static void	refresh_wd(t_wd *wd)
+static int	oldpwd_exists(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "OLDPWD=", 7) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static void	refresh_wd(t_wd *wd, char ***envp)
 {
 	char	*tmp;
+	char	**tmp2;
 
-	tmp = ft_strdup(wd->pwd);
-	free(wd->oldpwd);
-	wd->oldpwd = tmp;
+	tmp = NULL;
+	if (wd->pwd)
+		tmp = ft_strdup(wd->pwd);
+	if (wd->oldpwd == NULL || !oldpwd_exists(*envp))
+	{
+		wd->oldpwd = tmp;
+		if (wd->oldpwd)
+		{
+			tmp = ft_strjoin("OLDPWD=", tmp);
+			tmp2 = ft_append_double_array(*envp, tmp);
+			ft_free_double_array(*envp);
+			*envp = tmp2;
+		}
+	}
+	else
+	{
+		free(wd->oldpwd);
+		wd->oldpwd = tmp;
+	}
 	free(wd->pwd);
 	wd->pwd = NULL;
 	wd->pwd = getcwd(wd->pwd, 0);
@@ -103,7 +134,7 @@ int	ft_cd(char **cmd, char ***envp, t_wd *wd)
 	}
 	if (path)
 		return (EXIT_FAILURE);
-	refresh_wd(wd);
+	refresh_wd(wd, envp);
 	refresh_env(wd, envp);
 	return (EXIT_SUCCESS);
 }

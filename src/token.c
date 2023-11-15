@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/15 09:23:18 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 17:32:37 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	init_struct(char **cmd, t_token *token, t_pars **pars)
 		get_list(&token[i], pars);
 		i++;
 	}
+	free(token);
 //	print_list(pars);
 	return (1);
 }

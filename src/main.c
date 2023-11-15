@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/15 08:25:09 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 17:50:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	main(int ac, char **argv, char **envp)
 	{
 		add_history(str);
 		check_str(str, token, envpcpy, &pars);
+		free(str);
 		executor(pars, &envpcpy, wd);
 		ft_free_list(&pars);
 		pars = NULL;

@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:54:15 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/14 16:12:23 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 16:59:20 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**ft_cpy_double_array(char **to_copy)
 		return (NULL);
 	copy[i] = NULL;
 	j = 0;
-	while (to_copy[j])
+	while (to_copy && to_copy[j])
 	{
 		copy[j] = ft_strdup(to_copy[j]);
 		if (!copy[j])

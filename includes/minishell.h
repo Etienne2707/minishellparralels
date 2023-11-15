@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/15 08:24:56 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 17:55:50 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	check_pipe(char **cmd, char *str);
 // Struct
 int		init_struct(char **cmd, t_token *token, t_pars **pars);
 int	init_token(char **cmd, t_token *token);
-void    free_token(t_token **token, int i);
 
 // Redirection
 int    redirection(t_token *token, char **arg);
@@ -153,7 +152,7 @@ int	check_param(char *str);
 //Builtins
 
 int	ft_pwd(void);
-int	ft_exit(char **cmd);
+int	ft_exit(t_pars *pars, char **cmd, char **envp, t_wd *wd);
 int	ft_export(char **cmd, char ***envp);
 int	ft_echo(char **cmd);
 int	ft_env(char *envp[]);

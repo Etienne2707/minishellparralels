@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:24:06 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/15 08:45:55 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 17:15:04 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	get_wds(t_wd *wd, char **envp)
 	int	i;
 
 	i = -1;
+	wd->pwd = NULL;
+	wd->oldpwd = NULL;
 	while (envp[++i])
 	{
 		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
@@ -24,5 +26,7 @@ int	get_wds(t_wd *wd, char **envp)
 		if (ft_strncmp(envp[i], "OLDPWD=", 7) == 0)
 			wd->oldpwd = ft_substr(envp[i], 7, ft_strlen(envp[i]) - 7);
 	}
+	if (wd->pwd == NULL)
+		wd->pwd = getcwd(wd->pwd, 0);
 	return (1);
 }

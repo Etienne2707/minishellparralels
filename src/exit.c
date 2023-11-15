@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:27:00 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/14 09:02:12 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 18:03:35 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	is_arg_valid(char *arg)
 	return (1);
 }
 
-int	ft_exit(char **args)
+int	ft_exit(t_pars *pars, char **args, char **envp, t_wd *wd)
 {
 	int	exit_code;
 
@@ -36,6 +36,7 @@ int	ft_exit(char **args)
 		return (EXIT_FAILURE);
 	if (args[1])
 		exit_code = ft_atoi(args[1]);
+	exit_code = 1;
 	//else
 	//	exit_code = get_err_code();
 	if (args[1] && args[2])
@@ -51,5 +52,10 @@ int	ft_exit(char **args)
 		exit(2);
 	}
 	ft_putstr_fd("exit\n", STDERR_FILENO);
+	ft_free_double_array(envp);
+	free(wd->pwd);
+	free(wd->oldpwd);
+	free(wd);
+	ft_free_list(&pars);
 	exit(exit_code);
 }

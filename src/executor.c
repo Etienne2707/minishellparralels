@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/15 14:06:06 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 18:03:06 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ static void	child(int *pipefd, t_pars *pars,int i, int nb_cmd, char **envp)
 			ft_heredoc(pars, pipefd, i);
 		if (i == 0)
 		{
-			dup2(pipefd[1], 1);
+			if (nb_cmd != 1)
+				dup2(pipefd[1], 1);
 			redir_files(pars);
 		}
 		else if (i == nb_cmd - 1 && nb_cmd != 1)
@@ -142,22 +143,22 @@ static int	is_builtin(char **cmd_args)
 	return (0);
 }
 
-static int	exe_builtin(char **cmd_args, char ***envp, t_wd *wd)
+static int	exe_builtin(t_pars *pars, char ***envp, t_wd *wd)
 {
-	if (ft_strncmp(cmd_args[0], "echo", 4) == 0)
-		return (ft_echo(cmd_args));
-	if (ft_strncmp(cmd_args[0], "env", 3) == 0)
+	if (ft_strncmp(pars->cmd[0], "echo", 4) == 0)
+		return (ft_echo(pars->cmd));
+	if (ft_strncmp(pars->cmd[0], "env", 3) == 0)
 		return (ft_env(*envp));
-	if (ft_strncmp(cmd_args[0], "exit", 4) == 0)
-		return (ft_exit(cmd_args));
-	if (ft_strncmp(cmd_args[0], "pwd", 3) == 0)
+	if (ft_strncmp(pars->cmd[0], "exit", 4) == 0)
+		return (ft_exit(pars, pars->cmd, *envp, wd));
+	if (ft_strncmp(pars->cmd[0], "pwd", 3) == 0)
 		return (ft_pwd());
-	if (ft_strncmp(cmd_args[0], "export", 6) == 0)
-		return (ft_export(cmd_args, envp));
-	if (ft_strncmp(cmd_args[0], "unset", 5) == 0)
-		return (ft_unset(cmd_args, envp));
-	if (ft_strncmp(cmd_args[0], "cd", 2) == 0)
-		return (ft_cd(cmd_args, envp, wd));
+	if (ft_strncmp(pars->cmd[0], "export", 6) == 0)
+		return (ft_export(pars->cmd, envp));
+	if (ft_strncmp(pars->cmd[0], "unset", 5) == 0)
+		return (ft_unset(pars->cmd, envp));
+	if (ft_strncmp(pars->cmd[0], "cd", 2) == 0)
+		return (ft_cd(pars->cmd, envp, wd));
 	return (EXIT_FAILURE);
 }
 
@@ -172,7 +173,7 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 		ft_heredoc(pars, NULL, 0);
 	if (nb_of_cmd == 1 && is_builtin(pars->cmd))
 	{
-		exe_builtin(pars->cmd, envp, wd);
+		exe_builtin(pars, envp, wd);
 		return (0);
 	}
 	pipefd = malloc(sizeof(int) * 2 * (nb_of_cmd - 1));
