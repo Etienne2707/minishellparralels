@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/15 08:47:04 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:06:06 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,45 @@ static void	redir_files(t_pars *pars)
 		ft_putstr_fd("minishell: No such file or directory: ", 2);
 }
 
-static void ft_heredoc(t_pars *pars, int *pipefd, int i, int nb_cmd)
+static void ft_heredoc(t_pars *pars, int *pipefd, int i)
 {
 	int		len;
 	char	*line;
 	int	j;
+	int	fd;
 
 	j = 0;
 	while (pars->delimiter[j] != NULL)
 	{
 		line = readline("> ");
 		len = ft_strlen(pars->delimiter[j]);
+		if (i == 0)
+		{
+			fd = open (".heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+			if (fd < 0)
+				exit(EXIT_FAILURE);
+		}
 		while (line && (ft_strncmp(line, pars->delimiter[j], len)))
 		{
 			if (i == 0)
 			{
-				write(0, line, ft_strlen(line));
+				write(fd, line, ft_strlen(line));
+				write(fd, "\n", 1);
 				line = readline("> ");
 			}
-			else if (i != nb_cmd - 1)
+			else
 			{
-				write(pipefd[2 * i + 1], line, ft_strlen(line));
+				write(pipefd[2 * (i - 1) + 1], line, ft_strlen(line));
+				write(pipefd[2 * (i - 1) + 1], "\n", 1);
 				line = readline("> ");
 			}
 		}
 		free(line);
 		j++;
+		close(fd);
 	}
+	if (!pars->infile)
+		pars->infile = open(".heredoc_tmp", O_RDONLY);
 }
 
 static void	child(int *pipefd, t_pars *pars,int i, int nb_cmd, char **envp)
@@ -86,25 +98,24 @@ static void	child(int *pipefd, t_pars *pars,int i, int nb_cmd, char **envp)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (pars->next != NULL && (pars->next)->delimiter != NULL)
+			exit(1);
 		if (pars->delimiter != NULL)
-			ft_heredoc(pars, pipefd, i, nb_cmd);
-		if (i == 0 && nb_cmd != 1)
+			ft_heredoc(pars, pipefd, i);
+		if (i == 0)
 		{
 			dup2(pipefd[1], 1);
-			if (pars->infile != 0 || pars->outfile != 0)
-				redir_files(pars);
+			redir_files(pars);
 		}
 		else if (i == nb_cmd - 1 && nb_cmd != 1)
 		{
 			dup2(pipefd[2 * i - 2], 0);
-			if (pars->infile != 0 || pars->outfile != 0)
-				redir_files(pars);
+			redir_files(pars);
 		}
 		else if (nb_cmd != 1)
 		{
 			redir(pipefd[2 * i - 2], pipefd[2 * i + 1]);
-			if (pars->infile != 0 || pars->outfile != 0)
-				redir_files(pars);
+			redir_files(pars);
 		}
 		close_pipes(pipefd, nb_cmd);
 		if (pars->infile != -1)
@@ -114,15 +125,15 @@ static void	child(int *pipefd, t_pars *pars,int i, int nb_cmd, char **envp)
 
 static int	is_builtin(char **cmd_args)
 {
-	if (ft_strncmp(cmd_args[0], "echo", 5) == 0)
+	if (ft_strncmp(cmd_args[0], "echo", 4) == 0)
 		return (1);
-	if (ft_strncmp(cmd_args[0], "env", 4) == 0)
+	if (ft_strncmp(cmd_args[0], "env", 3) == 0)
 		return (1);
-	if (ft_strncmp(cmd_args[0], "exit", 5) == 0)
+	if (ft_strncmp(cmd_args[0], "exit", 4) == 0)
 		return (1);
-	if (ft_strncmp(cmd_args[0], "pwd", 4) == 0)
+	if (ft_strncmp(cmd_args[0], "pwd", 3) == 0)
 		return (1);
-	if (ft_strncmp(cmd_args[0], "export", 7) == 0)
+	if (ft_strncmp(cmd_args[0], "export", 6) == 0)
 		return (1);
 	if (ft_strncmp(cmd_args[0], "unset", 5) == 0)
 		return (1);
@@ -133,21 +144,21 @@ static int	is_builtin(char **cmd_args)
 
 static int	exe_builtin(char **cmd_args, char ***envp, t_wd *wd)
 {
-	if (ft_strncmp(cmd_args[0], "echo", 5) == 0)
+	if (ft_strncmp(cmd_args[0], "echo", 4) == 0)
 		return (ft_echo(cmd_args));
-	if (ft_strncmp(cmd_args[0], "env", 4) == 0)
+	if (ft_strncmp(cmd_args[0], "env", 3) == 0)
 		return (ft_env(*envp));
-	if (ft_strncmp(cmd_args[0], "exit", 5) == 0)
+	if (ft_strncmp(cmd_args[0], "exit", 4) == 0)
 		return (ft_exit(cmd_args));
-	if (ft_strncmp(cmd_args[0], "pwd", 4) == 0)
+	if (ft_strncmp(cmd_args[0], "pwd", 3) == 0)
 		return (ft_pwd());
-	if (ft_strncmp(cmd_args[0], "export", 7) == 0)
+	if (ft_strncmp(cmd_args[0], "export", 6) == 0)
 		return (ft_export(cmd_args, envp));
 	if (ft_strncmp(cmd_args[0], "unset", 5) == 0)
 		return (ft_unset(cmd_args, envp));
 	if (ft_strncmp(cmd_args[0], "cd", 2) == 0)
 		return (ft_cd(cmd_args, envp, wd));
-	return (-1000);
+	return (EXIT_FAILURE);
 }
 
 int	executor(t_pars *pars, char ***envp, t_wd *wd)
@@ -157,6 +168,8 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 	int	i;
 
 	nb_of_cmd = count_cmd(pars);
+	if (nb_of_cmd == 0 && pars->delimiter != NULL)
+		ft_heredoc(pars, NULL, 0);
 	if (nb_of_cmd == 1 && is_builtin(pars->cmd))
 	{
 		exe_builtin(pars->cmd, envp, wd);
