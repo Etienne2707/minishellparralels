@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 18:42:19 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/14 16:10:00 by mle-duc          ###   ########.fr       */
+/*   Created: 2023/10/09 16:35:08 by mle-duc           #+#    #+#             */
+/*   Updated: 2023/10/09 16:58:54 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_cmd(t_pars *pars)
+int	ft_env(char *envp[])
 {
-	int		nb_of_cmd;
-	t_pars	*temp;
+	int	i;
 
-	nb_of_cmd = 0;
-	temp = pars;
-	while (temp != NULL)
+	i = 0;
+	while (envp[i])
 	{
-		nb_of_cmd++;
-		temp = temp->next;
+		if (printf("%s\n", envp[i++]) == 0)
+			return (EXIT_FAILURE);
 	}
-	return (nb_of_cmd);
+	return (EXIT_SUCCESS);
 }

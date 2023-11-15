@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:23 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/26 15:38:48 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/14 16:15:10 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ void	wordinput(char *str, char **dest, char c)
 
 char	**ft_split(const char *s, char c)
 {
-	char **dest;
-	char *str;
+	char	**dest;
+	char	*str;
 
 	str = (char *)s;
 	if (str == 0 && str[0] == '\0')

@@ -6,7 +6,7 @@
 #    By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 16:55:24 by mle-duc           #+#    #+#              #
-#    Updated: 2023/10/25 19:43:25 by mle-duc          ###   ########.fr        #
+#    Updated: 2023/11/15 08:25:24 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,16 @@ SRCS =			$(addprefix src/, \
 				executor.c \
 				exe2.c \
 				pars.c \
+				array_utils.c \
+				env.c \
+				exit.c \
+				pwd.c \
+				echo.c \
+				export.c \
+				export_utils.c \
+				unset.c \
+				cd.c \
+				wd.c \
 				main.c)
 
 OBJS =			${SRCS:.c=.o}

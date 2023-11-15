@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/10/25 20:57:33 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/14 09:38:17 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,30 @@ static int	find_char(char *str, char c)
 	return (0);
 }
 
-void	exe_cmd(char **cmd_args, char *envp[])
+static int	is_builtin(char **cmd_args, char **envp)
+{
+	if (ft_strncmp(cmd_args[0], "echo", 5) == 0)
+		return (ft_echo(cmd_args));
+	if (ft_strncmp(cmd_args[0], "env", 4) == 0)
+		return (ft_env(envp));
+	if (ft_strncmp(cmd_args[0], "exit", 5) == 0)
+		return (ft_exit(cmd_args));
+	if (ft_strncmp(cmd_args[0], "pwd", 4) == 0)
+		return (ft_pwd());
+	if (ft_strncmp(cmd_args[0], "export", 7) == 0)
+		return (ft_export(cmd_args, &envp));
+	if (ft_strncmp(cmd_args[0], "unset", 5) == 0)
+		return (ft_unset(cmd_args, &envp));
+	return (-1000);
+}
+
+void	exe_cmd(char **cmd_args, char **envp)
 {
 	char	**path;
 	char	*cmd_path;
 
+	if (is_builtin(cmd_args, envp) != -1000)
+		exit(0);
 	if (find_char(cmd_args[0], '/'))
 	{
 		execve(cmd_args[0], cmd_args, envp);

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/27 12:24:41 by educlos          ###   ########.fr       */
+/*   Updated: 2023/11/15 08:24:56 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_pars
 	char	**delimiter;
 	struct s_pars	*next;
 	struct s_pars	*prev;
-	  
+	char **envp;
 }					t_pars;
 
 typedef struct s_token
@@ -49,6 +49,7 @@ typedef struct s_token
 	int				start_arg;
 	int last_o;
 	int last_i;
+	char *envp[];
 }					t_token;
 
 typedef struct s_expand
@@ -60,6 +61,12 @@ typedef struct s_expand
 	char e_len;
 	
 }				t_expand;
+
+typedef struct s_wd
+{
+	char *pwd;
+	char *oldpwd;
+}				t_wd;
 
 int					main(int ac, char **argv, char **envp);
 
@@ -102,7 +109,7 @@ char*	add_dquote(char *str);
 int	check_pipe(char **cmd, char *str);
 
 // Struct
-int					init_struct(char **cmd, t_token *token, t_pars **pars);
+int		init_struct(char **cmd, t_token *token, t_pars **pars);
 int	init_token(char **cmd, t_token *token);
 void    free_token(t_token **token, int i);
 
@@ -123,9 +130,35 @@ void	print_err(char *str);
 void	check_status(int status);
 void	child1(char *argv[], char *envp[], int *pipefd);
 void	child2(char *argv[], char *envp[], int *pipefd);
-void	exe_cmd(char **cmd_args, char *envp[]);
+void	exe_cmd(char **cmd_args, char **envp);
 
 int		count_cmd(t_pars *pars);
-int		executor(t_pars *pars, char *envp[]);
+int		executor(t_pars *pars, char ***envp, t_wd *wd);
 
+//Array_utils
+void	ft_free_double_array(char **to_free);
+char**	ft_cpy_double_array(char **to_copy);
+char	**ft_append_double_array(char **matrix, char *to_append);
+char	**ft_pop_double_array(char **matrix, char *to_pop);
+int		var_exists(char **envp, char *str);
+
+//Export_utils
+
+char	*remove_quotes(char *str, char c);
+int	after_equal(char *str);
+int	check_valid_identifier(char c);
+int	var_already_exists(char *envp[], char *str);
+int	check_param(char *str);
+
+//Builtins
+
+int	ft_pwd(void);
+int	ft_exit(char **cmd);
+int	ft_export(char **cmd, char ***envp);
+int	ft_echo(char **cmd);
+int	ft_env(char *envp[]);
+int	ft_unset(char **cmd, char ***envp);
+int	ft_cd(char **cmd, char ***envp, t_wd *wd);
+
+int	get_wds(t_wd *wd, char **envp);
 #endif

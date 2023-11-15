@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:50 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/26 15:38:23 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/07 12:08:23 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**put_arg_list(char **dest, char **str)
 	return (dest);
 }
 
-t_pars	*get_info(t_token *token)
+static t_pars	*get_info(t_token *token)
 {
 	t_pars	*new;
 

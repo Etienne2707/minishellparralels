@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:07 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/27 16:51:17 by educlos          ###   ########.fr       */
+/*   Updated: 2023/11/14 09:13:32 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 		if (is_solo_dol(str,i) != 0 && dollars_in_quote(str, i) == 1)
 		{
 			temp = swap_value(get_value(str, i), envp);
-			printf("%s\n", get_value(str,i));
+			//printf("%s\n", get_value(str,i));
 			if (temp != NULL)
 				dest = change_value(temp, dest);
 			else

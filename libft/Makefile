@@ -6,7 +6,7 @@
 #    By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 16:27:42 by mle-duc           #+#    #+#              #
-#    Updated: 2023/10/25 19:39:47 by mle-duc          ###   ########.fr        #
+#    Updated: 2023/11/15 08:35:31 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC =		cc
 
 RM =		rm -f
 
-CFLAGS =	-Werror -Wextra -Wall
+CFLAGS =	-g3 -Werror -Wextra -Wall
 
 SRCS =			ft_isalpha.c \
 				ft_isdigit.c \
@@ -51,6 +51,7 @@ SRCS =			ft_isalpha.c \
 				ft_putstr_fd.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
+				ft_substr.c \
 				$(addprefix ft_printf/, \
 				ft_print_char.c \
 				ft_printf.c \
