@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 12:31:57 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 14:23:00 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,21 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 	return (1);
 }
 
-int	main(int ac, char **argv, char **envp)
+static int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
+{
+	*envpcpy = ft_cpy_double_array(envp);
+	if (!(*envpcpy))
+		return (EXIT_FAILURE);
+	*wd = init_wd(*envpcpy);
+	if (!(*wd))
+	{
+		ft_free_double_array(*envpcpy);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+static void	minishell_loop(char **envp)
 {
 	t_token	*token;
 	t_pars	*pars;
@@ -57,12 +71,8 @@ int	main(int ac, char **argv, char **envp)
 	char	**envpcpy;
 	t_wd	*wd;
 
-	(void)ac;
-	(void)argv;
-	envpcpy = ft_cpy_double_array(envp);
-	wd = init_wd(envpcpy);
-	if (!wd)
-		return (EXIT_FAILURE);
+	if (init_vars(&envpcpy, envp, &wd))
+		exit(EXIT_FAILURE);
 	str = NULL;
 	pars = NULL;
 	token = NULL;
@@ -77,5 +87,12 @@ int	main(int ac, char **argv, char **envp)
 		pars = NULL;
 		str = readline("Minishell > ");
 	}
+}
+
+int	main(int ac, char **argv, char **envp)
+{
+	(void)ac;
+	(void)argv;
+	minishell_loop(envp);
 	return (1);
 }
