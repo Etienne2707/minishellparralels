@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 13:10:56 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 13:59:22 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_pars
 	int	infile;
 	int outfile;
 	int	append;
+	int	nb_cmd;
 	char	**delimiter;
 	struct s_pars	*next;
 	struct s_pars	*prev;
@@ -131,12 +132,13 @@ char	*get_right_cmd_path(char **paths, char *cmd);
 void	free_tab(char **tab);
 void	print_err(char *str);
 void	check_status(int status);
-void	child1(char *argv[], char *envp[], int *pipefd);
-void	child2(char *argv[], char *envp[], int *pipefd);
+void	child(int *pipefd, t_pars *pars, int i, char **envp);
+void	close_pipes(int *pipefd, int nb_of_cmd);
 void	exe_cmd(char **cmd_args, char **envp);
 
 int		count_cmd(t_pars *pars);
 int		executor(t_pars *pars, char ***envp, t_wd *wd);
+int		exec_single(t_pars *pars, int nb_cmd, char ***envp, t_wd *wd);
 
 //Array_utils
 void	ft_free_double_array(char **to_free);

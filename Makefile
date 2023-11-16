@@ -6,7 +6,7 @@
 #    By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 16:55:24 by mle-duc           #+#    #+#              #
-#    Updated: 2023/11/16 13:10:28 by mle-duc          ###   ########.fr        #
+#    Updated: 2023/11/16 13:57:52 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS =			$(addprefix src/, \
 				path.c \
 				executor.c \
 				exe2.c \
+				exec_utils.c \
 				pars.c \
 				array_utils.c \
 				array_utils2.c \
@@ -55,6 +56,7 @@ SRCS =			$(addprefix src/, \
 				cd_utils.c \
 				wd.c \
 				heredoc.c \
+				child.c \
 				main.c)
 
 OBJS =			${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:50 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 11:53:40 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 13:22:02 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static t_pars	*get_info(t_token *token)
 	new->infile = token->infile;
 	new->next = NULL;
 	new->prev = NULL;
+	new->nb_cmd = 0;
 	return (new);
 }
 
