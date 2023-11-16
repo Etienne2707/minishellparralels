@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:43:06 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 12:43:51 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 14:57:26 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ int	ft_cd(char **cmd, char ***envp, t_wd *wd)
 	}
 	if (path)
 		return (EXIT_FAILURE);
-	refresh_wd(wd, envp);
-	refresh_env(wd, envp);
+	if (wd)
+	{
+		refresh_wd(wd, envp);
+		refresh_env(wd, envp);
+	}
 	return (EXIT_SUCCESS);
 }

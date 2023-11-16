@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:06 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 11:33:24 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 15:26:09 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	only_special(char *str)
 
 char	*malloc_cpy(char *dest, char *src)
 {
+	if (!src || src[0] == 0)
+		return (NULL);
 	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
 	if (!dest)
 		return (NULL);

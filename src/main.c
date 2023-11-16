@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 14:23:00 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 15:32:28 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 	dest = ft_dollars(dest, envp, dest);
 	dest = add_space(dest);
 	cmd = ft_split(dest, '|');
+	if (cmd == NULL)
+		return (-1);
 	if ((check_pipe(cmd, dest)) == -1)
 		return (-1);
 	free(dest);
@@ -79,12 +81,15 @@ static void	minishell_loop(char **envp)
 	str = readline("Minishell > ");
 	while (-1)
 	{
-		add_history(str);
-		check_str(str, token, envpcpy, &pars);
-		free(str);
-		executor(pars, &envpcpy, wd);
-		ft_free_list(&pars);
-		pars = NULL;
+		if (str && str[0] != 0)
+		{
+			add_history(str);
+			check_str(str, token, envpcpy, &pars);
+			free(str);
+			executor(pars, &envpcpy, wd);
+			ft_free_list(&pars);
+			pars = NULL;
+		}
 		str = readline("Minishell > ");
 	}
 }

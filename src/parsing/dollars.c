@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:07 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 12:00:49 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 15:26:47 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 	char	*temp;
 
 	i = 0;
+	if (!dest)
+		return (NULL);
 	dest = str;
 	while (str[i] != 0)
 	{

@@ -6,7 +6,7 @@
 #    By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 16:55:24 by mle-duc           #+#    #+#              #
-#    Updated: 2023/11/16 14:35:38 by mle-duc          ###   ########.fr        #
+#    Updated: 2023/11/16 15:25:11 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRCS =			$(addprefix src/, \
 				$(addprefix utils/, utils.c utils2.c utils3.c) \
 				$(addprefix parsing/, dollars.c dollars2.c dollars3.c list.c quote.c redirection.c redirection_utils.c split.c syntax_error.c syntax_error2.c syntax_utils.c token.c) \
 				free.c \
-				ft_malloc.c \
 				main.c)
 
 OBJS =			${SRCS:.c=.o}
