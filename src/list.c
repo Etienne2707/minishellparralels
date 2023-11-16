@@ -6,22 +6,11 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:50 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 08:32:13 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 11:53:40 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_pars	*ft_lstlast_(t_pars *lst)
-{
-	while (lst->next != NULL)
-	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
 
 char	**put_arg_list2(char **dest, char **str)
 {
@@ -107,35 +96,6 @@ void	lst_add_back(t_pars **pars, t_pars *new)
 		tmp = tmp->next;
 	tmp->next = new;
 	new->prev = tmp;
-}
-
-void	print_list(t_pars **pars)
-{
-	t_pars	*current;
-	int		i;
-
-	current = *pars;
-	while (current != NULL)
-	{
-		i = 0;
-		while (current->cmd[i] != NULL)
-		{
-			printf("cmdlist = %s   ", current->cmd[i]);
-			i++;
-		}
-		printf("\noutfile = %d \n", current->outfile);
-		printf("infile = %d\n", current->infile);
-		if (current->delimiter != NULL)
-		{
-			i = 0;
-			while (current->delimiter[i] != NULL)
-			{
-				printf("heredoc = %s\n", current->delimiter[i]);
-				i++;
-			}
-		}
-		current = current->next;
-	}
 }
 
 void	get_list(t_token *token, t_pars **pars)

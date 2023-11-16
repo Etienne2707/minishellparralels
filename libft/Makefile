@@ -6,7 +6,7 @@
 #    By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 16:27:42 by mle-duc           #+#    #+#              #
-#    Updated: 2023/11/15 08:35:31 by mle-duc          ###   ########.fr        #
+#    Updated: 2023/11/16 12:30:34 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRCS =			ft_isalpha.c \
 				ft_strrchr.c \
 				ft_strcmp.c \
 				ft_strncmp.c \
+				ft_strcpy.c \
+				ft_strncpy.c \
 				ft_memchr.c \
 				ft_memcmp.c \
 				ft_strnstr.c \

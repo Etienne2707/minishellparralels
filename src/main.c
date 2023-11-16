@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/15 22:29:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 12:31:57 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,49 +47,6 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 		return (-1);
 	}
 	return (1);
-}
-
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (src[i] != '\0' && i < n)
-	{
-		dest[i] = src[i];
-		++i;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
-}
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-static t_wd	*init_wd(char **envp)
-{
-	t_wd *new_wd;
-
-	new_wd = malloc(sizeof(t_wd));
-	if (!new_wd)
-		return (NULL);
-	get_wds(new_wd, envp);
-	return (new_wd);
 }
 
 int	main(int ac, char **argv, char **envp)

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/27 16:02:01 by educlos          ###   ########.fr       */
+/*   Updated: 2023/11/16 12:02:37 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,6 @@ char	*add_dquote(char *str)
 	return (new);
 }
 
-int	dollars_in_quote(char *str, int index)
-{
-	int	i;
-	int	start;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 34)
-		{
-			start = ++i;
-			while ((str[i] != 34) && str[i] != '\0')
-				i++;
-			if (index >= start && index < i)
-				return (1);
-		}
-		else if (str[i] == 39)
-		{
-			start = ++i;
-			while ((str[i] != 39) && str[i] != '\0')
-				i++;
-			if (index >= start && index < i)
-				return (-1);
-		}
-		i++;
-	}
-	return (1);
-}
-
 char	*strcpyn(char *dest, char *src, int index, int size)
 {
 	int	i;
@@ -77,18 +48,6 @@ char	*strcpyn(char *dest, char *src, int index, int size)
 	}
 	dest[i] = '\0';
 	return (dest);
-}
-
-int	get_index(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (is_solo_dol(str, i) != 1)
-	{
-		i++;
-	}
-	return (i);
 }
 
 char	*change_value2(char *new, char *str, int size, int index)

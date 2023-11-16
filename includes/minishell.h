@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/15 17:55:50 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 13:10:56 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ int					no_authorize(char *str);
 int					have_digit(char *str, int i);
 
 // Expand
-char				*checkdollars(char *str, char **envp);
+char	*checkdollars(char *str, char **envp);
 char*	ft_dollars(char *str, char **envp, char *dest);
-int dollars_in_quote(char *str, int index);
-int	get_index(char *str);
-char *change_value(char *env, char *str);
-int	is_solo_dol(char *str, int index);
+int		dollars_in_quote(char *str, int index);
+int		get_index(char *str);
+char	*change_value(char *env, char *str);
+int		is_solo_dol(char *str, int index);
+char	*get_env(char *env, char *str);
 
 // List
 void    list_am(t_token *token ,t_pars  **pars);
@@ -105,6 +106,7 @@ int					check_quote(char *str, char *find);
 int					check_in_quote(char *str, int index);
 char	*add_space(char *str);
 int	syntax_check(char *str);
+void	syntax_quote2(char *str, int *s, int *d, int *i);
 char*	add_dquote(char *str);
 int	check_pipe(char **cmd, char *str);
 
@@ -112,10 +114,12 @@ int	check_pipe(char **cmd, char *str);
 int		init_struct(char **cmd, t_token *token, t_pars **pars);
 int	init_token(char **cmd, t_token *token);
 
-// Redirection
-int    redirection(t_token *token, char **arg);
-int nb_infile(t_token *token, char **arg);
-int nb_outfile(t_token *token, char **arg);
+// Redirection and utils
+int	redirection(t_token *token, char **arg);
+int	nb_infile(t_token *token, char **arg);
+int	nb_outfile(t_token *token, char **arg);
+void	get_infile(t_token *token, char **arg, int i);
+void	get_outfile(t_token *token, char **arg, int i);
 
 // Free
 int *ft_malloc(size_t size);
@@ -149,6 +153,10 @@ int	check_valid_identifier(char c);
 int	var_already_exists(char *envp[], char *str);
 int	check_param(char *str);
 
+//Heredoc
+
+void	ft_heredoc(t_pars *pars, int *pipefd, int i);
+
 //Builtins
 
 int	ft_pwd(void);
@@ -159,5 +167,13 @@ int	ft_env(char *envp[]);
 int	ft_unset(char **cmd, char ***envp);
 int	ft_cd(char **cmd, char ***envp, t_wd *wd);
 
-int	get_wds(t_wd *wd, char **envp);
+//Builtins_utils
+int	get_path(char **envp, char *path_to_find);
+int	oldpwd_exists(char **envp);
+void	refresh_wd(t_wd *wd, char ***envp);
+void	refresh_env(t_wd *wd, char ***envp);
+
+//Wds
+t_wd	*init_wd(char **envp);
+int		get_wds(t_wd *wd, char **envp);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:54:15 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/15 20:58:43 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 11:44:00 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,38 +92,5 @@ char	**ft_append_double_array(char **matrix, char *to_append)
 		}
 	}
 	new_matrix[j] = ft_strdup(to_append);
-	return (new_matrix);
-}
-
-char	**ft_pop_double_array(char **matrix, char *to_pop)
-{
-	char	**new_matrix;
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	while (matrix && matrix[i])
-		i++;
-	new_matrix = malloc(sizeof(char *) * (i));
-	if (!new_matrix)
-		return (NULL);
-	new_matrix[i - 1] = NULL;
-	j = -1;
-	k = 0;
-	while (++j < i)
-	{
-		if (!(ft_strncmp(matrix[j], to_pop, after_equal(matrix[j]) - 1) == 0
-				&& matrix[j][ft_strlen(to_pop)] == '='))
-		{
-			new_matrix[k] = ft_strdup(matrix[j]);
-			if (!new_matrix[k])
-			{
-				ft_free_double_array(new_matrix);
-				break ;
-			}
-			k++;
-		}
-	}
 	return (new_matrix);
 }

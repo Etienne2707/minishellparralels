@@ -6,7 +6,7 @@
 #    By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 16:55:24 by mle-duc           #+#    #+#              #
-#    Updated: 2023/11/15 08:25:24 by mle-duc          ###   ########.fr        #
+#    Updated: 2023/11/16 13:10:28 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ LIBFT_DIR =		./libft
 SRCS =			$(addprefix src/, \
 				dollars.c \
 				dollars2.c \
+				dollars3.c \
 				free.c \
 				ft_malloc.c \
 				list.c \
@@ -31,6 +32,7 @@ SRCS =			$(addprefix src/, \
 				redirection_utils.c \
 				split.c \
 				syntax_error.c \
+				syntax_error2.c \
 				syntax_utils.c \
 				token.c \
 				utils.c \
@@ -41,6 +43,7 @@ SRCS =			$(addprefix src/, \
 				exe2.c \
 				pars.c \
 				array_utils.c \
+				array_utils2.c \
 				env.c \
 				exit.c \
 				pwd.c \
@@ -49,7 +52,9 @@ SRCS =			$(addprefix src/, \
 				export_utils.c \
 				unset.c \
 				cd.c \
+				cd_utils.c \
 				wd.c \
+				heredoc.c \
 				main.c)
 
 OBJS =			${SRCS:.c=.o}

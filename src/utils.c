@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:06 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 19:34:58 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 11:33:24 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,4 @@ char	*malloc_cpy(char *dest, char *src)
 	dest = ft_strcpy(dest, src);
 	dest[ft_strlen(src)] = '\0';
 	return (dest);
-}
-
-int	no_authorize(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if ((str[i] != ' ' && str[i] != '.' && str[i] != '$' && str[i] != '|'
-				&& str[i] != '>' && str[i] != 39 && str[i] != 34
-				&& str[i] != '-' && str[i] != '<') && (str[i] < 'a'
-				|| str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
-			&& (str[i] < '0' || str[i] > '9'))
-			return (-1);
-		i++;
-	}
-	return (0);
 }

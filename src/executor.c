@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/15 21:50:39 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 13:10:21 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	redir_files(t_pars *pars)
 	if (pars->infile == -1)
 		ft_putstr_fd("minishell: No such file or directory: ", 2);
 }
-
+/*
 static void ft_heredoc(t_pars *pars, int *pipefd, int i)
 {
 	int		len;
@@ -74,22 +74,21 @@ static void ft_heredoc(t_pars *pars, int *pipefd, int i)
 			{
 				write(fd, line, ft_strlen(line));
 				write(fd, "\n", 1);
-				line = readline("> ");
 			}
 			else
 			{
 				write(pipefd[2 * (i - 1) + 1], line, ft_strlen(line));
 				write(pipefd[2 * (i - 1) + 1], "\n", 1);
-				line = readline("> ");
 			}
+			line = readline("> ");
 		}
 		free(line);
 		j++;
 		close(fd);
 	}
-	if (!pars->infile)
+	if (!pars->infile && i == 0)
 		pars->infile = open(".heredoc_tmp", O_RDONLY);
-}
+}*/
 
 static void	child(int *pipefd, t_pars *pars,int i, int nb_cmd, char **envp)
 {
@@ -100,8 +99,6 @@ static void	child(int *pipefd, t_pars *pars,int i, int nb_cmd, char **envp)
 	{
 		if (pars->next != NULL && (pars->next)->delimiter != NULL)
 			exit(1);
-		if (pars->delimiter != NULL)
-			ft_heredoc(pars, pipefd, i);
 		if (i == 0)
 		{
 			if (nb_cmd != 1)
@@ -173,6 +170,8 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 		ft_heredoc(pars, NULL, 0);
 	if (nb_of_cmd == 1 && is_builtin(pars->cmd))
 	{
+		if (pars->delimiter != NULL)
+			ft_heredoc(pars, NULL, 0);
 		exe_builtin(pars, envp, wd);
 		return (0);
 	}
@@ -187,12 +186,15 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 	i = 0;
 	while (i < nb_of_cmd)
 	{
-		child(pipefd, pars, i++, nb_of_cmd, *envp);
+		if (pars->delimiter != NULL)
+			ft_heredoc(pars, pipefd, i);
+		child(pipefd, pars, i, nb_of_cmd, *envp);
 		pars = pars->next;
+		i++;
 	}
 	close_pipes(pipefd, nb_of_cmd);
 	i = -1;
-	while (++i < nb_of_cmd + 1)
+	while (++i < nb_of_cmd)
 		waitpid(-1, NULL, 0);
 	if (pipefd)
 		free(pipefd);

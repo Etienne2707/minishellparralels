@@ -6,10 +6,9 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:12:59 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 19:37:48 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 11:48:38 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -30,51 +29,6 @@ int	ft_compare(char *str, char *str2, int size)
 	else
 		return (str[i] - str2[i]);
 }
-/*
-char	*ft_strlcpy(char *dest, char *src, unsigned int size)
-{
-	unsigned int	i;
-	unsigned int	l;
-
-	i = 0;
-	l = ft_strlen(src);
-	while (size != 0 && i < size - 1 && src[i] != 0)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	if (i < size)
-		dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	size_t	i;
-	size_t	k;
-	char	*str;
-
-	i = ft_strlen(s1);
-	k = ft_strlen(s2);
-	str = malloc(sizeof(char) * i + k + 1);
-	if (!str)
-		return (NULL);
-	i = 0;
-	k = 0;
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[k] != '\0')
-	{
-		str[i] = s2[k];
-		i++;
-		k++;
-	}
-	str[i] = 0;
-	return (str);
-}*/
 
 char	*ft_strnjoin(char *s1, char *s2, int c)
 {
@@ -116,7 +70,7 @@ char	*add_space_2(char *st, char *dest)
 		if ((st[i] == '<' || st[i] == '>') && (check_in_quote(st, i) == -1))
 		{
 			dest[c++] = 32;
-			while (st[i] == '<' ||(st[i] == '>' && st[i] != '\0'))
+			while (st[i] == '<' || (st[i] == '>' && st[i] != '\0'))
 				dest[c++] = st[i++];
 			dest[c++] = 32;
 		}
@@ -154,13 +108,21 @@ char	*add_space(char *st)
 	free(st);
 	return (dest);
 }
-/*
-int	ft_strcmp(char *s1, char *s2)
+
+int	no_authorize(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+	while (str[i] != '\0')
+	{
+		if ((str[i] != ' ' && str[i] != '.' && str[i] != '$' && str[i] != '|'
+				&& str[i] != '>' && str[i] != 39 && str[i] != 34
+				&& str[i] != '-' && str[i] != '<') && (str[i] < 'a'
+				|| str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
+			&& (str[i] < '0' || str[i] > '9'))
+			return (-1);
 		i++;
-	return (s1[i] - s2[i]);
-}*/
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/27 15:38:27 by educlos          ###   ########.fr       */
+/*   Updated: 2023/11/16 12:08:49 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,112 +101,4 @@ int	syntax_charac(char *str)
 		i++;
 	}
 	return (0);
-}
-
-int	nb_d_quotes(char *str)
-{
-	int	i;
-	int	c;
-
-	i = 0;
-	c = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 34)
-			c++;
-		i++;
-	}
-	return (c);
-}
-
-int	nb_s_quotes(char *str)
-{
-	int	i;
-	int	c;
-
-	i = 0;
-	c = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 39)
-			c++;
-		i++;
-	}
-	return (c);
-}
-
-int	syntax_quote(char *str)
-{
-	int	i;
-	int	s;
-	int	d;
-
-	i = 0;
-	d = nb_d_quotes(str);
-	s = nb_s_quotes(str);
-	while (str[i] != '\0')
-	{
-		if (str[i] == 34)
-		{
-			i++;
-			while ((str[i]) != 34 && str[i] != '\0')
-			{
-				if (str[i] == 39)
-					s--;
-				i++;
-			}
-		}
-		else if (str[i] == 39)
-		{
-			i++;
-			while ((str[i]) != 39 && str[i] != '\0')
-			{
-				if (str[i] == 34)
-					d--;
-				i++;
-			}//return s et d
-		}
-		i++;
-	}
-	if ((d % 2 != 0) || (s % 2 != 0))
-		return (0);
-	return (1);
-}
-
-int	syntax_check(char *str)
-{
-	if (syntax_quote(str) == 0)
-		return (0);
-	//if (syntax_charac(str) == -1)
-	//	return (0);
-	//if (syntax_red(str) == -1)
-//		return (0);
-	return (1);
-}
-
-int	check_pipe(char **cmd, char *str)
-{
-	int	i;
-	int	k;
-	int	c;
-
-	i = 0;
-	c = 0;
-	if (check_start_end(str) == -1)
-		return (-1);
-	while (cmd[i] != 0)
-	{
-		k = 0;
-		c = 0;
-		while (cmd[i][k] != '\0')
-		{
-			if (cmd[i][k] != ' ')
-				c++;
-			k++;
-		}
-		if (c == 0)
-			return (-1);
-		i++;
-	}
-	return (1);
 }
