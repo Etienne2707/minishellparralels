@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:35:21 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 14:02:35 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 18:10:52 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ static void	redir1(int *pipefd, t_pars *pars, int i, int nb_cmd)
 
 void	child(int *pipefd, t_pars *pars, int i, char **envp)
 {
-	pid_t	pid;
-	int		nb_cmd;
+	static int	nb_cmd;
+	pid_t		pid;
 
-	nb_cmd = count_cmd(pars);
+	if (i == 0)
+		nb_cmd = count_cmd(pars);
 	pid = fork();
 	if (pid == 0)
 	{

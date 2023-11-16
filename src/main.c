@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 15:32:28 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 18:14:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 	return (1);
 }
 
-static int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
+int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
 {
 	*envpcpy = ft_cpy_double_array(envp);
 	if (!(*envpcpy))

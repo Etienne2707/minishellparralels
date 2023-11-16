@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 14:04:13 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 18:10:31 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	close_pipes(int *pipefd, int nb_of_cmd)
 		close(pipefd[i++]);
 }
 
-static void	wait_and_close(int *pipefd, int nb_cmd)
+void	wait_and_close(int *pipefd, int nb_cmd)
 {
 	int	i;
 

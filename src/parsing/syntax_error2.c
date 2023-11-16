@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:06:59 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 12:23:21 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 16:35:54 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	nb_d_quotes(char *str)
 
 	i = 0;
 	c = 0;
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 	{
 		if (str[i] == 34)
 			c++;
@@ -35,7 +35,7 @@ static int	nb_s_quotes(char *str)
 
 	i = 0;
 	c = 0;
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 	{
 		if (str[i] == 39)
 			c++;
@@ -53,7 +53,7 @@ static int	syntax_quote(char *str)
 	i = 0;
 	d = nb_d_quotes(str);
 	s = nb_s_quotes(str);
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 	{
 		syntax_quote2(str, &s, &d, &i);
 		i++;

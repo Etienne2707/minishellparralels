@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 13:13:20 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 18:06:19 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	write1(int fd, char **str, int *pipefd, int i)
 		write(pipefd[2 * (i - 1) + 1], *str, ft_strlen(*str));
 		write(pipefd[2 * (i - 1) + 1], "\n", 1);
 	}
+	free(*str);
 	*str = readline("> ");
 }
 
@@ -49,7 +50,8 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 		while (line && (ft_strncmp(line, pars->delimiter[j], len)))
 			write1(fd, &line, pipefd, i);
 		free(line);
-		close(fd);
+		if (fd)
+			close(fd);
 	}
 	if (!pars->infile && i == 0)
 		pars->infile = open(".heredoc_tmp", O_RDONLY);
