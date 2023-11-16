@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:28 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:41:58 by educlos          ###   ########.fr       */
+/*   Updated: 2023/11/15 20:08:18 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	get_heredoc(t_token *token, char **arg)
 	}
 	if (nbh == 0)
 		return ;
-	token->delimiter = malloc(sizeof(char *) * nbh + 1);
+	token->delimiter = malloc(sizeof(char *) * (nbh + 1));
 	if (!token->delimiter)
 		return ;
 	put_heredoc(token, arg);
