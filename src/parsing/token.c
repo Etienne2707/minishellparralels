@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/17 13:32:55 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 17:11:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,24 @@ char	**get_arg(char *cmd, t_token *token)
 	return (token->arg);
 }
 
+static void	free_token(t_token **token, int i)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	while (j < i)
+	{
+		k = 0;
+		while ((*token)[j].arg[k])
+			free((*token)[j].arg[k++]);
+		free((*token)[j].arg);
+		free((*token)[j].delimiter);
+		j++;
+	}
+	free(*token);
+}
+
 int	init_struct(char **cmd, t_token *token, t_pars **pars)
 {
 	int	i;
@@ -67,19 +85,9 @@ int	init_struct(char **cmd, t_token *token, t_pars **pars)
 	{
 		token[i].arg = get_arg(cmd[i], &token[i]);
 		get_list(&token[i], pars);
-		/*
-		int k = 0;
-		while (token[i].arg[k])
-		{
-			printf("k : %d\n", k);
-			free(token[i].arg[k++]);
-		}
-		*/
-		//free(token[i].arg[0]);
-		//free(token[i].arg[1]);
 		i++;
 	}
-	//free(token->delimiter);
+	/*
 	int j = 0;
 	while (j < i)
 	{
@@ -90,8 +98,8 @@ int	init_struct(char **cmd, t_token *token, t_pars **pars)
 		free(token[j].delimiter);
 		j++;
 	}
-	//ft_free_double_array(token->delimiter);
 	free(token);
-//	print_list(pars);
+	*/
+	free_token(&token, i);
 	return (1);
 }

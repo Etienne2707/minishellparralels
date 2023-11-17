@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/17 13:43:58 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 17:00:59 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,31 @@
 
 static void	write1(int fd, char **str, int *pipefd, int i)
 {
-	if (i == 0)
-	{
-		write(fd, *str, ft_strlen(*str));
-		write(fd, "\n", 1);
-	}
+	(void)i;
+	(void)pipefd;
+	write(fd, *str, ft_strlen(*str));
+	write(fd, "\n", 1);
+	/*
 	else
 	{
 		write(pipefd[2 * (i - 1) + 1], *str, ft_strlen(*str));
 		write(pipefd[2 * (i - 1) + 1], "\n", 1);
-	}
+	}*/
 	free(*str);
 	*str = readline("> ");
+}
+
+static char	*tmpfile_name(int i)
+{
+	char	*index;
+	char	*file_name;
+
+	index = ft_itoa(i);
+	if (!index)
+		return (NULL);
+	file_name = ft_strjoin(".heredoc_tmp_", index);
+	free(index);
+	return (file_name);
 }
 
 void	ft_heredoc(t_pars *pars, int *pipefd, int i)
@@ -34,25 +47,28 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 	char	*line;
 	int		j;
 	int		fd;
+	char	*str;
 
 	j = -1;
 	fd = 0;
+	str = tmpfile_name(i);
 	while (pars->delimiter[++j] != NULL)
 	{
 		line = readline("> ");
 		len = ft_strlen(pars->delimiter[j]);
-		if (i == 0)
+		fd = open (str, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		if (fd < 0)
 		{
-			fd = open (".heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
-			if (fd < 0)
-				exit(EXIT_FAILURE);
+			free(str);
+			exit(EXIT_FAILURE);
 		}
 		while (line && (ft_strncmp(line, pars->delimiter[j], len)))
 			write1(fd, &line, pipefd, i);
 		free(line);
 		if (fd)
 			close(fd);
-	if (!pars->infile && i == 0)
-		pars->infile = open(".heredoc_tmp", O_RDONLY);
+		if (!pars->infile)
+			pars->infile = open(str, O_RDONLY);
 	}
+	free(str);
 }

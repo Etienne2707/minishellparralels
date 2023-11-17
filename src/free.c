@@ -6,11 +6,38 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:55 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/17 13:46:12 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 18:14:03 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	unlink_heredoc_files(t_pars *pars)
+{
+	int	nb_cmd;
+	int	i;
+	char	*index;
+	char	*file_name;
+
+	nb_cmd = count_cmd(pars);
+	i = 0;
+	while (i < nb_cmd)
+	{
+		index = ft_itoa(i);
+		if (!index)
+			return ;
+		file_name = ft_strjoin(".heredoc_tmp_", index);
+		if (!file_name)
+		{
+			free(index);
+			return ;
+		}
+		free(index);
+		unlink(file_name);
+		free(file_name);
+		i++;
+	}
+}
 
 void	free_maillon(t_pars *pars)
 {
@@ -45,6 +72,7 @@ void	ft_free_list(t_pars **pars)
 
 	while((*pars)->prev != NULL)
 		(*pars) = (*pars)->prev;
+	unlink_heredoc_files(*pars);
 	while (*pars != NULL)
 	{
 		temp = *pars;

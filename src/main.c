@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/17 12:18:39 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 17:02:10 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ static void	minishell_loop(char **envp)
 			check_str(str, token, envpcpy, &pars);
 			add_wd(pars, wd);
 			free(str);
+			unlink("mdr");
 			executor(pars, &envpcpy, wd);
 			ft_free_list(&pars);
 			pars = NULL;

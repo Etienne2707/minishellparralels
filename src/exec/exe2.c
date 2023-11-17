@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/17 11:54:41 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 18:01:42 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ static int	is_builtin(char **cmd_args, char **envp, int *exit_code)
 	return (*exit_code);
 }
 
+static void	free_remaining(t_pars *pars, char **envp)
+{
+	free((pars->wd)->pwd);
+	free((pars->wd)->oldpwd);
+	free(pars->wd);
+	ft_free_double_array(envp);
+	ft_free_list(&pars);
+}
+
 void	exe_cmd(t_pars *pars, char **envp)
 {
 	char	**path;
@@ -54,11 +63,7 @@ void	exe_cmd(t_pars *pars, char **envp)
 
 	if (is_builtin(pars->cmd, envp, &exit_code) != EXIT_FAILURE)
 	{
-		free((pars->wd)->pwd);
-		free((pars->wd)->oldpwd);
-		free(pars->wd);
-		ft_free_double_array(envp);
-		ft_free_list(&pars);
+		free_remaining(pars, envp);
 		exit(exit_code);
 	}
 	if (find_char(pars->cmd[0], '/'))
@@ -71,7 +76,7 @@ void	exe_cmd(t_pars *pars, char **envp)
 	if (cmd_path == NULL)
 	{
 		ft_putstr_fd("Command not found\n", 2);
-		free_tab(pars->cmd);
+		free_remaining(pars, envp);
 		free_tab(path);
 		exit(127);
 	}
