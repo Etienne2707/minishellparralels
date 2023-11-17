@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:50 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 13:22:02 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 12:19:06 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ static t_pars	*get_info(t_token *token)
 		return (NULL);
 	new->cmd = NULL;
 	new->cmd = put_arg_list(new->cmd, token->arg);
-	new->delimiter = token->delimiter;
-	//free(token->delimiter);
+	new->delimiter = ft_cpy_double_array(token->delimiter);
+	//ft_free_double_array(token->delimiter);
 	new->outfile = token->outfile;
 	new->infile = token->infile;
 	new->next = NULL;
 	new->prev = NULL;
-	new->nb_cmd = 0;
+	new->token = token;
 	return (new);
 }
 

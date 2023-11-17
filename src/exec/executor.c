@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 18:10:31 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:14:08 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 	i = -1;
 	while (++i < nb_cmd)
 	{
-		if (pars->delimiter != NULL)
+		if (pars->delimiter != NULL && pars->delimiter[0] != 0)
 			ft_heredoc(pars, pipefd, i);
 		child(pipefd, pars, i, *envp);
 		pars = pars->next;

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 18:14:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 12:18:39 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 	dest = malloc_cpy(dest, str);
 	dest = ft_dollars(dest, envp, dest);
 	dest = add_space(dest);
-	cmd = ft_split(dest, '|');
+	cmd = ft_split_lib(dest, '|');
 	if (cmd == NULL)
 		return (-1);
 	if ((check_pipe(cmd, dest)) == -1)
@@ -65,6 +65,15 @@ int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
 	return (EXIT_SUCCESS);
 }
 
+static void	add_wd(t_pars *pars, t_wd *wd)
+{
+	while (pars != NULL)
+	{
+		pars->wd = wd;
+		pars = pars->next;
+	}
+}
+
 static void	minishell_loop(char **envp)
 {
 	t_token	*token;
@@ -78,19 +87,19 @@ static void	minishell_loop(char **envp)
 	str = NULL;
 	pars = NULL;
 	token = NULL;
-	str = readline("Minishell > ");
 	while (-1)
 	{
+		str = readline("Minishell > ");
 		if (str && str[0] != 0)
 		{
 			add_history(str);
 			check_str(str, token, envpcpy, &pars);
+			add_wd(pars, wd);
 			free(str);
 			executor(pars, &envpcpy, wd);
 			ft_free_list(&pars);
 			pars = NULL;
 		}
-		str = readline("Minishell > ");
 	}
 }
 

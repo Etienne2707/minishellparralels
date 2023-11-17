@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:06:53 by mle-duc           #+#    #+#             */
-/*   Updated: 2022/11/13 10:54:58 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 09:08:08 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static char	**split(char *tmp, int words)
 	return (ret);
 }
 
-char	**ft_split(char const *str, char c)
+char	**ft_split_lib(char const *str, char c)
 {
 	char	*res;
 	int		nb_words;

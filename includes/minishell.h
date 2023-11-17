@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 13:59:22 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/16 20:12:28 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,11 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 
-typedef struct s_pars
+typedef struct s_wd
 {
-	char	**cmd;
-	int	infile;
-	int outfile;
-	int	append;
-	int	nb_cmd;
-	char	**delimiter;
-	struct s_pars	*next;
-	struct s_pars	*prev;
-	char **envp;
-}					t_pars;
+	char *pwd;
+	char *oldpwd;
+}				t_wd;
 
 typedef struct s_token
 {
@@ -53,6 +46,20 @@ typedef struct s_token
 	char *envp[];
 }					t_token;
 
+typedef struct s_pars
+{
+	char	**cmd;
+	int	infile;
+	int outfile;
+	int	append;
+	char	**delimiter;
+	struct s_pars	*next;
+	struct s_pars	*prev;
+	char **envp;
+	t_token	*token;
+	t_wd	*wd;
+}				t_pars;
+
 typedef struct s_expand
 {
 	char *value;
@@ -60,14 +67,7 @@ typedef struct s_expand
 	int start;
 	char *env;
 	char e_len;
-	
 }				t_expand;
-
-typedef struct s_wd
-{
-	char *pwd;
-	char *oldpwd;
-}				t_wd;
 
 int					main(int ac, char **argv, char **envp);
 
@@ -134,7 +134,7 @@ void	print_err(char *str);
 void	check_status(int status);
 void	child(int *pipefd, t_pars *pars, int i, char **envp);
 void	close_pipes(int *pipefd, int nb_of_cmd);
-void	exe_cmd(char **cmd_args, char **envp);
+void	exe_cmd(t_pars *pars, char **envp);
 
 int		count_cmd(t_pars *pars);
 int		executor(t_pars *pars, char ***envp, t_wd *wd);

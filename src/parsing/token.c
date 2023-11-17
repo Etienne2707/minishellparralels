@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 18:11:34 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:32:55 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**get_arg(char *cmd, t_token *token)
 	i = 0;
 	temp = NULL;
 	temp = (ft_strnrcpy(cmd, temp, i));
-	token->arg = ft_split(temp, ' ');
+	token->arg = ft_split_lib(temp, ' ');
 	redirection(token, token->arg);
 	i = 0;
 	while (token->arg[i] != 0)
@@ -70,13 +70,27 @@ int	init_struct(char **cmd, t_token *token, t_pars **pars)
 		/*
 		int k = 0;
 		while (token[i].arg[k])
+		{
+			printf("k : %d\n", k);
 			free(token[i].arg[k++]);
+		}
 		*/
-		free(token[i].arg[0]);
-		free(token[i].arg);
+		//free(token[i].arg[0]);
+		//free(token[i].arg[1]);
 		i++;
 	}
 	//free(token->delimiter);
+	int j = 0;
+	while (j < i)
+	{
+		int k = 0;
+		while (token[j].arg[k])
+			free(token[j].arg[k++]);
+		free(token[j].arg);
+		free(token[j].delimiter);
+		j++;
+	}
+	//ft_free_double_array(token->delimiter);
 	free(token);
 //	print_list(pars);
 	return (1);

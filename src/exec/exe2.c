@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 17:52:42 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 11:54:41 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,35 @@ static int	is_builtin(char **cmd_args, char **envp, int *exit_code)
 	return (*exit_code);
 }
 
-void	exe_cmd(char **cmd_args, char **envp)
+void	exe_cmd(t_pars *pars, char **envp)
 {
 	char	**path;
 	char	*cmd_path;
 	int		exit_code;
 
-	if (is_builtin(cmd_args, envp, &exit_code) != EXIT_FAILURE)
-		exit(exit_code);
-	if (find_char(cmd_args[0], '/'))
+	if (is_builtin(pars->cmd, envp, &exit_code) != EXIT_FAILURE)
 	{
-		execve(cmd_args[0], cmd_args, envp);
+		free((pars->wd)->pwd);
+		free((pars->wd)->oldpwd);
+		free(pars->wd);
+		ft_free_double_array(envp);
+		ft_free_list(&pars);
+		exit(exit_code);
+	}
+	if (find_char(pars->cmd[0], '/'))
+	{
+		execve(pars->cmd[0], pars->cmd, envp);
 		exit(127);
 	}
-	path = ft_split(find_path(envp), ':');
-	cmd_path = get_right_cmd_path(path, cmd_args[0]);
+	path = ft_split_lib(find_path(envp), ':');
+	cmd_path = get_right_cmd_path(path, pars->cmd[0]);
 	if (cmd_path == NULL)
 	{
 		ft_putstr_fd("Command not found\n", 2);
-		free_tab(cmd_args);
+		free_tab(pars->cmd);
 		free_tab(path);
 		exit(127);
 	}
-	execve(cmd_path, cmd_args, envp);
+	execve(cmd_path, pars->cmd, envp);
 	exit(127);
 }

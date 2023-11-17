@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 18:06:19 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:43:58 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 		free(line);
 		if (fd)
 			close(fd);
-	}
 	if (!pars->infile && i == 0)
 		pars->infile = open(".heredoc_tmp", O_RDONLY);
+	}
 }
