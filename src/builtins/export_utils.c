@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:38:51 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/14 06:50:29 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:40:55 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,25 @@ int	check_param(char *str)
 
 	i = 0;
 	if (ft_isdigit(str[0]))
-		return (EXIT_FAILURE);
-	if (after_equal(str) == 0)
-		return (EXIT_FAILURE);
-	if (str[0] == '=')
-		return (EXIT_FAILURE);
-	while (str[i] != '=')
+		return (export_err(str));
+	while (str[i] != '=' && str[i])
 	{
 		if (check_valid_identifier(str[i]))
-			return (EXIT_FAILURE);
+			return (export_err(str));
 		i++;
 	}
+	i = 0;
+	if (after_equal(str) == 0)
+	{
+		while (str[i])
+		{
+			if (check_valid_identifier(str[i]))
+				return (export_err(str));
+			i++;
+		}
+		return (-1);
+	}
+	if (str[0] == '=')
+		return (export_err(str));
 	return (EXIT_SUCCESS);
 }

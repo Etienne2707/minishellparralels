@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/17 17:00:59 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:53:24 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ static void	write1(int fd, char **str, int *pipefd, int i)
 	(void)pipefd;
 	write(fd, *str, ft_strlen(*str));
 	write(fd, "\n", 1);
-	/*
-	else
-	{
-		write(pipefd[2 * (i - 1) + 1], *str, ft_strlen(*str));
-		write(pipefd[2 * (i - 1) + 1], "\n", 1);
-	}*/
 	free(*str);
 	*str = readline("> ");
 }
@@ -39,6 +33,14 @@ static char	*tmpfile_name(int i)
 	file_name = ft_strjoin(".heredoc_tmp_", index);
 	free(index);
 	return (file_name);
+}
+
+static void	manage_files(int fd, t_pars *pars, char *str)
+{
+	if (fd)
+		close(fd);
+	if (!pars->infile)
+		pars->infile = open(str, O_RDONLY);
 }
 
 void	ft_heredoc(t_pars *pars, int *pipefd, int i)
@@ -65,10 +67,7 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 		while (line && (ft_strncmp(line, pars->delimiter[j], len)))
 			write1(fd, &line, pipefd, i);
 		free(line);
-		if (fd)
-			close(fd);
-		if (!pars->infile)
-			pars->infile = open(str, O_RDONLY);
+		manage_files(fd, pars, str);
 	}
 	free(str);
 }

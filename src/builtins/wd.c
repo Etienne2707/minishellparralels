@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:24:06 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 12:39:31 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:02:27 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,13 @@ int	get_wds(t_wd *wd, char **envp)
 	if (wd->pwd == NULL)
 		wd->pwd = getcwd(wd->pwd, 0);
 	return (1);
+}
+
+void	add_wd(t_pars *pars, t_wd *wd)
+{
+	while (pars != NULL)
+	{
+		pars->wd = wd;
+		pars = pars->next;
+	}
 }

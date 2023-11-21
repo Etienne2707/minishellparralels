@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:55 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/17 18:14:03 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:00:31 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	unlink_heredoc_files(t_pars *pars)
 {
-	int	nb_cmd;
-	int	i;
+	int		nb_cmd;
+	int		i;
 	char	*index;
 	char	*file_name;
 
@@ -70,7 +70,7 @@ void	ft_free_list(t_pars **pars)
 {
 	t_pars	*temp;
 
-	while((*pars)->prev != NULL)
+	while ((*pars)->prev != NULL)
 		(*pars) = (*pars)->prev;
 	unlink_heredoc_files(*pars);
 	while (*pars != NULL)

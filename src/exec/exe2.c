@@ -6,11 +6,13 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/17 18:01:42 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:59:09 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 static int	find_char(char *str, char c)
 {
@@ -28,7 +30,7 @@ static int	find_char(char *str, char c)
 
 static int	is_builtin(char **cmd_args, char **envp, int *exit_code)
 {
-	*exit_code = EXIT_FAILURE;
+	*exit_code = -1;
 	if (ft_strncmp(cmd_args[0], "echo", 5) == 0)
 		*exit_code = ft_echo(cmd_args);
 	if (ft_strncmp(cmd_args[0], "env", 4) == 0)
@@ -55,13 +57,22 @@ static void	free_remaining(t_pars *pars, char **envp)
 	ft_free_list(&pars);
 }
 
+static void	exe_err(t_pars *pars, char **envp, char **path)
+{
+	ft_putstr_fd(pars->cmd[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	free_remaining(pars, envp);
+	free_tab(path);
+	exit(127);
+}
+
 void	exe_cmd(t_pars *pars, char **envp)
 {
 	char	**path;
 	char	*cmd_path;
 	int		exit_code;
 
-	if (is_builtin(pars->cmd, envp, &exit_code) != EXIT_FAILURE)
+	if (is_builtin(pars->cmd, envp, &exit_code) != -1)
 	{
 		free_remaining(pars, envp);
 		exit(exit_code);
@@ -69,17 +80,13 @@ void	exe_cmd(t_pars *pars, char **envp)
 	if (find_char(pars->cmd[0], '/'))
 	{
 		execve(pars->cmd[0], pars->cmd, envp);
+		g_exit_status = 127;
 		exit(127);
 	}
 	path = ft_split_lib(find_path(envp), ':');
 	cmd_path = get_right_cmd_path(path, pars->cmd[0]);
 	if (cmd_path == NULL)
-	{
-		ft_putstr_fd("Command not found\n", 2);
-		free_remaining(pars, envp);
-		free_tab(path);
-		exit(127);
-	}
+		exe_err(pars, envp, path);
 	execve(cmd_path, pars->cmd, envp);
 	exit(127);
 }

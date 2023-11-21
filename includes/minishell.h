@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 20:12:28 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:05:29 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <sys/ioctl.h>
 
 typedef struct s_wd
 {
@@ -154,6 +155,7 @@ int	after_equal(char *str);
 int	check_valid_identifier(char c);
 int	var_already_exists(char *envp[], char *str);
 int	check_param(char *str);
+int	export_err(char *str);
 
 //Heredoc
 
@@ -178,4 +180,9 @@ void	refresh_env(t_wd *wd, char ***envp);
 //Wds
 t_wd	*init_wd(char **envp);
 int		get_wds(t_wd *wd, char **envp);
+void	add_wd(t_pars *pars, t_wd *wd);
+
+//Signals
+void	handle_sigint(int sig);
+
 #endif

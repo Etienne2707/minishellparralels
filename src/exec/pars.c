@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:42:19 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 11:53:30 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/20 18:44:14 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	print_list(t_pars **pars)
 		i = 0;
 		while (current->cmd[i] != NULL)
 		{
-			printf("cmdlist = %s   ", current->cmd[i]);
+			printf("cmd[%d] = %s\n", i, current->cmd[i]);
 			i++;
 		}
-		printf("\noutfile = %d \n", current->outfile);
+		printf("outfile = %d\n", current->outfile);
 		printf("infile = %d\n", current->infile);
 		if (current->delimiter != NULL)
 		{

@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 09:15:08 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/20 19:50:20 by mle-duc          ###   ########.fr       */
+/*   Created: 2023/11/21 11:19:28 by mle-duc           #+#    #+#             */
+/*   Updated: 2023/11/21 13:00:52 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(char **args, char ***envp)
+int	export_err(char *str)
 {
-	char	**tmp;
-	int		i;
-
-	i = 1;
-	while (args[i])
-	{
-		if (var_exists(*envp, args[i]))
-		{
-			tmp = ft_pop_double_array(*envp, args[i]);
-			if (!tmp)
-				return (EXIT_FAILURE);
-			ft_free_double_array(*envp);
-			*envp = tmp;
-		}
-		i++;
-	}
-	return (EXIT_SUCCESS);
+	ft_putstr_fd("minishell: export: '", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+	return (EXIT_FAILURE);
 }

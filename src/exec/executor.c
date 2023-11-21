@@ -6,11 +6,13 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/17 13:14:08 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:59:54 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 static void	create_pipes(int *pipefd, int nb_of_cmd)
 {
@@ -37,12 +39,15 @@ void	close_pipes(int *pipefd, int nb_of_cmd)
 void	wait_and_close(int *pipefd, int nb_cmd)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	close_pipes(pipefd, nb_cmd);
 	while (i < nb_cmd)
 	{
-		waitpid(-1, NULL, 0);
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status))
+			g_exit_status = WEXITSTATUS(status);
 		i++;
 	}
 	if (pipefd)

@@ -6,11 +6,13 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/17 17:02:10 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:03:24 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_exit_status;
 
 int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 {
@@ -65,15 +67,6 @@ int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
 	return (EXIT_SUCCESS);
 }
 
-static void	add_wd(t_pars *pars, t_wd *wd)
-{
-	while (pars != NULL)
-	{
-		pars->wd = wd;
-		pars = pars->next;
-	}
-}
-
 static void	minishell_loop(char **envp)
 {
 	t_token	*token;
@@ -89,6 +82,9 @@ static void	minishell_loop(char **envp)
 	token = NULL;
 	while (-1)
 	{
+		printf("exit status : %d\n", g_exit_status);
+		signal(SIGINT, handle_sigint);
+		signal(SIGQUIT, SIG_IGN);
 		str = readline("Minishell > ");
 		if (str && str[0] != 0)
 		{
