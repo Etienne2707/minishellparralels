@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/21 12:53:24 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:38:19 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 			free(str);
 			exit(EXIT_FAILURE);
 		}
-		while (line && (ft_strncmp(line, pars->delimiter[j], len)))
+		while (line && (ft_strncmp(line, pars->delimiter[j], len + 1)))
 			write1(fd, &line, pipefd, i);
 		free(line);
 		manage_files(fd, pars, str);
