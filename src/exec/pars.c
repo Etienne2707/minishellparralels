@@ -36,22 +36,13 @@ void	print_list(t_pars **pars)
 	while (current != NULL)
 	{
 		i = 0;
-		while (current->cmd[i] != NULL)
+		while (current->cmd[i])
 		{
 			printf("cmd[%d] = %s\n", i, current->cmd[i]);
 			i++;
 		}
 		printf("outfile = %d\n", current->outfile);
 		printf("infile = %d\n", current->infile);
-		if (current->delimiter != NULL)
-		{
-			i = 0;
-			while (current->delimiter[i] != NULL)
-			{
-				printf("heredoc = %s\n", current->delimiter[i]);
-				i++;
-			}
-		}
 		current = current->next;
 	}
 }

@@ -40,14 +40,14 @@ char	**get_arg(char *cmd, t_token *token)
 	i = 0;
 	temp = NULL;
 	temp = (ft_strnrcpy(cmd, temp, i));
-	token->arg = ft_split_lib(temp, ' ');
-	redirection(token, token->arg);
+	token->arg = ft_split(temp, ' ');
 	i = 0;
 	while (token->arg[i] != 0)
 	{
 		token->arg[i] = ft_remove_quote(token->arg[i]);
 		i++;
 	}
+	redirection(token, token->arg);
 	free(temp);
 	return (token->arg);
 }

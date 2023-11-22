@@ -77,6 +77,8 @@ int					have_digit(char *str, int i);
 int					only_special(char *str);
 int					no_authorize(char *str);
 int					have_digit(char *str, int i);
+int					syntax_red(char *str);
+int					syntax_charac(char *str);
 
 // Expand
 char	*checkdollars(char *str, char **envp);

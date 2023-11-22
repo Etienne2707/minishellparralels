@@ -67,6 +67,10 @@ int	syntax_check(char *str)
 {
 	if (syntax_quote(str) == 0)
 		return (0);
+	//if (syntax_red(str) == -1)
+	//	return (0);
+//	if (syntax_charac(str) == -1)
+	//	return (0);
 	return (1);
 }
 

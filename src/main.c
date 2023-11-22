@@ -27,8 +27,8 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 	dest = malloc_cpy(dest, str);
 	dest = ft_dollars(dest, envp, dest);
 	dest = add_space(dest);
-	cmd = ft_split_lib(dest, '|');
-	if (cmd == NULL)
+	cmd = ft_split(dest, '|');
+	if (cmd == NULL)      
 		return (-1);
 	if ((check_pipe(cmd, dest)) == -1)
 		return (-1);
