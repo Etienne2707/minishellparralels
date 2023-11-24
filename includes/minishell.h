@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/24 12:07:30 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:32:47 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	get_outfile(t_token *token, char **arg, int i);
 // Free
 int *ft_malloc(size_t size);
 void    ft_free_list(t_pars **pars);
+void	free_remaining(t_pars *pars, char **envp);
 
 //Exec
 char	*find_path(char **envp);
@@ -141,7 +142,10 @@ void	exe_cmd(t_pars *pars, char **envp);
 
 int		count_cmd(t_pars *pars);
 int		executor(t_pars *pars, char ***envp, t_wd *wd);
+
+//Exec_utils
 int		exec_single(t_pars *pars, int nb_cmd, char ***envp, t_wd *wd);
+void	exe_relative(t_pars *pars, char **envp);
 
 //Array_utils
 void	ft_free_double_array(char **to_free);

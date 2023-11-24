@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:55 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/21 13:00:31 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:30:22 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,13 @@ void	ft_free_list(t_pars **pars)
 		*pars = (*pars)->next;
 		free_maillon(temp);
 	}
+}
+
+void	free_remaining(t_pars *pars, char **envp)
+{
+	free((pars->wd)->pwd);
+	free((pars->wd)->oldpwd);
+	free(pars->wd);
+	ft_free_double_array(envp);
+	ft_free_list(&pars);
 }

@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/21 12:59:09 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:38:21 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,6 @@ static int	is_builtin(char **cmd_args, char **envp, int *exit_code)
 	return (*exit_code);
 }
 
-static void	free_remaining(t_pars *pars, char **envp)
-{
-	free((pars->wd)->pwd);
-	free((pars->wd)->oldpwd);
-	free(pars->wd);
-	ft_free_double_array(envp);
-	ft_free_list(&pars);
-}
-
 static void	exe_err(t_pars *pars, char **envp, char **path)
 {
 	ft_putstr_fd(pars->cmd[0], 2);
@@ -78,11 +69,7 @@ void	exe_cmd(t_pars *pars, char **envp)
 		exit(exit_code);
 	}
 	if (find_char(pars->cmd[0], '/'))
-	{
-		execve(pars->cmd[0], pars->cmd, envp);
-		g_exit_status = 127;
-		exit(127);
-	}
+		exe_relative(pars, envp);
 	path = ft_split_lib(find_path(envp), ':');
 	cmd_path = get_right_cmd_path(path, pars->cmd[0]);
 	if (cmd_path == NULL)
