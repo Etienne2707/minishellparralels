@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int	g_exit_status;
+
 char	*remove_dol(char *str, char *value)
 {
 	int		i;
@@ -44,6 +46,12 @@ char	*swap_value(char *value, char **envp)
 	char	*temp;
 
 	i = 0;
+	if (ft_strcmp(value,"?") == 0)
+	{
+		printf("oui");
+		free(value);
+		return (temp = ft_itoa(g_exit_status));
+	}
 	while (envp[i] != NULL)
 	{
 		temp = get_env(envp[i], value);
@@ -51,6 +59,8 @@ char	*swap_value(char *value, char **envp)
 			return (temp);
 		i++;
 	}
+	if (value != NULL)
+		free(value);
 	free(temp);
 	return (NULL);
 }
@@ -77,10 +87,18 @@ char	*get_value(char *str, int index)
 		return (get_exp_num(str, index));
 	while (str[i] != '\0' && str[i] != 32 && str[i] != '$' && str[i] != 39
 		&& str[i] != ']' && str[i] != 34)
+	{
+		if (str[i] == '?')
+		{
+			i++;
+			break ;
+		}
 		i++;
+	}
 	value = malloc(sizeof(char) * (i - index) + 1);
 	if (!value)
 		return (NULL);
+	
 	value = strcpyn(value, str, index + 1, i - index);
 	return (value);
 }
@@ -106,5 +124,6 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 		}
 		i++;
 	}
+	free(str);
 	return (dest);
 }

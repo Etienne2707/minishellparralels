@@ -59,7 +59,7 @@ char	*ft_remove_quote(char *str)
 	if (only_quotes(str) == 0)
 	{
 		// faire tous ca dans une fonction differentes
-		free(str)
+		free(str);
 		dest = malloc(sizeof(char ) * 2);
 		dest[0] = 32;
 		dest[1] = '\0';
