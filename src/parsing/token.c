@@ -45,6 +45,7 @@ char	**get_arg(char *cmd, t_token *token)
 	while (token->arg[i] != 0)
 	{
 		token->arg[i] = ft_remove_quote(token->arg[i]);
+		printf("%d\n",token->arg[i][0]);
 		i++;
 	}
 	redirection(token, token->arg);

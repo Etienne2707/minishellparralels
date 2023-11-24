@@ -32,6 +32,22 @@ char	*string_woquotes(char *str, char *dest)
 	return (dest);
 }
 
+int	only_quotes(char *str)
+{
+	int i;
+	int result;
+	
+	i = 0;
+	result = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != 34 && str[i] != 39)
+			result = 1;
+		i++;
+	}
+	return (result);
+}
+
 char	*ft_remove_quote(char *str)
 {
 	int		k;
@@ -40,6 +56,15 @@ char	*ft_remove_quote(char *str)
 
 	k = 0;
 	c = 0;
+	if (only_quotes(str) == 0)
+	{
+		// faire tous ca dans une fonction differentes
+		free(str)
+		dest = malloc(sizeof(char ) * 2);
+		dest[0] = 32;
+		dest[1] = '\0';
+		return (dest);
+	}
 	while (str[k] != '\0')
 	{
 		if ((str[k] == 34 || str[k] == 39) && check_in_quote(str, k) == -1)
