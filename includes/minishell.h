@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/21 13:05:29 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:07:30 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,6 @@ void	add_wd(t_pars *pars, t_wd *wd);
 
 //Signals
 void	handle_sigint(int sig);
+void	handle_ctrl_d(char **envpcpy, t_wd *wd);
 
 #endif

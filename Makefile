@@ -6,7 +6,7 @@
 #    By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 16:55:24 by mle-duc           #+#    #+#              #
-#    Updated: 2023/11/21 13:04:47 by mle-duc          ###   ########.fr        #
+#    Updated: 2023/11/24 12:03:50 by mle-duc          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS =			$(addprefix src/, \
 
 OBJS =			${SRCS:.c=.o}
 
-CFLAGS =		-g3 -Wall -Werror -Wextra
+CFLAGS =		-g3 #-Wall -Werror -Wextra
 
 LIBFT_PATH =	libft/libft.a
 

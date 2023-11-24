@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/21 13:43:05 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:06:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,6 @@ int	init_struct(char **cmd, t_token *token, t_pars **pars)
 		get_list(&token[i], pars);
 		i++;
 	}
-	/*
-	int j = 0;
-	while (j < i)
-	{
-		int k = 0;
-		while (token[j].arg[k])
-			free(token[j].arg[k++]);
-		free(token[j].arg);
-		free(token[j].delimiter);
-		j++;
-	}
-	free(token);
-	*/
 	free_token(&token, i);
 	print_list(pars);
 	return (1);
