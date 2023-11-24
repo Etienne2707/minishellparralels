@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:06:59 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 16:35:54 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:46:18 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	syntax_check(char *str)
 {
 	if (syntax_quote(str) == 0)
 		return (0);
-	//if (syntax_red(str) == -1)
-	//	return (0);
-//	if (syntax_charac(str) == -1)
-	//	return (0);
+	if (syntax_red(str) == -1)
+		return (0);
+	if (syntax_charac(str) == -1)
+		return (0);
 	return (1);
 }
 

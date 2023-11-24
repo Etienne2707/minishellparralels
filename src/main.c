@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/24 12:08:20 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:58:33 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 {
 	if ((syntax_error(str, token, envp, pars)) == -1)
 	{
-		write(1, "Syntax Error\n", 13);
+		ft_putstr_fd("minishell: syntax_error\n", 2);
 		return (-1);
 	}
 	return (1);

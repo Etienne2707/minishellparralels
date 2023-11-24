@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 12:08:49 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:58:04 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	syntax_red(char *str)
 	int		k;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (i < ft_strlen(str) && str[i] != '\0')
 	{
 		k = 0;
 		if ((str[i] == '>' && check_in_quote(str, i) == -1) || (str[i] == '<'
