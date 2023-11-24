@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 12:46:24 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:27:17 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ static void	manage_files(int fd, t_pars *pars, char *str)
 		pars->infile = open(str, O_RDONLY);
 }
 
-static void	handle_sigint_heredoc(int sig)
+void	handle_sigint_heredoc(int sig)
 {
 	if (sig == SIGINT)
 	{
+		printf("ALLO\n");
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
@@ -66,7 +67,7 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 	str = tmpfile_name(i);
 	while (pars->delimiter[++j] != NULL)
 	{
-		signal(SIGINT, handle_sigint_heredoc);
+//		signal(SIGINT, handle_sigint_heredoc);
 		line = readline("> ");
 		len = ft_strlen(pars->delimiter[j]);
 		fd = open (str, O_CREAT | O_RDWR | O_TRUNC, 0644);

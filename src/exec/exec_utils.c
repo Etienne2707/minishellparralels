@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:53:22 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 16:17:28 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:49:18 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ extern int	g_exit_status;
 
 static int	is_builtin(char **cmd_args)
 {
+	if (!cmd_args[0])
+		return (0);
 	if (ft_strncmp(cmd_args[0], "echo", 4) == 0)
 		return (1);
 	if (ft_strncmp(cmd_args[0], "env", 3) == 0)
@@ -56,7 +58,7 @@ int	exec_single(t_pars *pars, int nb_cmd, char ***envp, t_wd *wd)
 {
 	if (nb_cmd == 0 && pars->delimiter != NULL)
 		ft_heredoc(pars, NULL, 0);
-	if (nb_cmd == 1 && is_builtin(pars->cmd))
+	if (nb_cmd == 1 && pars->cmd && is_builtin(pars->cmd))
 	{
 		if (pars->delimiter != NULL)
 			ft_heredoc(pars, NULL, 0);

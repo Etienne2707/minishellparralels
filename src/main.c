@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/24 16:16:55 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:23:30 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static void	minishell_loop(char **envp)
 	char	**envpcpy;
 	t_wd	*wd;
 
+	signal(SIGINT, &handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
 	if (init_vars(&envpcpy, envp, &wd))
 		exit(EXIT_FAILURE);
 	str = NULL;
@@ -83,8 +85,6 @@ static void	minishell_loop(char **envp)
 	while (-1)
 	{
 		printf("exit status : %d\n", g_exit_status);
-		signal(SIGINT, handle_sigint);
-		signal(SIGQUIT, SIG_IGN);
 		str = readline("Minishell > ");
 		if (!str)
 			handle_ctrl_d(envpcpy, wd);

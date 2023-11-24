@@ -6,11 +6,13 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:35:21 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 12:05:39 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:18:38 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 static void	redir(int pipein, int pipeout)
 {
