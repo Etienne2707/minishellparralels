@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:53:22 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 15:37:33 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 16:17:28 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,13 @@ void	exe_relative(t_pars *pars, char **envp)
 		return ;
 	execve(pars->cmd[0], pars->cmd, envp);
 	stat(pars->cmd[0], buf);
+	g_exit_status = 127;
 	if (S_ISDIR(buf->st_mode))
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pars->cmd[0], 2);
 		ft_putstr_fd(": Is a directory\n", 2);
+		g_exit_status = 126;
 	}
 	if (access(pars->cmd[0], F_OK) != 0)
 	{
@@ -89,8 +91,7 @@ void	exe_relative(t_pars *pars, char **envp)
 		ft_putstr_fd(pars->cmd[0], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 	}
-	g_exit_status = 127;
 	free_remaining(pars, envp);
 	free(buf);
-	exit(127);
+	exit(g_exit_status);
 }

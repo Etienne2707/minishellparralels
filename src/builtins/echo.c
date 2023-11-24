@@ -6,11 +6,28 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:51 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/14 09:12:52 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/24 16:22:52 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	only_n_arg(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (arg[i] != '-')
+		return (0);
+	i++;
+	while (arg && arg[i])
+	{
+		if (arg[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_echo(char **args)
 {
@@ -20,7 +37,7 @@ int	ft_echo(char **args)
 	if (ft_strncmp(*args, "echo", ft_strlen(*args)) != 0)
 		return (EXIT_FAILURE);
 	args++;
-	if (*args && ft_strncmp(*args, "-n", 3) == 0)
+	if (*args && only_n_arg(*args))
 	{
 		newline_bool = 0;
 		args++;
