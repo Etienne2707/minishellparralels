@@ -14,6 +14,24 @@
 
 int	g_exit_status;
 
+int	only_tab(char *str)
+{
+	int i;
+	int result;
+
+	i = 0;
+	result = 1;
+	while (str[i] != '\0')
+	{
+		if (str[i] < 9 || str[i] > 13)
+			result = 0;
+		i++;
+	}
+	if (ft_strcmp(str,":") == 0)
+		return (1);
+	return (result);
+}
+
 int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 {
 	int		i;
@@ -24,6 +42,8 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 	dest = NULL;
 	if (syntax_check(str) == 0)
 		return (-1);
+	if (only_tab(str) == 1)
+		return (2);
 	dest = malloc_cpy(dest, str);
 	dest = ft_dollars(str, envp, dest);
 	dest = add_space(dest);
@@ -56,8 +76,14 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 		ft_putstr_fd("minishell: syntax_error\n", 2);
 		return (-1);
 	}
+	else if ((syntax_error(str, token, envp, pars)) == 2)
+	{
+		ft_putstr_fd("", 2);
+		return (-1);
+	}
 	return (1);
 }
+
 
 int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
 {
