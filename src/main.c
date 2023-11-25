@@ -71,12 +71,15 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 
 int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 {
-	if ((syntax_error(str, token, envp, pars)) == -1)
+	int result;
+
+	result = syntax_error(str, token, envp, pars);
+	if (result == -1)
 	{
 		ft_putstr_fd("minishell: syntax_error\n", 2);
 		return (-1);
 	}
-	else if ((syntax_error(str, token, envp, pars)) == 2)
+	else if (result == 2)
 	{
 		ft_putstr_fd("", 2);
 		return (-1);
