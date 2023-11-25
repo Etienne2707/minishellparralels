@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:07 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/25 12:50:46 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 16:39:52 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*swap_value(char *value, char **envp)
 	i = 0;
 	if (ft_strcmp(value, "?") == 0)
 	{
-		printf("oui");
 		free(value);
 		return (temp = ft_itoa(g_exit_status));
 	}
@@ -110,7 +109,6 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 	i = 0;
 	if (!dest)
 		return (NULL);
-	dest = str;
 	while (str[i] != 0)
 	{
 		if (is_solo_dol(str, i) != 0 && dollars_in_quote(str, i) == 1)

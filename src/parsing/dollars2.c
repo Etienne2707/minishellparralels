@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/25 12:56:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 16:38:40 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ char	*change_value(char *env, char *str)
 		new[index++] = env[i++];
 	new = change_value2(new, str, size, index);
 	free(env);
+	free(str);
 	return (new);
 }

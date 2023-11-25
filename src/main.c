@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/25 13:05:16 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 16:50:22 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,19 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 	if (syntax_check(str) == 0)
 		return (-1);
 	dest = malloc_cpy(dest, str);
-	dest = ft_dollars(dest, envp, dest);
+	dest = ft_dollars(str, envp, dest);
 	dest = add_space(dest);
 	cmd = ft_split(dest, '|');
 	if (cmd == NULL)
+	{
+		printf("CMD NULL");
 		return (-1);
+	}
 	if ((check_pipe(cmd, dest)) == -1)
+	{
+		printf("check pipe");
 		return (-1);
+	}
 	free(dest);
 	init_struct(cmd, token, pars);
 	while (cmd[i] != 0)
@@ -84,7 +90,7 @@ static void	minishell_loop(char **envp)
 	token = NULL;
 	while (-1)
 	{
-		printf("exit status : %d\n", g_exit_status);
+//		printf("exit status : %d\n", g_exit_status);
 		str = readline("Minishell > ");
 		if (!str)
 			handle_ctrl_d(envpcpy, wd);
