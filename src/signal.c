@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:02:44 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/25 18:27:22 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 19:49:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,17 @@ void	handle_sigquit_child(int sig)
 	{
 		write(1, "Quit (core dumped)\n", 19);
 		g_exit_status = 131;
+	}
+}
+
+void	handle_sigint_heredoc(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_exit_status = 130;
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 1);
+		close(STDIN_FILENO);
 	}
 }
