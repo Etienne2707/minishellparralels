@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:39 by educlos           #+#    #+#             */
-/*   Updated: 2023/10/25 18:38:48 by educlos          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:54:31 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*string_woquotes(char *str, char *dest)
 
 int	only_quotes(char *str)
 {
-	int i;
-	int result;
-	
+	int	i;
+	int	result;
+
 	i = 0;
 	result = 0;
 	while (str[i] != '\0')
@@ -46,6 +46,19 @@ int	only_quotes(char *str)
 		i++;
 	}
 	return (result);
+}
+
+static char	*ft_remove_quote2(char *str)
+{
+	char	*ret;
+
+	free(str);
+	ret = malloc(sizeof(char) * 2);
+	if (!ret)
+		return (NULL);
+	ret[0] = 32;
+	ret[1] = 0;
+	return (ret);
 }
 
 char	*ft_remove_quote(char *str)
@@ -58,11 +71,7 @@ char	*ft_remove_quote(char *str)
 	c = 0;
 	if (only_quotes(str) == 0)
 	{
-		// faire tous ca dans une fonction differentes
-		free(str);
-		dest = malloc(sizeof(char ) * 2);
-		dest[0] = 32;
-		dest[1] = '\0';
+		dest = ft_remove_quote2(str);
 		return (dest);
 	}
 	while (str[k] != '\0')

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/24 15:32:47 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 13:04:20 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,10 @@ int	check_param(char *str);
 int	export_err(char *str);
 
 //Heredoc
-
 void	ft_heredoc(t_pars *pars, int *pipefd, int i);
+
+//Heredoc_utils
+int		open_heredoc_file(char *str);
 
 //Builtins
 

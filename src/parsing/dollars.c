@@ -6,13 +6,13 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:07 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 15:26:47 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:50:46 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_exit_status;
+extern int	g_exit_status;
 
 char	*remove_dol(char *str, char *value)
 {
@@ -46,7 +46,7 @@ char	*swap_value(char *value, char **envp)
 	char	*temp;
 
 	i = 0;
-	if (ft_strcmp(value,"?") == 0)
+	if (ft_strcmp(value, "?") == 0)
 	{
 		printf("oui");
 		free(value);
@@ -98,7 +98,6 @@ char	*get_value(char *str, int index)
 	value = malloc(sizeof(char) * (i - index) + 1);
 	if (!value)
 		return (NULL);
-	
 	value = strcpyn(value, str, index + 1, i - index);
 	return (value);
 }
@@ -124,6 +123,5 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 		}
 		i++;
 	}
-	free(str);
 	return (dest);
 }

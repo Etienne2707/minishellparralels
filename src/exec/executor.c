@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 17:41:07 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:49:58 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,22 @@ void	wait_and_close(int *pipefd, int nb_cmd)
 		free(pipefd);
 }
 
+static void	launch_heredoc(t_pars *pars, int *pipefd, int nb_cmd)
+{
+	t_pars	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = pars;
+	while (i < nb_cmd)
+	{
+		if (tmp->delimiter != NULL && tmp->delimiter[0] != 0)
+			ft_heredoc(tmp, pipefd, i);
+		tmp = tmp->next;
+		i++;
+	}
+}
+
 int	executor(t_pars *pars, char ***envp, t_wd *wd)
 {
 	int	*pipefd;
@@ -71,11 +87,10 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 			return (EXIT_FAILURE);
 	}
 	create_pipes(pipefd, nb_cmd);
+	launch_heredoc(pars, pipefd, nb_cmd);
 	i = -1;
 	while (++i < nb_cmd)
 	{
-		if (pars->delimiter != NULL && pars->delimiter[0] != 0)
-			ft_heredoc(pars, pipefd, i);
 		child(pipefd, pars, i, *envp);
 		pars = pars->next;
 	}

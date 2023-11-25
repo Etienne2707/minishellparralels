@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/24 16:11:21 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:56:20 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,13 @@ int	syntax_charac(char *str)
 	while (str[i] != '\0')
 	{
 		if ((str[i] != ' ' && str[i] != '$' && str[i] != '.' && str[i] != '='
-				&& str[i] != '|' && str[i] != ':' && str[i] != '>' && str[i] != 39
-				&& str[i] != 34 && str[i] != '-' && str[i] != '<'
-				&& str[i] != '[' && str[i] != ']' && str[i] != '/')
+				&& str[i] != '|' && str[i] != ':' && str[i] != '>'
+				&& str[i] != 39 && str[i] != 34 && str[i] != '-'
+				&& str[i] != '<' && str[i] != '[' && str[i] != ']'
+				&& str[i] != '/' && str[i] != '?')
 			&& (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
-			&& (str[i] < '0' || str[i] > '9') && (str[i] < 9 || str[i] > 13) && check_in_quote(str, i) != 1)
+			&& (str[i] < '0' || str[i] > '9') && (str[i] < 9 || str[i] > 13)
+			&& check_in_quote(str, i) != 1)
 		{
 			return (-1);
 		}

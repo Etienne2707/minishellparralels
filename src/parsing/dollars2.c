@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 12:02:37 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:56:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*change_value(char *env, char *str)
 	index = get_index(str);
 	size = index + 1;
 	while (str[size] != '\0' && str[size] != 32 && str[size] != '$'
-		&& str[size] != 39 && str[size] != 34 )
+		&& str[size] != 39 && str[size] != 34)
 		size++;
 	new = malloc(sizeof(char *) * (ft_strlen(str) - (size - index))
 			+ ft_strlen(env) + 1);
