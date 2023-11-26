@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:57:19 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 12:02:22 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:09:06 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	get_index(char *str)
 	int	i;
 
 	i = 0;
-	while (!(is_solo_dol(str, i) == 1 && d_hd(str,i) == 1))
+	while (!(is_solo_dol(str, i) == 1 && d_hd(str, i) == 1))
 	{
 		i++;
 	}

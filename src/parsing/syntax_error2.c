@@ -6,11 +6,9 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:06:59 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 14:07:23 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:14:45 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minishell.h"
 
 #include "minishell.h"
 
@@ -91,30 +89,24 @@ int	check_pipe(char **cmd, char *str)
 	int	k;
 	int	c;
 
-	i = 0;
-	c = 0;
+	i = -1;
 	if (check_start_end(str) == -1)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token \n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
 		return (-1);
 	}
-	while (cmd[i] != 0)
+	while (cmd[++i] != 0)
 	{
-		k = 0;
+		k = -1;
 		c = 0;
-		while (cmd[i][k] != '\0')
-		{
+		while (cmd[i][++k] != '\0')
 			if (cmd[i][k] != ' ')
 				c++;
-			k++;
-		}
 		if (c == 0)
 		{
-			ft_putstr_fd("minishell: syntax error near unexpected token \n", 2);
+			ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
 			return (-1);
 		}
-		i++;
 	}
 	return (1);
 }
-

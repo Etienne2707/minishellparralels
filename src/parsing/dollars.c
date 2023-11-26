@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:07 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/26 12:19:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:13:23 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*remove_dol(char *str, char *value)
 	new = malloc(sizeof(char) * ft_strlen(str) - ft_strlen(value) + 1);
 	if (!new)
 		return (NULL);
-	while (is_solo_dol(str, i) == 0 && dollars_in_quote(str, i) == 1 && d_hd(str,i) != -1
-		&& str[i] != '\0')
+	while (is_solo_dol(str, i) == 0 && dollars_in_quote(str, i) == 1
+		&& d_hd(str, i) != -1 && str[i] != '\0')
 	{
 		new[c++] = str[i++];
 	}
@@ -101,42 +101,6 @@ char	*get_value(char *str, int index)
 	return (value);
 }
 
-int	separator_in_quotes(char *str, int i)
-{
-	if (str[i] == 32)
-		return (check_in_quote(str,i));
-	else if (str[i] == '|')
-		return (check_in_quote(str,i));
-	else
-		return (1);
-}
-
-int d_hd(char *str, int i)
-{
-	int k;
-	int index;
-
-	k = 0;
-	if (str[i] != '$')
-		return (0);
-	while (str[k] != '\0')
-	{
-		if (str[k] == '<' && str[k + 1] == '<')
-		{
-			index = k;
-			k += 2;
-			while (str[k] == 32 && str[k] != '\0')
-				k++;
-			while (str[k] != '\0' && separator_in_quotes(str,k) != -1)
-				k++;
-			if (i > index && i < k)
-				return (-1);
-		}
-		k++;
-	}
-	return (1);
-}
-
 char	*ft_dollars(char *str, char **envp, char *dest)
 {
 	int		i;
@@ -147,7 +111,8 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 		return (NULL);
 	while (str[i] != 0)
 	{
-		if (is_solo_dol(str, i) != 0 && dollars_in_quote(str, i) == 1 && d_hd(str,i) == 1)
+		if (is_solo_dol(str, i) != 0 && dollars_in_quote(str, i) == 1
+			&& d_hd(str, i) == 1)
 		{
 			temp = swap_value(get_value(str, i), envp);
 			if (temp != NULL)
@@ -157,6 +122,5 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 		}
 		i++;
 	}
-	printf("%s\n", dest);
 	return (dest);
 }

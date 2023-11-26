@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:53:22 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 17:49:18 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:09:29 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ void	exe_relative(t_pars *pars, char **envp)
 	if (!buf)
 		return ;
 	execve(pars->cmd[0], pars->cmd, envp);
-	stat(pars->cmd[0], buf);
 	g_exit_status = 127;
-	if (S_ISDIR(buf->st_mode))
+	if (stat(pars->cmd[0], buf) != -1 && S_ISDIR(buf->st_mode))
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(pars->cmd[0], 2);

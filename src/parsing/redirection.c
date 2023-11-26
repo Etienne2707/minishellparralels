@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:45:25 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 11:45:29 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:08:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	put_heredoc(t_token *token, char **arg)
 
 	i = 0;
 	nbh = 0;
-	
 	while (arg[i] != 0)
 	{
 		if (ft_strcmp("<<", arg[i]) == 0)
@@ -94,4 +93,3 @@ int	redirection(t_token *token, char **arg)
 	}
 	return (1);
 }
-
