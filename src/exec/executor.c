@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 14:20:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 15:36:43 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,29 @@
 
 extern int	g_exit_status;
 
-static void	create_pipes(int *pipefd, int nb_of_cmd)
+static int	*create_pipes(int nb_of_cmd)
 {
 	int	i;
+	int	*pipefd;
 
+	pipefd = NULL;
+	if (nb_of_cmd > 1)
+	{
+		pipefd = malloc(sizeof(int) * 2 * (nb_of_cmd - 1));
+		if (!pipefd)
+			exit(EXIT_FAILURE);
+	}
 	i = 0;
 	while (i < nb_of_cmd - 1)
 	{
 		if (pipe(pipefd + 2 * i) < 0)
+		{
+			free(pipefd);
 			exit(EXIT_FAILURE);
+		}
 		i++;
 	}
+	return (pipefd);
 }
 
 void	close_pipes(int *pipefd, int nb_of_cmd)
@@ -76,21 +88,18 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 	int	*pipefd;
 	int	i;
 	int	nb_cmd;
+	int	boolean;
 
+	boolean = 0;
+	if (g_exit_status == -1)
+		boolean = 1;
 	nb_cmd = count_cmd(pars);
 	if (exec_single(pars, nb_cmd, envp, wd))
 		return (0);
-	pipefd = NULL;
-	if (nb_cmd > 1)
-	{
-		pipefd = malloc(sizeof(int) * 2 * (nb_cmd - 1));
-		if (!pipefd)
-			return (EXIT_FAILURE);
-	}
-	create_pipes(pipefd, nb_cmd);
+	pipefd = create_pipes(nb_cmd);
 	launch_heredoc(pars, pipefd, nb_cmd);
 	i = -1;
-	while (++i < nb_cmd && g_exit_status != -1)
+	while (++i < nb_cmd && (g_exit_status != -1 || boolean))
 	{
 		if (pars && pars->cmd[0] != 0)
 			child(pipefd, pars, i, *envp);
