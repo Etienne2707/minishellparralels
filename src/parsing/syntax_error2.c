@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+#include "minishell.h"
+
 static int	nb_d_quotes(char *str)
 {
 	int	i;
@@ -53,7 +55,7 @@ static int	syntax_quote(char *str)
 	i = 0;
 	d = nb_d_quotes(str);
 	s = nb_s_quotes(str);
-	while (i < ft_strlen(str) && str && str[i] != '\0')
+	while (str && str[i] != '\0')
 	{
 		syntax_quote2(str, &s, &d, &i);
 		i++;
@@ -66,11 +68,20 @@ static int	syntax_quote(char *str)
 int	syntax_check(char *str)
 {
 	if (syntax_quote(str) == 0)
+	{
+		ft_putstr_fd("minishell: syntax_error\n", 2);
 		return (0);
+	}
 	if (syntax_red(str) == -1)
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token \n", 2);
 		return (0);
+	}
 	if (syntax_charac(str) == -1)
+	{
+		ft_putstr_fd("minishell: syntax error\n", 2);
 		return (0);
+	}
 	return (1);
 }
 
@@ -83,7 +94,10 @@ int	check_pipe(char **cmd, char *str)
 	i = 0;
 	c = 0;
 	if (check_start_end(str) == -1)
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token \n", 2);
 		return (-1);
+	}
 	while (cmd[i] != 0)
 	{
 		k = 0;
@@ -95,8 +109,12 @@ int	check_pipe(char **cmd, char *str)
 			k++;
 		}
 		if (c == 0)
+		{
+			ft_putstr_fd("minishell: syntax error near unexpected token \n", 2);
 			return (-1);
+		}
 		i++;
 	}
 	return (1);
 }
+

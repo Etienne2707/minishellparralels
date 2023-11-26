@@ -88,7 +88,7 @@ int	get_index(char *str)
 	int	i;
 
 	i = 0;
-	while (is_solo_dol(str, i) != 1)
+	while (!(is_solo_dol(str, i) == 1 && d_hd(str,i) == 1))
 	{
 		i++;
 	}

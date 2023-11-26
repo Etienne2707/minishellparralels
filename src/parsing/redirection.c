@@ -19,11 +19,13 @@ void	put_heredoc(t_token *token, char **arg)
 
 	i = 0;
 	nbh = 0;
+	
 	while (arg[i] != 0)
 	{
 		if (ft_strcmp("<<", arg[i]) == 0)
 		{
-			token->delimiter[nbh++] = ft_remove_quote(arg[i + 1]);
+			arg[i + 1] = ft_remove_quote(arg[i + 1]);
+			token->delimiter[nbh++] = arg[i + 1];
 		}
 		i++;
 	}
@@ -57,7 +59,8 @@ void	get_append(t_token *token, char **arg, int i)
 
 	if (token->outfile == -1)
 		return ;
-	fd = open(arg[i], O_APPEND | O_CREAT | O_RDWR, 0000644);
+	arg[i] = ft_remove_quote(arg[i]);
+	fd = open(ft_remove_quote(arg[i]), O_APPEND | O_CREAT | O_RDWR, 0000644);
 	token->outfile = fd;
 	token->append = 1;
 	if (i - 1 == token->last_o)
@@ -91,3 +94,4 @@ int	redirection(t_token *token, char **arg)
 	}
 	return (1);
 }
+

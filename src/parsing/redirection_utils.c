@@ -46,14 +46,8 @@ void	get_infile(t_token *token, char **arg, int i)
 
 	if (token->infile == -1)
 		return ;
+	arg[i] = ft_remove_quote(arg[i]);
 	fd = open(arg[i], O_RDONLY);
-	if (fd < 0)
-	{
-		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(arg[i], 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		return ;
-	}
 	token->infile = fd;
 	if (i - 1 == token->last_i)
 	{
@@ -68,6 +62,7 @@ void	get_outfile(t_token *token, char **arg, int i)
 
 	if (token->outfile == -1)
 		return ;
+	arg[i] = ft_remove_quote(arg[i]);
 	fd = open(arg[i], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	token->outfile = fd;
 	token->append = 0;
