@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 12:17:25 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 13:07:02 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	wait_and_close(int *pipefd, int nb_cmd)
 	int	status;
 
 	i = 0;
+	status = 0;
 	close_pipes(pipefd, nb_cmd);
 	while (i < nb_cmd)
 	{
@@ -89,7 +90,7 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 	create_pipes(pipefd, nb_cmd);
 	launch_heredoc(pars, pipefd, nb_cmd);
 	i = -1;
-	while (++i < nb_cmd)
+	while (++i < nb_cmd && g_exit_status != -1)
 	{
 		if (pars && pars->cmd[0] != 0)
 			child(pipefd, pars, i, *envp);

@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:02:44 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 12:15:25 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 13:08:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	handle_sigint(int sig)
 			write(1, "\n", 1);
 			g_exit_status = 130;
 		}
+		printf("handle signit\n");
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
@@ -46,6 +47,7 @@ void	handle_sigint_child(int sig)
 		g_exit_status = 130;
 		write(1, "\n", 1);
 		rl_on_new_line();
+		printf("handle sigint child \n");
 		rl_replace_line("", 1);
 	}
 }

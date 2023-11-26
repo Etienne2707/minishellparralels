@@ -6,11 +6,13 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 11:07:06 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 13:05:14 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 static void	write1(int fd, char **str, int *pipefd, int i)
 {
@@ -48,7 +50,7 @@ void	heredoc_loop(t_pars *pars, int *pipefd, int i, char *str)
 	j = -1;
 	fd = 0;
 	stdin_save = dup(STDIN_FILENO);
-	while (pars->delimiter[++j] != NULL)
+	while (pars->delimiter[++j] != NULL && g_exit_status != -1)
 	{
 		fd = open_heredoc_file(str);
 		line = readline("> ");
