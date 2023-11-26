@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 16:02:58 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:45:21 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	find_char(char *str, char c)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == c)
@@ -31,6 +33,8 @@ static int	find_char(char *str, char c)
 static int	is_builtin(char **cmd_args, char **envp, int *exit_code)
 {
 	*exit_code = -1;
+	if (!cmd_args || cmd_args[0] == 0)
+		return (*exit_code);
 	if (ft_strncmp(cmd_args[0], "echo", 5) == 0)
 		*exit_code = ft_echo(cmd_args);
 	if (ft_strncmp(cmd_args[0], "env", 4) == 0)

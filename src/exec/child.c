@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:35:21 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/25 18:28:01 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:43:35 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void	child(int *pipefd, t_pars *pars, int i, char **envp)
 	static int	nb_cmd;
 	pid_t		pid;
 
-	if (i == 0)
-		nb_cmd = count_cmd(pars);
+	nb_cmd = count_cmd(pars);
 	signal(SIGINT, handle_sigint_child);
 	signal(SIGQUIT, handle_sigquit_child);
 	pid = fork();

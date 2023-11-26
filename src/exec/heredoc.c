@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/25 19:48:43 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:47:22 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*tmpfile_name(int i)
 
 static void	manage_files(int fd, t_pars *pars, char *str)
 {
-	if (fd > 0)
+	if (fd)
 		close(fd);
 	if (!pars->infile)
 		pars->infile = open(str, O_RDONLY);
@@ -58,7 +58,7 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 	int		j;
 	int		fd;
 	char	*str;
-	int	stdin_save;
+	int		stdin_save;
 
 	j = -1;
 	fd = 0;
@@ -72,11 +72,12 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 		len = ft_strlen(pars->delimiter[j]);
 		while (line && (ft_strncmp(line, pars->delimiter[j], len + 1)))
 			write1(fd, &line, pipefd, i);
-		if (!line && dup(0) != -1) 
+		if (!line && dup(0) != -1)
 			handle_ctrl_d_heredoc(pars, j);
 		free(line);
 		manage_files(fd, pars, str);
 		dup2(stdin_save, STDIN_FILENO);
 	}
+	close(stdin_save);
 	free(str);
 }

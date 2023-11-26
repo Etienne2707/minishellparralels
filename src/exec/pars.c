@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:42:19 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 17:48:03 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:43:22 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	count_cmd(t_pars *pars)
 	t_pars	*temp;
 
 	nb_of_cmd = 0;
+	while (pars->prev != NULL)
+		pars = pars->prev;
 	temp = pars;
 	while (temp != NULL && (temp->cmd[0] != NULL
 			|| (temp->delimiter && temp->delimiter[0] != NULL)))

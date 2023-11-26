@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/25 18:17:32 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:48:08 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	g_exit_status;
 
 int	only_tab(char *str)
 {
-	int i;
-	int result;
+	int	i;
+	int	result;
 
 	i = 0;
 	result = 1;
@@ -27,7 +27,7 @@ int	only_tab(char *str)
 			result = 0;
 		i++;
 	}
-	if (ft_strcmp(str,":") == 0)
+	if (ft_strcmp(str, ":") == 0)
 		return (1);
 	return (result);
 }
@@ -71,7 +71,7 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 
 int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 {
-	int result;
+	int	result;
 
 	result = syntax_error(str, token, envp, pars);
 	if (result == -1)
@@ -86,7 +86,6 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 	}
 	return (1);
 }
-
 
 int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
 {
