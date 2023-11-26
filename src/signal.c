@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:02:44 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 11:39:26 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 12:15:25 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		if (g_exit_status != -1)
+		{
+			write(1, "\n", 1);
+			g_exit_status = 130;
+		}
 		rl_on_new_line();
 		rl_replace_line("", 1);
-//		rl_redisplay();
+		rl_redisplay();
 	}
 }
 

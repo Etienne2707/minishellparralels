@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:07 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/25 16:39:52 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 12:19:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*swap_value(char *value, char **envp)
 	if (ft_strcmp(value, "?") == 0)
 	{
 		free(value);
+		if (g_exit_status == -1)
+			return (temp = ft_itoa(130));
 		return (temp = ft_itoa(g_exit_status));
 	}
 	while (envp[i] != NULL)

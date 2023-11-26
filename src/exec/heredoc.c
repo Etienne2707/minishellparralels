@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:01:39 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 11:28:49 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/26 12:08:32 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,4 @@ void	ft_heredoc(t_pars *pars, int *pipefd, int i)
 	str = tmpfile_name(i);
 	signal(SIGINT, handle_sigint_heredoc);
 	heredoc_loop(pars, pipefd, i, str);
-	if (g_exit_status == -1)
-		g_exit_status = 130;
 }
