@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 16:33:45 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 18:35:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ char		**ft_cpy_double_array(char **to_copy);
 char		**ft_append_double_array(char **matrix, char *to_append);
 char		**ft_pop_double_array(char **matrix, char *to_pop);
 int			var_exists(char **envp, char *str);
-char	*ft_remove_quote3(char *str);
+char		*ft_remove_quote3(char *str);
 
 //Export_utils
 

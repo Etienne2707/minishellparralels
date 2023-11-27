@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 15:31:17 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 18:36:06 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ char	**get_arg(char *cmd, t_token *token)
 	{
 		if (ft_strcmp(token->arg[i], "\"\"") == 0 && token->arg[i + 1] == NULL)
 			token->arg[i] = ft_remove_quote3(token->arg[i]);
-		else if (ft_strcmp(token->arg[i], "\'\'") == 0 && token->arg[i + 1] == NULL)
+		else if (ft_strcmp(token->arg[i], "\'\'") == 0
+			&& token->arg[i + 1] == NULL)
 			token->arg[i] = ft_remove_quote3(token->arg[i]);
 		else
 			token->arg[i] = ft_remove_quote(token->arg[i]);
