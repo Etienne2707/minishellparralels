@@ -53,10 +53,12 @@ static int	syntax_quote(char *str)
 	i = 0;
 	d = nb_d_quotes(str);
 	s = nb_s_quotes(str);
-	while (str && str[i] != '\0')
+	while (str[i] != '\0')
 	{
-		syntax_quote2(str, &s, &d, &i);
+		syntax_quote2(str, &s, &d, &i); // faut que tu m'explique vu que lorsque tu sors de cette fonction i depasse j'ai fias un briocologe en attendant 
 		i++;
+		if (i > ft_strlen(str))
+			break ;
 	}
 	if ((d % 2 != 0) || (s % 2 != 0))
 		return (0);
