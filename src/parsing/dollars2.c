@@ -73,8 +73,15 @@ char	*change_value(char *env, char *str)
 	index = get_index(str);
 	size = index + 1;
 	while (str[size] != '\0' && str[size] != 32 && str[size] != '$'
-		&& str[size] != 39 && str[size] != 34)
+		&& str[size] != 39 && str[size] != 34 && is_n_a(str[size]) == 1)
+	{
+		if (str[size] == '?')
+		{
+			size++;
+			break ;
+		}
 		size++;
+	}
 	new = malloc(sizeof(char *) * (ft_strlen(str) - (size - index))
 			+ ft_strlen(env) + 1);
 	if (!new)

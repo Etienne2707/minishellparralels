@@ -90,6 +90,12 @@ int	check_pipe(char **cmd, char *str)
 	int	c;
 
 	i = -1;
+	if (!str)
+	{
+		printf("oui");
+		free(str);
+		return (-1);
+	}
 	if (check_start_end(str) == -1)
 	{
 		ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);

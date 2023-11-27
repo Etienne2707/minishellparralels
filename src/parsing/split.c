@@ -107,7 +107,7 @@ char	**ft_split(const char *s, char c)
 	char	*str;
 
 	str = (char *)s;
-	if (str == 0 || str[0] == '\0')
+	if (str == NULL || str[0] == '\0')
 		return (NULL);
 	dest = malloc(sizeof(char *) * wordcount(str, c));
 	if (!dest)

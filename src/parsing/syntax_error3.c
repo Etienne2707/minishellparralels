@@ -44,6 +44,8 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 		return (2);
 	dest = malloc_cpy(dest, str);
 	dest = ft_dollars(str, envp, dest);
+	if (!dest)
+		return (-1);
 	dest = add_space(dest);
 	cmd = ft_split(dest, '|');
 	if ((check_pipe(cmd, dest)) == -1)
@@ -66,7 +68,6 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 	result = syntax_error(str, token, envp, pars);
 	if (result == -1)
 	{
-		ft_putstr_fd("minishell: syntax_error\n", 2);
 		return (-1);
 	}
 	else if (result == 2)
@@ -75,4 +76,20 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 		return (-1);
 	}
 	return (1);
+}
+
+int is_n_a(char c)
+{
+	if (c == 34 || c == 39)
+		return (1);
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	else if (c >= 'A' && c <= 'Z')
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (1);
+	else if (c == '?')
+		return (1);
+	else 
+		return (-1);
 }

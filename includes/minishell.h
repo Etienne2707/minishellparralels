@@ -105,6 +105,7 @@ char		*malloc_cpy(char *dest, char *src);
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_strncpy(char *dest, char *src, unsigned int n);
 char		*strcpyn(char *dest, char *src, int index, int size);
+int is_n_a(char c);
 
 // String_Check
 int			check_start_end(char *str);

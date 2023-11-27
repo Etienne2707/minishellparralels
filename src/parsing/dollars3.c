@@ -23,9 +23,12 @@ int	is_solo_dol(char *str, int index)
 		return (0);
 	if (str[i] == 32 || str[i] == '\0')
 		return (0);
+	
 	if ((str[i] >= '0' && str[i] <= '9'))
 		return (-1);
 	if ((str[i] == 34 || str[i] == 39) && check_in_quote(str, index) == 1)
+		return (0);
+	if (is_n_a(str[i]) == -1)
 		return (0);
 	return (1);
 }
