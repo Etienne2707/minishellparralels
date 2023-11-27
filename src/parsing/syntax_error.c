@@ -90,14 +90,7 @@ int	syntax_charac(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] != ' ' && str[i] != '$' && str[i] != '.' && str[i] != '='
-				&& str[i] != '|' && str[i] != ':' && str[i] != '>'
-				&& str[i] != 39 && str[i] != 34 && str[i] != '-'
-				&& str[i] != '<' && str[i] != '[' && str[i] != ']'
-				&& str[i] != '/' && str[i] != '?')
-			&& (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')
-			&& (str[i] < '0' || str[i] > '9') && (str[i] < 9 || str[i] > 13)
-			&& check_in_quote(str, i) != 1)
+		if ((str[i] == ';' && check_in_quote(str,i) != 1) && (str[i] == '\'' && check_in_quote(str,i) != 1) )
 		{
 			return (-1);
 		}
