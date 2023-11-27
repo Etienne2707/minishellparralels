@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:15:42 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 09:13:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:43:29 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int	check_pipe2(char **cmd)
 		}
 		if (c == 0)
 		{
-			ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
+			ft_putstr_fd("minishell: syntax error near unexpected token", 2);
+			ft_putstr_fd(" `|'\n", 2);
 			return (-1);
 		}
 		i++;

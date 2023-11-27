@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 15:17:54 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:33:45 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int			have_digit(char *str, int i);
 int			syntax_red(char *str);
 int			syntax_charac(char *str);
 int			check_str(char *str, t_token *token, char **envp, t_pars **pars);
+void		less_great_error(char *str);
 
 // Expand
 char		*checkdollars(char *str, char **envp);
