@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:15:42 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 08:20:16 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 09:13:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ int	only_tab(char *str)
 
 int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 {
-	int		i;
 	char	**cmd;
 	char	*dest;
 
-	i = -1;
 	dest = NULL;
 	if (syntax_check(str) == 0)
 		return (-1);
@@ -57,9 +55,7 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 		return (-1);
 	free(dest);
 	init_struct(cmd, token, pars);
-	while (cmd[++i] != 0)
-		free(cmd[i]);
-	free(cmd);
+	ft_free_double_array(cmd);
 	return (1);
 }
 
