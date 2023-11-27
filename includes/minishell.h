@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 13:45:27 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:17:54 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char		*malloc_cpy(char *dest, char *src);
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_strncpy(char *dest, char *src, unsigned int n);
 char		*strcpyn(char *dest, char *src, int index, int size);
-int is_n_a(char c);
+int			is_n_a(char c);
 
 // String_Check
 int			check_start_end(char *str);

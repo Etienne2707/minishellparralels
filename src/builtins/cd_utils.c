@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:40:53 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 12:44:11 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:56:45 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ int	get_path(char **envp, char *path_to_find)
 	int		path;
 
 	tmp = NULL;
-	i = 0;
-	while (envp[i])
+	i = -1;
+	while (envp[++i])
 	{
 		if (ft_strncmp(envp[i], path_to_find, ft_strlen(path_to_find)) == 0)
 			tmp = ft_substr(envp[i], ft_strlen(path_to_find),
 					ft_strlen(envp[i]) - ft_strlen(path_to_find));
-		i++;
 	}
-	path = chdir(tmp);
+	path = -1;
+	if (tmp != NULL)
+		path = chdir(tmp);
 	free(tmp);
 	if (path)
 	{
@@ -53,7 +54,7 @@ int	oldpwd_exists(char **envp)
 	return (0);
 }
 
-void	refresh_wd(t_wd *wd, char ***envp)
+static void	refresh_wd2(t_wd *wd, char ***envp)
 {
 	char	*tmp;
 	char	**tmp2;
@@ -63,11 +64,14 @@ void	refresh_wd(t_wd *wd, char ***envp)
 		tmp = ft_strdup(wd->pwd);
 	if (wd->oldpwd == NULL || !oldpwd_exists(*envp))
 	{
+		if (wd->oldpwd)
+			free(wd->oldpwd);
 		wd->oldpwd = tmp;
 		if (wd->oldpwd)
 		{
 			tmp = ft_strjoin("OLDPWD=", tmp);
 			tmp2 = ft_append_double_array(*envp, tmp);
+			free(tmp);
 			ft_free_double_array(*envp);
 			*envp = tmp2;
 		}
@@ -77,6 +81,11 @@ void	refresh_wd(t_wd *wd, char ***envp)
 		free(wd->oldpwd);
 		wd->oldpwd = tmp;
 	}
+}
+
+void	refresh_wd(t_wd *wd, char ***envp)
+{
+	refresh_wd2(wd, envp);
 	free(wd->pwd);
 	wd->pwd = NULL;
 	wd->pwd = getcwd(wd->pwd, 0);

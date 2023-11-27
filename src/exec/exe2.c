@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 13:45:50 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:07:58 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	exe_err(t_pars *pars, char **envp, char **path)
 	ft_putstr_fd(pars->cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	free_remaining(pars, envp);
-	free_tab(path);
+	ft_free_double_array(path);
 	exit(127);
 }
 

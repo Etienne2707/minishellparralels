@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:02:24 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 13:50:34 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:18:19 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putstr_fd(char *s, int fd)
 {
-	int exit_value;
+	int	exit_value;
 
 	if (!s)
 		return (EXIT_FAILURE);

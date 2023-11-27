@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:51 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 13:32:28 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:11:40 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	only_n_arg(char *arg)
 
 	i = 0;
 	if (arg[i] != '-')
+		return (0);
+	if (arg[i] == '-' && arg[i + 1] != 'n')
 		return (0);
 	i++;
 	while (arg && arg[i])

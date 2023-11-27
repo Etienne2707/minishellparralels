@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:54:48 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/10/25 19:47:20 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:05:28 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_right_cmd_path(char **paths, char *cmd)
 	char	*temp;
 	char	*cmd_path;
 
-	while (*paths)
+	while (paths && *paths)
 	{
 		temp = ft_strjoin(*paths, "/");
 		cmd_path = ft_strjoin(temp, cmd);

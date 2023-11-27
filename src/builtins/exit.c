@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:27:00 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 12:22:03 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:38:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	free_everything(t_pars *pars, char **envp, t_wd *wd)
 {
 	(void)wd;
 	ft_free_double_array(envp);
-	free(pars->wd->pwd);
-	free(pars->wd->oldpwd);
+	free((pars->wd)->pwd);
+	free((pars->wd)->oldpwd);
 	free(pars->wd);
 	ft_free_list(&pars);
 }
