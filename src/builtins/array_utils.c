@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:54:15 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 14:45:09 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 23:59:01 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	var_exists(char **envp, char *str)
 	{
 		if (ft_strncmp(envp[i], str, after_equal(envp[i]) - 1) == 0)
 		{
-			return (1);
+			if (str[after_equal(envp[i]) - 1] != 0)
+				return (0);
+			else
+				return (1);
 		}
 		i++;
 	}

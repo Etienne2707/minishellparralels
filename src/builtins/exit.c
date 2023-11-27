@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:27:00 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 14:38:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 23:26:12 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	ft_exit(t_pars *pars, char **args, char **envp, t_wd *wd)
 {
 	int	exit_code;
 
-	if (ft_strncmp(args[0], "exit", ft_strlen(args[0])) != 0)
-		return (EXIT_FAILURE);
 	if (args[1])
 		exit_code = ft_atoi(args[1]);
 	else
@@ -62,6 +60,7 @@ int	ft_exit(t_pars *pars, char **args, char **envp, t_wd *wd)
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		free_everything(pars, envp, wd);
 		exit(2);
 	}
 	ft_putstr_fd("exit\n", 1);
