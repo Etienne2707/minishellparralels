@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/25 12:56:20 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 09:11:34 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	syntax_charac(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == ';' && check_in_quote(str,i) != 1) && (str[i] == '\'' && check_in_quote(str,i) != 1) )
+		if ((str[i] == ';' && check_in_quote(str, i) != 1)
+			&& (str[i] == '\'' && check_in_quote(str, i) != 1))
 		{
 			return (-1);
 		}
