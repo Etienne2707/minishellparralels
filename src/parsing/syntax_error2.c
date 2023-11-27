@@ -6,13 +6,13 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:06:59 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 07:42:08 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:48:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 static int	nb_d_quotes(char *str)
 {

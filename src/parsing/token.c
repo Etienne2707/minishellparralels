@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 09:08:37 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:48:34 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ char	**get_arg(char *cmd, t_token *token)
 	while (token->arg[i] != 0)
 	{
 		token->arg[i] = ft_remove_quote(token->arg[i]);
-		//printf("token : %s\n", token->arg[i]);
 		i++;
 	}
-	
 	free(temp);
 	return (token->arg);
 }

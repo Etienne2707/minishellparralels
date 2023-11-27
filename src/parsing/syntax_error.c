@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 09:11:34 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:52:32 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	check_red_arg(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '<' && check_in_quote(str,i) == -1) || (str[i] == '>' && check_in_quote(str,i) == -1))
+		if ((str[i] == '<' && check_in_quote(str, i) == -1)
+			|| (str[i] == '>' && check_in_quote(str, i) == -1))
 		{
 			while (str[i] == '>' || (str[i] == '<' && str[i] != '\0'))
 				i++;
@@ -45,9 +46,11 @@ int	check_in_out(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '>' && check_in_quote(str,i) == -1) && (str[i + 1] == '<' || str[i + 1] == '\0'))
+		if ((str[i] == '>' && check_in_quote(str, i) == -1)
+			&& (str[i + 1] == '<' || str[i + 1] == '\0'))
 			return (-1);
-		else if ((str[i] == '<' && check_in_quote(str,i) == -1) && (str[i + 1] == '>' || str[i + 1] == '\0'))
+		else if ((str[i] == '<' && check_in_quote(str, i) == -1)
+			&& (str[i + 1] == '>' || str[i + 1] == '\0'))
 			return (-1);
 		i++;
 	}

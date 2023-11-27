@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:39 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/25 12:54:31 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:50:32 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,11 @@ char	*ft_remove_quote(char *str)
 
 	k = 0;
 	c = 0;
-	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0   || ft_strcmp(str, "\">\"") == 0  || ft_strcmp(str, "\">>\"") == 0 )
-	{
+	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0
+		|| ft_strcmp(str, "\">\"") == 0 || ft_strcmp(str, "\">>\"") == 0)
 		return (str);
-	}
 	if (only_quotes(str) == 0)
-	{
-		dest = ft_remove_quote2(str);
-		return (dest);
-	}
+		return (ft_remove_quote2(str));
 	while (str[k] != '\0')
 	{
 		if ((str[k] == 34 || str[k] == 39) && check_in_quote(str, k) == -1)
