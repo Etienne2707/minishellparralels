@@ -42,12 +42,14 @@ char	**get_arg(char *cmd, t_token *token)
 	temp = (ft_strnrcpy(cmd, temp, i));
 	token->arg = ft_split(temp, ' ');
 	i = 0;
+	redirection(token, token->arg);
 	while (token->arg[i] != 0)
 	{
 		token->arg[i] = ft_remove_quote(token->arg[i]);
+		//printf("token : %s\n", token->arg[i]);
 		i++;
 	}
-	redirection(token, token->arg);
+	
 	free(temp);
 	return (token->arg);
 }
@@ -88,6 +90,6 @@ int	init_struct(char **cmd, t_token *token, t_pars **pars)
 		i++;
 	}
 	free_token(&token, i);
-	print_list(pars);
+	//print_list(pars);
 	return (1);
 }

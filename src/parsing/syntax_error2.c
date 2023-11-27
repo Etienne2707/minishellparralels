@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern int g_exit_status;
+
 static int	nb_d_quotes(char *str)
 {
 	int	i;
@@ -70,16 +72,19 @@ int	syntax_check(char *str)
 	if (syntax_quote(str) == 0)
 	{
 		ft_putstr_fd("minishell: syntax_error\n", 2);
+		g_exit_status = 2;
 		return (0);
 	}
 	if (syntax_red(str) == -1)
 	{
 		ft_putstr_fd("minishell: syntax error near unexpected token \n", 2);
+		g_exit_status = 2;
 		return (0);
 	}
 	if (syntax_charac(str) == -1)
 	{
 		ft_putstr_fd("minishell: syntax error\n", 2);
+		g_exit_status = 2;
 		return (0);
 	}
 	return (1);
@@ -95,6 +100,7 @@ int	check_pipe(char **cmd, char *str)
 	if (check_start_end(str) == -1)
 	{
 		ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
+		g_exit_status = 2;
 		return (-1);
 	}
 	return (check_pipe2(cmd));

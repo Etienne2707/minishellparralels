@@ -97,7 +97,7 @@ char	*add_space(char *st)
 			i++;
 			c++;
 		}
-		if (st[i] == '>' || st[i] == '<')
+		if ((st[i] == '>' || st[i] == '<') && (check_in_quote(st, i) == -1))
 			i++;
 		i++;
 	}

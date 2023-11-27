@@ -24,7 +24,7 @@ int	check_red_arg(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '<' || str[i] == '>')
+		if ((str[i] == '<' && check_in_quote(str,i) == -1) || (str[i] == '>' && check_in_quote(str,i) == -1))
 		{
 			while (str[i] == '>' || (str[i] == '<' && str[i] != '\0'))
 				i++;
@@ -45,9 +45,9 @@ int	check_in_out(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '>' && str[i + 1] == '<' && str[i + 1] != '\0')
+		if ((str[i] == '>' && check_in_quote(str,i) == -1) && (str[i + 1] == '<' || str[i + 1] == '\0'))
 			return (-1);
-		else if (str[i] == '<' && str[i + 1] == '>' && str[i + 1] != '\0')
+		else if ((str[i] == '<' && check_in_quote(str,i) == -1) && (str[i + 1] == '>' || str[i + 1] == '\0'))
 			return (-1);
 		i++;
 	}
@@ -78,7 +78,7 @@ int	syntax_red(char *str)
 		}
 		i++;
 	}
-	if (check_in_out(str) == -1 || check_red_arg(str) == -1)
+	if (check_in_out(str) == -1)
 		return (-1);
 	return (1);
 }
@@ -90,7 +90,8 @@ int	syntax_charac(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == ';' && check_in_quote(str,i) != 1) && (str[i] == '\'' && check_in_quote(str,i) != 1) )
+		if ((str[i] == ';' && check_in_quote(str, i) != 1)
+			&& (str[i] == '\'' && check_in_quote(str, i) != 1))
 		{
 			return (-1);
 		}

@@ -39,6 +39,8 @@ int	only_quotes(char *str)
 
 	i = 0;
 	result = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 	{
 		if (str[i] != 34 && str[i] != 39)
@@ -56,7 +58,7 @@ static char	*ft_remove_quote2(char *str)
 	ret = malloc(sizeof(char) * 2);
 	if (!ret)
 		return (NULL);
-	ret[0] = 32;
+	ret[0] = 0;
 	ret[1] = 0;
 	return (ret);
 }
@@ -69,6 +71,10 @@ char	*ft_remove_quote(char *str)
 
 	k = 0;
 	c = 0;
+	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0   || ft_strcmp(str, "\">\"") == 0  || ft_strcmp(str, "\">>\"") == 0 )
+	{
+		return (str);
+	}
 	if (only_quotes(str) == 0)
 	{
 		dest = ft_remove_quote2(str);
