@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 10:45:21 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:45:50 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,26 @@ static int	find_char(char *str, char c)
 	return (0);
 }
 
-static int	is_builtin(char **cmd_args, char **envp, int *exit_code)
+static int	is_builtin(char **cmd_args, char **envp, int *exit, t_pars *pars)
 {
-	*exit_code = -1;
+	*exit = -1;
 	if (!cmd_args || cmd_args[0] == 0)
-		return (*exit_code);
+		return (*exit);
 	if (ft_strncmp(cmd_args[0], "echo", 5) == 0)
-		*exit_code = ft_echo(cmd_args);
+		*exit = ft_echo(pars);
 	if (ft_strncmp(cmd_args[0], "env", 4) == 0)
-		*exit_code = ft_env(envp);
+		*exit = ft_env(pars, envp);
 	if (ft_strncmp(cmd_args[0], "exit", 5) == 0)
-		*exit_code = EXIT_SUCCESS;
+		*exit = EXIT_SUCCESS;
 	if (ft_strncmp(cmd_args[0], "pwd", 4) == 0)
-		*exit_code = ft_pwd();
+		*exit = ft_pwd(pars);
 	if (ft_strncmp(cmd_args[0], "export", 7) == 0)
-		*exit_code = ft_export(cmd_args, &envp);
-	if (ft_strncmp(cmd_args[0], "unset", 5) == 0)
-		*exit_code = ft_unset(cmd_args, &envp);
+		*exit = ft_export(pars, cmd_args, &envp);
+	if (ft_strncmp(cmd_args[0], "unset", 6) == 0)
+		*exit = ft_unset(cmd_args, &envp);
 	if (ft_strncmp(cmd_args[0], "cd", 3) == 0)
-		*exit_code = ft_cd(cmd_args, &envp, NULL);
-	return (*exit_code);
+		*exit = ft_cd(cmd_args, &envp, NULL);
+	return (*exit);
 }
 
 static void	exe_err(t_pars *pars, char **envp, char **path)
@@ -68,7 +68,7 @@ void	exe_cmd(t_pars *pars, char **envp)
 	char	*cmd_path;
 	int		exit_code;
 
-	if (is_builtin(pars->cmd, envp, &exit_code) != -1)
+	if (is_builtin(pars->cmd, envp, &exit_code, pars) != -1)
 	{
 		free_remaining(pars, envp);
 		exit(exit_code);

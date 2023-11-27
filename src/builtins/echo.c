@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:51 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/24 16:22:52 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:32:28 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,30 @@ static int	only_n_arg(char *arg)
 	return (1);
 }
 
-int	ft_echo(char **args)
+int	ft_echo(t_pars *pars)
 {
 	int	newline_bool;
+	int	outfile;
+	int	i;
 
 	newline_bool = 1;
-	if (ft_strncmp(*args, "echo", ft_strlen(*args)) != 0)
-		return (EXIT_FAILURE);
-	args++;
-	if (*args && only_n_arg(*args))
+	outfile = 1;
+	i = 1;
+	if (pars->cmd[i] && only_n_arg(pars->cmd[i]))
 	{
 		newline_bool = 0;
-		args++;
+		i++;
 	}
-	while (*args)
+	if (pars->outfile > 0)
+		outfile = pars->outfile;
+	while (pars->cmd[i])
 	{
-		if (printf("%s", *args) != (int)ft_strlen(*args))
-			return (EXIT_FAILURE);
-		if (ft_strlen(*args) != 0 && *(args + 1) != NULL)
-			if (printf(" ") != (int)ft_strlen(" "))
-				return (EXIT_FAILURE);
-		args++;
+		ft_putstr_fd(pars->cmd[i], outfile);
+		if (ft_strlen(pars->cmd[i]) != 0 && pars->cmd[i + 1] != NULL)
+			ft_putstr_fd(" ", outfile);
+		i++;
 	}
 	if (newline_bool)
-		if (printf("\n") != (int)ft_strlen("\n"))
-			return (EXIT_FAILURE);
+		ft_putstr_fd("\n", outfile);
 	return (EXIT_SUCCESS);
 }

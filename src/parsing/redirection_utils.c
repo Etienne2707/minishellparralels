@@ -6,11 +6,13 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:32 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 08:06:37 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:58:40 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 int	nb_outfile(t_token *token, char **arg)
 {
@@ -53,6 +55,7 @@ void	get_infile(t_token *token, char **arg, int i)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(arg[i], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		g_exit_status = 1;
 	}
 	token->infile = fd;
 	if (i - 1 == token->last_i)
@@ -69,7 +72,16 @@ void	get_outfile(t_token *token, char **arg, int i)
 		return ;
 	arg[i] = ft_remove_quote(arg[i]);
 	fd = open(arg[i], O_TRUNC | O_CREAT | O_RDWR, 0000644);
-	token->outfile = fd;
+	if (access(arg[i], W_OK) != 0)
+	{
+		token->outfile = -1;
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(arg[i], 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+		g_exit_status = 1;
+	}
+	else
+		token->outfile = fd;
 	token->append = 0;
 	if (i - 1 == token->last_o)
 	{

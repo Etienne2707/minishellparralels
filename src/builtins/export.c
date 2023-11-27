@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 00:49:03 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/21 13:01:15 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:36:42 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static int	ft_export2(char **args, char ***envp, int *exitvalue, int i)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_export(char **args, char ***envp)
+int	ft_export(t_pars *pars, char **args, char ***envp)
 {
 	int		i;
 	int		exitvalue;
 
 	exitvalue = EXIT_SUCCESS;
 	if (!args[1] || args[1][0] == 0)
-		ft_env(*envp);
+		ft_env(pars, *envp);
 	else
 	{
 		i = 1;

@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:02:44 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 07:54:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 12:16:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	handle_ctrl_d(char **envpcpy, t_wd *wd)
 	free(wd->pwd);
 	free(wd->oldpwd);
 	free(wd);
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 1);
 	exit(EXIT_SUCCESS);
 }
 

@@ -6,15 +6,21 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:02:24 by mle-duc           #+#    #+#             */
-/*   Updated: 2022/11/07 14:02:25 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:50:34 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
+	int exit_value;
+
 	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+		return (EXIT_FAILURE);
+	exit_value = write(fd, s, ft_strlen(s));
+	if (exit_value == -1)
+		return (EXIT_FAILURE);
+	else
+		return (EXIT_SUCCESS);
 }

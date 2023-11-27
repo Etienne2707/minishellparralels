@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:35:21 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 08:05:34 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:02:35 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	redir(int pipein, int pipeout)
 
 static void	redir_files(t_pars *pars)
 {
-	if (pars->infile != 0)
+	if (pars->infile > 0)
 		dup2(pars->infile, 0);
-	if (pars->outfile != 0)
+	if (pars->outfile > 0)
 		dup2(pars->outfile, 1);
 }
 
@@ -61,11 +61,18 @@ void	child(int *pipefd, t_pars *pars, int i, char **envp)
 	if (pid == 0)
 	{
 		redir1(pipefd, pars, i, nb_cmd);
-		if (pars->infile != -1)
+		if (pars->infile != -1 && pars->outfile != -1)
 		{
 			if (pipefd)
 				free(pipefd);
 			exe_cmd(pars, envp);
+		}
+		else
+		{
+			if (pipefd)
+				free(pipefd);
+			free_remaining(pars, envp);
+			exit(1);
 		}
 	}
 }
