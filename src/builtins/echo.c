@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:51 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 15:11:40 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:56:51 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,25 @@ static int	only_n_arg(char *arg)
 	return (1);
 }
 
+static void	move_cursor_after_option(char **cmd, int *i)
+{
+	int	j;
+
+	while (cmd && cmd[*i])
+	{
+		if (cmd[*i][0] != '-')
+			return ;
+		j = 1;
+		while (cmd[*i][j] != 0)
+		{
+			if (cmd[*i][j] != 'n')
+				return ;
+			j++;
+		}
+		(*i)++;
+	}
+}
+
 int	ft_echo(t_pars *pars)
 {
 	int	newline_bool;
@@ -44,6 +63,7 @@ int	ft_echo(t_pars *pars)
 	{
 		newline_bool = 0;
 		i++;
+		move_cursor_after_option(pars->cmd, &i);
 	}
 	if (pars->outfile > 0)
 		outfile = pars->outfile;
