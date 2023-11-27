@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/26 20:33:23 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 07:41:53 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,14 @@ int			check_str(char *str, t_token *token, char **envp, t_pars **pars);
 // Expand
 char		*checkdollars(char *str, char **envp);
 char		*ft_dollars(char *str, char **envp, char *dest);
+char		*ft_dollars2(char *str, char **envp, char *dest);
 int			dollars_in_quote(char *str, int index);
 int			get_index(char *str);
 char		*change_value(char *env, char *str);
+char		*swap_value(char *value, char **envp);
 int			is_solo_dol(char *str, int index);
+char		*remove_dol(char *str, char *value);
+char		*get_value(char *str, int index);
 char		*get_env(char *env, char *str);
 int			d_hd(char *str, int i);
 int			separator_in_quotes(char *str, int i);
@@ -117,6 +121,7 @@ int			syntax_check(char *str);
 void		syntax_quote2(char *str, int *s, int *d, int *i);
 char		*add_dquote(char *str);
 int			check_pipe(char **cmd, char *str);
+int			check_pipe2(char **cmd);
 
 // Struct
 int			init_struct(char **cmd, t_token *token, t_pars **pars);

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:07 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/26 20:13:23 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 07:52:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ char	*remove_dol(char *str, char *value)
 	while (is_solo_dol(str, i) == 0 && dollars_in_quote(str, i) == 1
 		&& d_hd(str, i) != -1 && str[i] != '\0')
 	{
-	//	printf("solo dol = %d\n", is_solo_dol(str, i));
 		new[c++] = str[i++];
 	}
-	//printf("solo dol = %d\n", is_solo_dol(str, i));
 	i = i + ft_strlen(value) + 1;
 	while (str[i] != '\0')
 	{
@@ -52,6 +50,8 @@ char	*swap_value(char *value, char **envp)
 	if (ft_strcmp(value, "?") == 0)
 	{
 		free(value);
+		if (g_exit_status == -1)
+			return (temp = ft_itoa(130));
 		return (temp = ft_itoa(g_exit_status));
 	}
 	while (envp[i] != NULL)
@@ -87,8 +87,8 @@ char	*get_value(char *str, int index)
 	i = index + 1;
 	if (is_solo_dol(str, index) == -1)
 		return (get_exp_num(str, index));
-	while (str[i] != '\0' && str[i] != 32 && str[i] != '$' && str[i] != 39 
-			&& str[i] != 34 && is_n_a(str[i]) == 1)
+	while (str[i] != '\0' && str[i] != 32 && str[i] != '$' && str[i] != 39
+		&& str[i] != 34 && is_n_a(str[i]) == 1)
 	{
 		if (str[i] == '?')
 		{
@@ -104,47 +104,10 @@ char	*get_value(char *str, int index)
 	return (value);
 }
 
-int	only_space(char *str)
-{
-	int i;
-	
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] != 32 && (str[i] < 9 || str[i] > 13))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 char	*ft_dollars(char *str, char **envp, char *dest)
 {
-	int		i;
-	char	*temp;
-
-	i = 0;
 	if (!dest)
 		return (NULL);
-	while (str[i] != 0)
-	{
-		if (is_solo_dol(str, i) != 0 && dollars_in_quote(str, i) == 1
-			&& d_hd(str, i) == 1)
-		{
-			temp = swap_value(get_value(str, i), envp);
-			if (temp != NULL)
-				dest = change_value(temp, dest);
-			else
-			{
-				dest = remove_dol(dest, get_value(str, i));
-				if (dest[0] == 0 || (only_space(dest) == 1))
-				{
-					free(dest);
-					return (NULL);
-				}
-			}
-		}
-		i++;
-	}
+	dest = ft_dollars2(str, envp, dest);
 	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:55 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/24 15:30:22 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 08:34:59 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	free_maillon(t_pars *pars)
 	}
 	if (pars->delimiter)
 		free(pars->delimiter);
-	if (pars->infile)
+	if (pars->infile > 0)
 		close(pars->infile);
 	free(pars);
 }

@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:35:21 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 14:36:46 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 08:05:34 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static void	redir_files(t_pars *pars)
 		dup2(pars->infile, 0);
 	if (pars->outfile != 0)
 		dup2(pars->outfile, 1);
-	if (pars->infile == -1)
-		ft_putstr_fd("minishell: No such file or directory: ", 2);
 }
 
 static void	redir1(int *pipefd, t_pars *pars, int i, int nb_cmd)

@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:06:59 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 20:14:45 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 07:42:08 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	syntax_quote(char *str)
 	s = nb_s_quotes(str);
 	while (str[i] != '\0')
 	{
-		syntax_quote2(str, &s, &d, &i); // faut que tu m'explique vu que lorsque tu sors de cette fonction i depasse j'ai fias un briocologe en attendant 
+		syntax_quote2(str, &s, &d, &i);
 		i++;
 		if (i > ft_strlen(str))
 			break ;
@@ -87,14 +87,8 @@ int	syntax_check(char *str)
 
 int	check_pipe(char **cmd, char *str)
 {
-	int	i;
-	int	k;
-	int	c;
-
-	i = -1;
 	if (!str)
 	{
-		printf("oui");
 		free(str);
 		return (-1);
 	}
@@ -103,18 +97,5 @@ int	check_pipe(char **cmd, char *str)
 		ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
 		return (-1);
 	}
-	while (cmd[++i] != 0)
-	{
-		k = -1;
-		c = 0;
-		while (cmd[i][++k] != '\0')
-			if (cmd[i][k] != ' ')
-				c++;
-		if (c == 0)
-		{
-			ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
-			return (-1);
-		}
-	}
-	return (1);
+	return (check_pipe2(cmd));
 }

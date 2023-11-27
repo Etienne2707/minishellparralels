@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 13:05:14 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 08:26:08 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	write1(int fd, char **str, int *pipefd, int i)
 
 static void	manage_files(int fd, t_pars *pars, char *str)
 {
-	if (fd)
+	if (fd > 0)
 		close(fd);
 	if (!pars->infile)
 		pars->infile = open(str, O_RDONLY);

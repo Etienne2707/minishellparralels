@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:32 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/26 14:12:20 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 08:06:37 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ void	get_infile(t_token *token, char **arg, int i)
 		return ;
 	arg[i] = ft_remove_quote(arg[i]);
 	fd = open(arg[i], O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(arg[i], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
 	token->infile = fd;
 	if (i - 1 == token->last_i)
-	{
 		return ;
-	}
-	close(fd);
+	if (fd != -1)
+		close(fd);
 }
 
 void	get_outfile(t_token *token, char **arg, int i)

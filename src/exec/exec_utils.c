@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:53:22 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/26 20:09:29 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 08:32:32 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	exec_single(t_pars *pars, int nb_cmd, char ***envp, t_wd *wd)
 		if (pars->delimiter != NULL)
 			ft_heredoc(pars, NULL, 0);
 		g_exit_status = exe_builtin(pars, envp, wd);
-		if (pars->infile)
+		if (pars->infile > 0)
 			close(pars->infile);
 		return (1);
 	}
