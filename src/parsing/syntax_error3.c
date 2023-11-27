@@ -6,11 +6,13 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:15:42 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 15:43:29 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 00:40:00 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 int	only_tab(char *str)
 {
@@ -21,7 +23,7 @@ int	only_tab(char *str)
 	result = 1;
 	while (str[i] != '\0')
 	{
-		if (str[i] < 9 || str[i] > 13)
+		if ((str[i] < 9 || str[i] > 13) && str[i] != 32)
 			result = 0;
 		i++;
 	}
@@ -113,6 +115,7 @@ int	check_pipe2(char **cmd)
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token", 2);
 			ft_putstr_fd(" `|'\n", 2);
+			g_exit_status = 2;
 			return (-1);
 		}
 		i++;

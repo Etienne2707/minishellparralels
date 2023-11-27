@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:06 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/16 16:50:57 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 00:06:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	strlen_no_space(char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	while (str[i - 1] == ' ')
+	while (i > 0 && str[i - 1] == ' ')
 		i--;
 	return (i);
 }
@@ -42,6 +42,8 @@ int	check_start_end(char *str)
 	int	i;
 
 	size = strlen_no_space(str);
+	if (!size)
+		return (0);
 	i = 0;
 	if (str[i] == '|' || str[size - 1] == '|')
 		return (-1);
