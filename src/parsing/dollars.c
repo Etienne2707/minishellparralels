@@ -104,6 +104,20 @@ char	*get_value(char *str, int index)
 	return (value);
 }
 
+int	only_space(char *str)
+{
+	int i;
+	
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != 32 && (str[i] < 9 || str[i] > 13))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 char	*ft_dollars(char *str, char **envp, char *dest)
 {
 	int		i;
@@ -123,7 +137,7 @@ char	*ft_dollars(char *str, char **envp, char *dest)
 			else
 			{
 				dest = remove_dol(dest, get_value(str, i));
-				if (dest[0] == 0)
+				if (dest[0] == 0 || (only_space(dest) == 1))
 				{
 					free(dest);
 					return (NULL);
