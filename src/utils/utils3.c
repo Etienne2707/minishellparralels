@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 12:50:33 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 16:36:10 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:39:02 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_tab(char **tab)
 
 static void	print_great_less_error(int n, char c)
 {
-	ft_putstr_fd("minishell: syntax_error near unexpected token ", 2);
+	ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
 	if (c == '<')
 	{
 		if (n < 4)
