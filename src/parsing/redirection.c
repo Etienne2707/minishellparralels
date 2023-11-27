@@ -80,6 +80,19 @@ void	get_append(t_token *token, char **arg, int i)
 	close(fd);
 }
 
+char	*ft_remove_quote3(char *str)
+{
+	char	*ret;
+
+	free(str);
+	ret = malloc(sizeof(char) * 2);
+	if (!ret)
+		return (NULL);
+	ret[0] = 0;
+	ret[1] = 0;
+	return (ret);
+}
+
 int	redirection(t_token *token, char **arg)
 {
 	int	i;

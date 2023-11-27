@@ -163,6 +163,7 @@ char		**ft_cpy_double_array(char **to_copy);
 char		**ft_append_double_array(char **matrix, char *to_append);
 char		**ft_pop_double_array(char **matrix, char *to_pop);
 int			var_exists(char **envp, char *str);
+char	*ft_remove_quote3(char *str);
 
 //Export_utils
 

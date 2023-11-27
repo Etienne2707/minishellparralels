@@ -45,7 +45,12 @@ char	**get_arg(char *cmd, t_token *token)
 	redirection(token, token->arg);
 	while (token->arg[i] != 0)
 	{
-		token->arg[i] = ft_remove_quote(token->arg[i]);
+		if (ft_strcmp(token->arg[i], "\"\"") == 0 && token->arg[i + 1] == NULL)
+			token->arg[i] = ft_remove_quote3(token->arg[i]);
+		else if (ft_strcmp(token->arg[i], "\'\'") == 0 && token->arg[i + 1] == NULL)
+			token->arg[i] = ft_remove_quote3(token->arg[i]);
+		else
+			token->arg[i] = ft_remove_quote(token->arg[i]);
 		i++;
 	}
 	free(temp);

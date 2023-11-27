@@ -58,7 +58,7 @@ static char	*ft_remove_quote2(char *str)
 	ret = malloc(sizeof(char) * 2);
 	if (!ret)
 		return (NULL);
-	ret[0] = 0;
+	ret[0] = 32;
 	ret[1] = 0;
 	return (ret);
 }
