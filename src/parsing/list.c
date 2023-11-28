@@ -6,39 +6,11 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:50 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 12:49:10 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:00:06 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char *remove_red_quote(char *str)
-{
-	int i;
-	int size;
-	char *new;
-	int k;
-
-	size = ft_strlen(str);
-	i = 1;
-	k = 0;
-	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0
-		|| ft_strcmp(str, "\">\"") == 0 || ft_strcmp(str, "\">>\"") == 0 ||
-		ft_strcmp(str, "'<'") == 0 || ft_strcmp(str, "'<<'") == 0
-		|| ft_strcmp(str, "'>'") == 0 || ft_strcmp(str, "'>>'") == 0)
-	{
-		printf("ouiiiiiii\n");
-		new = malloc(sizeof(char) * size - 1);
-		if (!new)
-			return (NULL);
-		while (i != size - 1)
-			new[k++] = str[i++];
-		new[k] = '\0';
-		free(str);
-		return (new);
-	}
-	return (str);
-}
 
 char	**put_arg_list2(char **dest, char **str)
 {

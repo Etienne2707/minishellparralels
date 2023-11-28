@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 12:50:33 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/28 16:09:55 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 16:56:20 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,33 @@ int	ft_check_red_with_quotes(char *str)
 {
 	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0
 		|| ft_strcmp(str, "\">\"") == 0 || ft_strcmp(str, "\">>\"") == 0
-		|| ft_strcmp(str, "\'<\'") == 0 || ft_strcmp(str, "\'<<\'") == 0
-		|| ft_strcmp(str, "\'>\'") == 0 || ft_strcmp(str, "\'>>\'") == 0)
+		|| ft_strcmp(str, "'<'") == 0 || ft_strcmp(str, "'<<'") == 0
+		|| ft_strcmp(str, "'>'") == 0 || ft_strcmp(str, "'>>'") == 0)
 		return (1);
 	else
 		return (0);
+}
+
+char	*remove_red_quote(char *str)
+{
+	int		i;
+	int		size;
+	char	*new;
+	int		k;
+
+	size = ft_strlen(str);
+	i = 1;
+	k = 0;
+	if (ft_check_red_with_quotes(str))
+	{
+		new = malloc(sizeof(char) * size - 1);
+		if (!new)
+			return (NULL);
+		while (i != size - 1)
+			new[k++] = str[i++];
+		new[k] = '\0';
+		free(str);
+		return (new);
+	}
+	return (str);
 }
