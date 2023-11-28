@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:39 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 16:53:21 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 19:14:20 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ int	only_quotes(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == 34)
-			while (str[i] !='\0')
-			{
+		{
+			while (str[i] != '\0')
 				if (str[i++] != 34)
 					return (-1);
-			}
+		}
 		else if (str[i] == 39)
-			while (str[i] !='\0')
-			{
+		{
+			while (str[i] != '\0')
 				if (str[i++] != 39)
-					return(-1);
-			}
+					return (-1);
+		}
 		else
 			return (-1);
 	}

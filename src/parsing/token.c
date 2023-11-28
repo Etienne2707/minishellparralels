@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:13:14 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 12:43:22 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 19:12:04 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ char	*ft_strnrcpy(char *str, char *temp, int c)
 	return (temp);
 }
 
-
-
 char	**get_arg(char *cmd, t_token *token)
 {
 	int		i;
@@ -42,7 +40,7 @@ char	**get_arg(char *cmd, t_token *token)
 	i = 0;
 	temp = NULL;
 	temp = (ft_strnrcpy(cmd, temp, i));
-	token->arg = ft_split(temp, ' '); 
+	token->arg = ft_split(temp, ' ');
 	i = 0;
 	while (token->arg[i] != 0)
 	{
