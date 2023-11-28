@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:50 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/24 12:05:50 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 12:49:10 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**put_arg_list(char **dest, char **str)
 	{
 		if (ft_strcmp(">>", str[i]) == 0 || ft_strcmp("<<", str[i]) == 0
 			|| ft_strcmp(">", str[i]) == 0 || ft_strcmp("<", str[i]) == 0)
-			i = i + 2;
+				i = i + 2;
 		if (str[i] != 0 && ft_strcmp(">>", str[i]) != 0 && ft_strcmp("<<",
 				str[i]) != 0 && ft_strcmp(">", str[i]) != 0 && ft_strcmp("<",
 				str[i]) != 0)

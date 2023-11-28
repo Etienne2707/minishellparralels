@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 18:35:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:04:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ char		*ft_strcpy(char *dest, char *src);
 char		*ft_strncpy(char *dest, char *src, unsigned int n);
 char		*strcpyn(char *dest, char *src, int index, int size);
 int			is_n_a(char c);
+void		print_tab(char **tab);
 
 // String_Check
 int			check_start_end(char *str);

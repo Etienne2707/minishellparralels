@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:45:25 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 13:55:40 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 12:42:40 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ int	redirection(t_token *token, char **arg)
 	token->last_i = nb_infile(token, arg);
 	while (arg[i] != 0 && token->outfile != -1 && token->infile != -1)
 	{
-		if (ft_strcmp(">", arg[i]) == 0)
+		if (ft_strcmp(">", arg[i]) == 0 && arg[i + 1] != NULL)
 			get_outfile(token, arg, i + 1);
-		else if (ft_strcmp("<", arg[i]) == 0)
+		else if (ft_strcmp("<", arg[i]) == 0 && arg[i + 1] != NULL)
 			get_infile(token, arg, i + 1);
-		else if (ft_strcmp(">>", arg[i]) == 0)
+		else if (ft_strcmp(">>", arg[i]) == 0 && arg[i + 1] != NULL)
 			get_append(token, arg, i + 1);
 		i++;
 	}
