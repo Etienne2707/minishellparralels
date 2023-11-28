@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell.h" 
 
 char	*ft_strnrcpy(char *str, char *temp, int c)
 {
@@ -32,6 +32,8 @@ char	*ft_strnrcpy(char *str, char *temp, int c)
 	return (temp);
 }
 
+
+
 char	**get_arg(char *cmd, t_token *token)
 {
 	int		i;
@@ -40,9 +42,8 @@ char	**get_arg(char *cmd, t_token *token)
 	i = 0;
 	temp = NULL;
 	temp = (ft_strnrcpy(cmd, temp, i));
-	token->arg = ft_split(temp, ' ');
+	token->arg = ft_split(temp, ' '); 
 	i = 0;
-	redirection(token, token->arg);
 	while (token->arg[i] != 0)
 	{
 		if (ft_strcmp(token->arg[i], "\"\"") == 0 && token->arg[i + 1] == NULL)
@@ -54,6 +55,7 @@ char	**get_arg(char *cmd, t_token *token)
 			token->arg[i] = ft_remove_quote(token->arg[i]);
 		i++;
 	}
+	redirection(token, token->arg);
 	free(temp);
 	return (token->arg);
 }

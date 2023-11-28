@@ -25,7 +25,6 @@ void	put_heredoc(t_token *token, char **arg)
 	{
 		if (ft_strcmp("<<", arg[i]) == 0)
 		{
-			arg[i + 1] = ft_remove_quote(arg[i + 1]);
 			token->delimiter[nbh++] = arg[i + 1];
 		}
 		i++;
@@ -60,8 +59,7 @@ void	get_append(t_token *token, char **arg, int i)
 
 	if (token->outfile == -1)
 		return ;
-	arg[i] = ft_remove_quote(arg[i]);
-	fd = open(ft_remove_quote(arg[i]), O_APPEND | O_CREAT | O_RDWR, 0000644);
+	fd = open(arg[i], O_APPEND | O_CREAT | O_RDWR, 0000644);
 	if (access(arg[i], W_OK) != 0)
 	{
 		ft_putstr_fd("minishell: ", 2);

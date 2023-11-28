@@ -43,9 +43,20 @@ int	only_quotes(char *str)
 		return (0);
 	while (str[i] != '\0')
 	{
-		if (str[i] != 34 && str[i] != 39)
-			result = 1;
-		i++;
+		if (str[i] == 34)
+			while (str[i] !='\0')
+			{
+				if (str[i++] != 34)
+					return (-1);
+			}
+		else if (str[i] == 39)
+			while (str[i] !='\0')
+			{
+				if (str[i++] != 39)
+					return(-1);
+			}
+		else
+			return (-1);
 	}
 	return (result);
 }

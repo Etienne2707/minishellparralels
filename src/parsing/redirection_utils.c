@@ -48,7 +48,6 @@ void	get_infile(t_token *token, char **arg, int i)
 
 	if (token->infile == -1)
 		return ;
-	arg[i] = ft_remove_quote(arg[i]);
 	fd = open(arg[i], O_RDONLY);
 	if (fd < 0)
 	{
@@ -70,7 +69,6 @@ void	get_outfile(t_token *token, char **arg, int i)
 
 	if (token->outfile == -1)
 		return ;
-	arg[i] = ft_remove_quote(arg[i]);
 	fd = open(arg[i], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (access(arg[i], W_OK) != 0)
 	{
