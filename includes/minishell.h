@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 13:04:48 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 16:08:59 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void		syntax_quote2(char *str, int *s, int *d, int *i);
 char		*add_dquote(char *str);
 int			check_pipe(char **cmd, char *str);
 int			check_pipe2(char **cmd);
+int			ft_check_red_with_quotes(char *str);
 
 // Struct
 int			init_struct(char **cmd, t_token *token, t_pars **pars);

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:39 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 12:36:21 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 16:09:42 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,14 @@ char	*ft_remove_quote(char *str)
 
 	k = 0;
 	c = 0;
+<<<<<<< HEAD
 	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0
 		|| ft_strcmp(str, "\">\"") == 0 || ft_strcmp(str, "\">>\"") == 0 ||
 		ft_strcmp(str, "'<'") == 0 || ft_strcmp(str, "'<<'") == 0
 		|| ft_strcmp(str, "'>'") == 0 || ft_strcmp(str, "'>>'") == 0)
+=======
+	if (ft_check_red_with_quotes(str))
+>>>>>>> cb0679bf38f3713fc3bb7e894a2f93a62f5d2b38
 		return (str);
 	if (only_quotes(str) == 0)
 		return (ft_remove_quote2(str));

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 13:54:11 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 16:05:50 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	wserror(void)
 	write(2, "Syntax Error", 12);
 }
 
-
 int	check_in_out(char *str)
 {
 	int	i;
@@ -26,10 +25,10 @@ int	check_in_out(char *str)
 	while (str[i] != '\0')
 	{
 		if ((str[i] == '>' && check_in_quote(str, i) == -1)
-			&& (str[i + 1] == '<' || str[i + 1] == '\0')) //
+			&& (str[i + 1] == '<' || str[i + 1] == '\0'))
 			return (-1);
 		else if ((str[i] == '<' && check_in_quote(str, i) == -1)
-			&& (str[i + 1] == '>' || str[i + 1] == '\0')) //
+			&& (str[i + 1] == '>' || str[i + 1] == '\0'))
 			return (-1);
 		i++;
 	}
@@ -43,13 +42,16 @@ int	check_red_arg(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '<' && (check_in_quote(str,i) == -1 )) || (str[i] == '>' && (check_in_quote(str,i) == -1 )) )
+		if ((str[i] == '<' && (check_in_quote(str, i) == -1))
+			|| (str[i] == '>' && (check_in_quote(str, i) == -1)))
 		{
 			while (str[i] == '>' || (str[i] == '<' && str[i] != '\0'))
 				i++;
-			while ((str[i] ==  32 || (str[i] >= 9 && str[i] <= 13)) && str[i] != '\0')
+			while ((str[i] == 32
+					|| (str[i] >= 9 && str[i] <= 13)) && str[i] != '\0')
 				i++;
-			if (str[i] == '>' || (str[i] == '<' || str[i] == '\0' || str[i] == '|'))
+			if (str[i] == '>'
+				|| (str[i] == '<' || str[i] == '\0' || str[i] == '|'))
 				return (-1);
 		}
 		i++;
@@ -81,7 +83,7 @@ int	syntax_red(char *str)
 		}
 		i++;
 	}
-	if (check_in_out(str) == -1 || check_red_arg(str) ==  -1)
+	if (check_in_out(str) == -1 || check_red_arg(str) == -1)
 		return (-1);
 	return (1);
 }
