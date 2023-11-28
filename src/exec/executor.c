@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 14:00:07 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 19:44:17 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 	i = -1;
 	while (++i < nb_cmd && (g_exit_status != -1 || boolean))
 	{
-		if (pars && pars->cmd[0] != 0)
+		if (pars /*&& pars->cmd[0] != 0*/)
 			child(pipefd, pars, i, *envp);
 		pars = pars->next;
 	}

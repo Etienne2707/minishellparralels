@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 17:32:22 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 19:37:40 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	minishell_loop(char **envp, t_pars *pars, t_token *token, t_wd *wd)
 				ft_free_list(&pars);
 				pars = NULL;
 			}
-			printf("exit status : %d\n", g_exit_status);
 		}
 	}
 }

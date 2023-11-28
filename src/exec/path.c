@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:54:48 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 15:05:28 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 19:46:32 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ char	*get_right_cmd_path(char **paths, char *cmd)
 		temp = ft_strjoin(*paths, "/");
 		cmd_path = ft_strjoin(temp, cmd);
 		free(temp);
-		if (access(cmd_path, F_OK | X_OK) == 0)
-			return (cmd_path);
+		if (cmd_path != NULL)
+			if (access(cmd_path, F_OK | X_OK) == 0)
+				return (cmd_path);
 		free(cmd_path);
 		paths++;
 	}
