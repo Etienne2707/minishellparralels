@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:38:51 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 23:56:30 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 21:26:41 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_valid_identifier(char c)
 		|| c == '\'' || c == '\"' || c == ' ' || c == ',' || c == '.'
 		|| c == ':' || c == '/' || c == '{' || c == '}' || c == '+'
 		|| c == '^' || c == '%' || c == '#' || c == '@' || c == '!'
-		|| c == '~'
+		|| c == '~' || c == 92
 		|| c == '=' || c == '-' || c == '?' || c == '&' || c == '*');
 }
 
@@ -62,10 +62,6 @@ int	var_already_exists(char **envp, char *str)
 	int	i;
 
 	i = 0;
-	if (str[after_equal(str)] == '\"')
-		remove_quotes(str, '\"');
-	if (str[after_equal(str)] == '\'')
-		remove_quotes(str, '\'');
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], str, after_equal(envp[i])) == 0)
