@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 12:50:33 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/28 13:04:11 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 16:09:55 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,15 @@ void	less_great_error(char *str)
 		print_great_less_error(less, '<');
 	else if (less <= great)
 		print_great_less_error(great, '>');
+}
+
+int	ft_check_red_with_quotes(char *str)
+{
+	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0
+		|| ft_strcmp(str, "\">\"") == 0 || ft_strcmp(str, "\">>\"") == 0
+		|| ft_strcmp(str, "\'<\'") == 0 || ft_strcmp(str, "\'<<\'") == 0
+		|| ft_strcmp(str, "\'>\'") == 0 || ft_strcmp(str, "\'>>\'") == 0)
+		return (1);
+	else
+		return (0);
 }
