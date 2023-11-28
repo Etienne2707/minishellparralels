@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 00:49:03 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 13:36:42 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 18:53:19 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_export2(char **args, char ***envp, int *exitvalue, int i)
 		ft_free_double_array(*envp);
 		*envp = temp;
 	}
-	else if (!(*exitvalue))
+	else if (!(*exitvalue) && !var_already_exists(*envp, args[i]))
 		*exitvalue = EXIT_FAILURE;
 	return (EXIT_SUCCESS);
 }
