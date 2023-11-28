@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 20:15:42 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/28 13:44:33 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:23:44 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ int	only_tab(char *str)
 		i++;
 	}
 	if (ft_strcmp(str, ":") == 0)
+	{
+		ft_putstr_fd("", 1);
 		return (1);
+	}
+	if (result == 1)
+		ft_putstr_fd("", 1);
 	return (result);
 }
 
@@ -38,10 +43,8 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 	char	*dest;
 
 	dest = NULL;
-	if (syntax_check(str) == 0)
+	if (syntax_check(str) == 0 || only_tab(str) == 1)
 		return (-1);
-	if (only_tab(str) == 1)
-		return (2);
 	dest = malloc_cpy(dest, str);
 	dest = ft_dollars(str, envp, dest);
 	if (!dest)
@@ -52,6 +55,7 @@ int	syntax_error(char *str, t_token *token, char **envp, t_pars **pars)
 		return (-1);
 	}
 	dest = add_space(dest);
+	replace_whitespaces(dest);
 	cmd = ft_split(dest, '|');
 	if ((check_pipe(cmd, dest)) == -1)
 		return (-1);
@@ -67,14 +71,7 @@ int	check_str(char *str, t_token *token, char **envp, t_pars **pars)
 
 	result = syntax_error(str, token, envp, pars);
 	if (result == -1)
-	{
 		return (-1);
-	}
-	else if (result == 2)
-	{
-		ft_putstr_fd("", 2);
-		return (-1);
-	}
 	return (1);
 }
 

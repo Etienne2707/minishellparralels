@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:11:50 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 12:24:17 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:23:14 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ void	syntax_quote2(char *str, int *s, int *d, int *i)
 		syntax1(str, s, i);
 	else if (str[*i] == 39)
 		syntax2(str, d, i);
+}
+
+void	replace_whitespaces(char *dest)
+{
+	int	i;
+
+	if (!dest)
+		return ;
+	i = 0;
+	while (dest[i])
+	{
+		if (dest[i] >= 9 && dest[i] <= 13)
+			dest[i] = 32;
+		i++;
+	}
 }

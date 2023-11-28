@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 17:00:20 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/28 17:24:07 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int			syntax_charac(char *str);
 int			check_str(char *str, t_token *token, char **envp, t_pars **pars);
 void		less_great_error(char *str);
 char		*remove_red_quote(char *str);
+void		replace_whitespaces(char *dest);
 
 // Expand
 char		*checkdollars(char *str, char **envp);
