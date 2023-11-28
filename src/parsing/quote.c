@@ -73,8 +73,8 @@ char	*ft_remove_quote(char *str)
 	c = 0;
 	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0
 		|| ft_strcmp(str, "\">\"") == 0 || ft_strcmp(str, "\">>\"") == 0 ||
-		ft_strcmp(str, "\'<\'") == 0 || ft_strcmp(str, "\'<<\'") == 0
-		|| ft_strcmp(str, "\'>\'") == 0 || ft_strcmp(str, "\'>>\'") == 0)
+		ft_strcmp(str, "'<'") == 0 || ft_strcmp(str, "'<<'") == 0
+		|| ft_strcmp(str, "'>'") == 0 || ft_strcmp(str, "'>>'") == 0)
 		return (str);
 	if (only_quotes(str) == 0)
 		return (ft_remove_quote2(str));

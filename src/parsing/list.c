@@ -12,6 +12,34 @@
 
 #include "minishell.h"
 
+char *remove_red_quote(char *str)
+{
+	int i;
+	int size;
+	char *new;
+	int k;
+
+	size = ft_strlen(str);
+	i = 1;
+	k = 0;
+	if (ft_strcmp(str, "\"<\"") == 0 || ft_strcmp(str, "\"<<\"") == 0
+		|| ft_strcmp(str, "\">\"") == 0 || ft_strcmp(str, "\">>\"") == 0 ||
+		ft_strcmp(str, "'<'") == 0 || ft_strcmp(str, "'<<'") == 0
+		|| ft_strcmp(str, "'>'") == 0 || ft_strcmp(str, "'>>'") == 0)
+	{
+		printf("ouiiiiiii\n");
+		new = malloc(sizeof(char) * size - 1);
+		if (!new)
+			return (NULL);
+		while (i != size - 1)
+			new[k++] = str[i++];
+		new[k] = '\0';
+		free(str);
+		return (new);
+	}
+	return (str);
+}
+
 char	**put_arg_list2(char **dest, char **str)
 {
 	int	i;
@@ -28,6 +56,7 @@ char	**put_arg_list2(char **dest, char **str)
 				str[i]) != 0 && ft_strcmp(">", str[i]) != 0 && ft_strcmp("<",
 				str[i]) != 0)
 		{
+			str[i] = remove_red_quote(str[i]);
 			dest[c] = malloc_cpy(dest[c], str[i]);
 			i++;
 			c++;
