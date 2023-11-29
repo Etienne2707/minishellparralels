@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:53:22 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/28 21:19:39 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 03:32:46 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	exe_builtin(t_pars *pars, char ***envp, t_wd *wd)
 	if (ft_strncmp(pars->cmd[0], "pwd", 4) == 0)
 		return (ft_pwd(pars));
 	if (ft_strncmp(pars->cmd[0], "export", 7) == 0)
-		return (ft_export(pars, pars->cmd, envp));
+		return (ft_export(pars, pars->cmd, envp, 0));
 	if (ft_strncmp(pars->cmd[0], "unset", 6) == 0)
 		return (ft_unset(pars->cmd, envp));
 	if (ft_strncmp(pars->cmd[0], "cd", 3) == 0)

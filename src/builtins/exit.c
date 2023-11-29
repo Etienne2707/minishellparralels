@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:27:00 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 23:26:12 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 03:20:14 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_exit(t_pars *pars, char **args, char **envp, t_wd *wd)
 		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	else if (args[1] && (!is_arg_valid(args[1]) || ft_strlen(args[1]) > 19))
+	else if (args[1] && (!is_arg_valid(args[1]) || ft_strlen(args[1]) > 20))
 	{
 		ft_putstr_fd("exit\n", 1);
 		ft_putstr_fd("minishell: exit: ", 2);

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 17:24:07 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 03:32:03 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void		heredoc_loop(t_pars *pars, int *pipefd, int i, char *str);
 
 int			ft_pwd(t_pars *pars);
 int			ft_exit(t_pars *pars, char **cmd, char **envp, t_wd *wd);
-int			ft_export(t_pars *pars, char **cmd, char ***envp);
+int			ft_export(t_pars *pars, char **cmd, char ***envp, int pipe);
 int			ft_echo(t_pars *pars);
 int			ft_env(t_pars *pars, char *envp[]);
 int			ft_unset(char **cmd, char ***envp);
