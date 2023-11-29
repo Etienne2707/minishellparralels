@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:43:06 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 14:48:56 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 02:25:17 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ static void	err_msg(char **cmd)
 	ft_putstr_fd("minishell: cd: ", 1);
 	ft_putstr_fd(cmd[1], 1);
 	ft_putstr_fd(": No such file or directory\n", 2);
+}
+
+static void	refresh(t_wd *wd, char ***envp)
+{
+	refresh_wd(wd, envp);
+	refresh_env(wd, envp);
 }
 
 int	ft_cd(char **cmd, char ***envp, t_wd *wd)
@@ -41,9 +47,6 @@ int	ft_cd(char **cmd, char ***envp, t_wd *wd)
 	if (path)
 		return (EXIT_FAILURE);
 	if (wd)
-	{
-		refresh_wd(wd, envp);
-		refresh_env(wd, envp);
-	}
+		refresh(wd, envp);
 	return (EXIT_SUCCESS);
 }
