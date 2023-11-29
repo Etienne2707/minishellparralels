@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 19:40:53 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 14:56:45 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:09:29 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	get_path(char **envp, char *path_to_find)
 	return (path);
 }
 
-int	oldpwd_exists(char **envp)
+static int	wd_exists(char **envp, char *str, int j)
 {
 	int	i;
 
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], "OLDPWD=", 7) == 0)
+		if (ft_strncmp(envp[i], str, j) == 0)
 			return (1);
 		i++;
 	}
@@ -62,12 +62,12 @@ static void	refresh_wd2(t_wd *wd, char ***envp)
 	tmp = NULL;
 	if (wd->pwd)
 		tmp = ft_strdup(wd->pwd);
-	if (wd->oldpwd == NULL || !oldpwd_exists(*envp))
+	if (wd->oldpwd == NULL || !wd_exists(*envp, "OLDPWD=", 7))
 	{
 		if (wd->oldpwd)
 			free(wd->oldpwd);
 		wd->oldpwd = tmp;
-		if (wd->oldpwd)
+		if (wd->oldpwd && !wd_exists(*envp, "OLDPWD=", 7))
 		{
 			tmp = ft_strjoin("OLDPWD=", tmp);
 			tmp2 = ft_append_double_array(*envp, tmp);
@@ -96,21 +96,26 @@ void	refresh_env(t_wd *wd, char ***envp)
 	char	*tmp;
 	int		i;
 
-	i = 0;
-	while ((*envp)[i])
+	i = -1;
+	while ((*envp)[++i])
 	{
 		if (ft_strncmp((*envp)[i], "OLDPWD=", 7) == 0)
 		{
-			tmp = ft_strjoin("OLDPWD=", wd->oldpwd);
+			if (wd->oldpwd != NULL)
+				tmp = ft_strjoin("OLDPWD=", wd->oldpwd);
+			else
+				tmp = ft_strjoin("OLDPWD=", "..");
 			free((*envp)[i]);
 			(*envp)[i] = tmp;
 		}
 		else if (ft_strncmp((*envp)[i], "PWD=", 4) == 0)
 		{
-			tmp = ft_strjoin("PWD=", wd->pwd);
+			if (wd->pwd != NULL)
+				tmp = ft_strjoin("PWD=", wd->pwd);
+			else
+				tmp = ft_strjoin("PWD=", "..");
 			free((*envp)[i]);
 			(*envp)[i] = tmp;
 		}
-		i++;
 	}
 }

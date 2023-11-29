@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/29 03:32:03 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:01:55 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,6 @@ int			ft_cd(char **cmd, char ***envp, t_wd *wd);
 
 //Builtins_utils
 int			get_path(char **envp, char *path_to_find);
-int			oldpwd_exists(char **envp);
 void		refresh_wd(t_wd *wd, char ***envp);
 void		refresh_env(t_wd *wd, char ***envp);
 
