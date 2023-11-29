@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:43:06 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 02:54:48 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 03:01:53 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	check_cd_args(char **cmd)
 		if (cmd[1][0] == '-' && cmd[1][1] == '-'
 				&& cmd[1][2] != 0)
 		{
-			ft_putstr_fd("minishell: pwd: --: invalid option\n", 2);
+			ft_putstr_fd("minishell: cd: --: invalid option\n", 2);
 			return (0);
 		}
 	}
