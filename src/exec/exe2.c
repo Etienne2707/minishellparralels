@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 04:41:53 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:56:50 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,7 @@ void	exe_cmd(t_pars *pars, char **envp)
 	if (cmd_path == NULL)
 		exe_err(pars, envp, path);
 	execve(cmd_path, pars->cmd, envp);
+	free(cmd_path);
+	exe_err(pars, envp, path);
 	exit(127);
 }
