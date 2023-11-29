@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 14:54:17 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 19:11:15 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	wait_and_close(int *pipefd, int nb_cmd)
 	while (i < nb_cmd)
 	{
 		waitpid(-1, &status, 0);
-		if (WIFEXITED(status) && g_exit_status != -1)
+		if (WIFEXITED(status))
 			g_exit_status = WEXITSTATUS(status);
 		i++;
 	}

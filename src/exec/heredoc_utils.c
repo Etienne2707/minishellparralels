@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 08:26:08 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 18:39:31 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	heredoc_loop(t_pars *pars, int *pipefd, int i, char *str)
 	j = -1;
 	fd = 0;
 	stdin_save = dup(STDIN_FILENO);
-	while (pars->delimiter[++j] != NULL && g_exit_status != -1)
+	while (pars->delimiter[++j] != NULL && g_exit_status != -2)
 	{
 		fd = open_heredoc_file(str);
 		line = readline("> ");
 		while (line && (ft_strncmp(line, pars->delimiter[j],
 					ft_strlen(pars->delimiter[j]) + 1)))
 			write1(fd, &line, pipefd, i);
-		if (!line && dup(0) != -1)
+		if (!line && errno != EBADF)
 			handle_ctrl_d_heredoc(pars, j);
 		free(line);
 		manage_files(fd, pars, str);

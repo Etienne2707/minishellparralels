@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:02:44 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 12:16:05 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 18:38:45 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	handle_sigint_heredoc(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_exit_status = -1;
+		g_exit_status = -2;
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 1);
