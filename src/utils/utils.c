@@ -44,7 +44,7 @@ int	check_nb_pipe(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '|')
+		if (str[i] == '|' && check_in_quote(str, i) == -1)
 		{
 			c = 0;
 			while (str[i] != '\0' && str[i] == '|')
