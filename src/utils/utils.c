@@ -36,11 +36,38 @@ int	have_digit(char *str, int i)
 	return (1);
 }
 
+int check_nb_pipe(char *str)
+{
+	int i;
+	int c;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '|')
+		{
+			c = 0;
+			while (str[i] != '\0' && str[i] == '|')
+			{
+				i++;
+				c++;
+			}
+			if (c > 1)
+				return (-1);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	check_start_end(char *str)
 {
 	int	size;
 	int	i;
 
+
+	if (check_nb_pipe(str) == -1)
+		return (-1);
 	size = strlen_no_space(str);
 	if (!size)
 		return (0);
