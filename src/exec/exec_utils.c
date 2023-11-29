@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:53:22 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 18:50:11 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 23:35:51 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ static int	exe_builtin(t_pars *pars, char ***envp, t_wd *wd)
 
 int	exec_single(t_pars *pars, int nb_cmd, char ***envp, t_wd *wd)
 {
-	if (nb_cmd == 1 && !pars->cmd[0] && pars->delimiter != NULL)
+	if (nb_cmd == 1 && !pars->cmd[0] && pars->delimiter[0] != NULL)
 	{
-		printf("je retnre dans la boucle\n");
 		ft_heredoc(pars, NULL, 0);
 		return (1);
 	}
