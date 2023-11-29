@@ -98,7 +98,7 @@ int	check_pipe(char **cmd, char *str)
 		free(str);
 		return (-1);
 	}
-	if (check_start_end(str) == -1)
+	if ((check_start_end(str) == -1 )|| (check_nb_pipe(str) == -1))
 	{
 		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		g_exit_status = 2;

@@ -65,8 +65,6 @@ int	check_start_end(char *str)
 	int	size;
 	int	i;
 
-	if (check_nb_pipe(str) == -1)
-		return (-1);
 	size = strlen_no_space(str);
 	if (!size)
 		return (0);

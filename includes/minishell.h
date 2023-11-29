@@ -83,6 +83,7 @@ int			check_str(char *str, t_token *token, char **envp, t_pars **pars);
 void		less_great_error(char *str);
 char		*remove_red_quote(char *str);
 void		replace_whitespaces(char *dest);
+int			check_nb_pipe(char *str);
 
 // Expand
 char		*checkdollars(char *str, char **envp);
