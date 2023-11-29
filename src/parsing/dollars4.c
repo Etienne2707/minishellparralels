@@ -90,3 +90,27 @@ char	*ft_dollars2(char *str, char **envp, char *dest)
 	}
 	return (dest);
 }
+
+char	*add_quote(char *str, char *value)
+{
+	int i;
+	int quote;
+	char *new;
+	int k;
+
+	i = 0;
+	k = 0;
+	quote = check_in_quote2(value, get_index(value));
+	if (quote == 0)
+		return (str);
+	new = malloc(sizeof(char) * ft_strlen(str) + 3);
+	if (!new)
+		return (NULL);
+	new[i++] = 34;
+	while(str[k] != '\0')
+		new[i++] = str[k++];
+	new[i++] = 34;
+	new[i] = '\0';
+	free(str);
+	return (new);
+}

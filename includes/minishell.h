@@ -99,6 +99,7 @@ char		*get_value(char *str, int index);
 char		*get_env(char *env, char *str);
 int			d_hd(char *str, int i);
 int			separator_in_quotes(char *str, int i);
+char	*add_quote(char *str, char *value);
 
 // List
 void		list_am(t_token *token, t_pars **pars);

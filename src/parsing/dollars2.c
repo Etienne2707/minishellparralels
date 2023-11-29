@@ -50,6 +50,35 @@ char	*strcpyn(char *dest, char *src, int index, int size)
 	return (dest);
 }
 
+int	check_in_quote2(char *str, int index)
+{
+	int	i;
+	int	start;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == 34)
+		{
+			start = ++i;
+			while ((str[i] != 34) && str[i] != '\0')
+				i++;
+			if (index >= start && index < i)
+				return (0);
+		}
+		else if (str[i] == 39)
+		{
+			start = ++i;
+			while ((str[i] != 39) && str[i] != '\0')
+				i++;
+			if (index >= start && index < i)
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 char	*change_value2(char *new, char *str, int size, int index)
 {
 	while (str[size] != '\0')
@@ -71,13 +100,14 @@ char	*change_value(char *env, char *str)
 
 	i = 0;
 	index = get_index(str);
+	env = add_quote(env,str);
 	size = index + 1;
 	while (str[size] != '\0' && str[size] != 32 && str[size] != '$'
 		&& str[size] != 39 && str[size] != 34 && is_n_a(str[size]) == 1)
 		if (str[size++] == '?')
 			break ;
 	new = malloc(sizeof(char *) * (ft_strlen(str) - (size - index))
-			+ ft_strlen(env) + 1);
+			+ ft_strlen(env) + 1 + 2);
 	if (!new)
 		return (NULL);
 	new = ft_strncpy(new, str, index);
