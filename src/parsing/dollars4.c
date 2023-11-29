@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:52:55 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/27 07:27:44 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:27:28 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ char	*ft_dollars2(char *str, char **envp, char *dest)
 
 char	*add_quote(char *str, char *value)
 {
-	int i;
-	int quote;
-	char *new;
-	int k;
+	int		i;
+	int		quote;
+	char	*new;
+	int		k;
 
 	i = 0;
 	k = 0;
@@ -107,7 +107,7 @@ char	*add_quote(char *str, char *value)
 	if (!new)
 		return (NULL);
 	new[i++] = 34;
-	while(str[k] != '\0')
+	while (str[k] != '\0')
 		new[i++] = str[k++];
 	new[i++] = 34;
 	new[i] = '\0';

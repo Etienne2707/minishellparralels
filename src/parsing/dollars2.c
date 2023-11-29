@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:18:00 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/27 07:11:38 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:26:37 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*change_value(char *env, char *str)
 
 	i = 0;
 	index = get_index(str);
-	env = add_quote(env,str);
+	env = add_quote(env, str);
 	size = index + 1;
 	while (str[size] != '\0' && str[size] != 32 && str[size] != '$'
 		&& str[size] != 39 && str[size] != 34 && is_n_a(str[size]) == 1)

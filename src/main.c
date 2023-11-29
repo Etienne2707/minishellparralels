@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:45 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/29 14:48:15 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:35:16 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ int	init_vars(char ***envpcpy, char **envp, t_wd **wd)
 	return (EXIT_SUCCESS);
 }
 
+static void	launch_signals(void)
+{
+	signal(SIGINT, &handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+}
+
 static void	minishell_loop(char **envp, t_pars *pars, t_token *token, t_wd *wd)
 {
 	char	*str;
@@ -35,8 +41,7 @@ static void	minishell_loop(char **envp, t_pars *pars, t_token *token, t_wd *wd)
 	str = NULL;
 	while (-1)
 	{
-		signal(SIGINT, &handle_sigint);
-		signal(SIGQUIT, SIG_IGN);
+		launch_signals();
 		str = readline("minishell$ ");
 		if (!str)
 			handle_ctrl_d(envp, wd);
@@ -50,9 +55,11 @@ static void	minishell_loop(char **envp, t_pars *pars, t_token *token, t_wd *wd)
 				executor(pars, &envp, wd);
 				ft_free_list(&pars);
 				pars = NULL;
+				str = NULL;
 			}
-			printf("exit status : %d\n", g_exit_status);
 		}
+		if (str != NULL)
+			free(str);
 	}
 }
 
