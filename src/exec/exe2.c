@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 03:32:35 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/29 04:41:53 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,20 @@ static int	is_builtin(char **cmd_args, char **envp, int *exit, t_pars *pars)
 
 static void	exe_err(t_pars *pars, char **envp, char **path)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(pars->cmd[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
+	int	exit_code;
+
+	exit_code = 0;
+	if (pars->cmd[0] || (pars->cmd[0] == 0 && (pars->outfile == 0
+				&& pars->infile == 0)))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(pars->cmd[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
+		exit_code = 127;
+	}
 	free_remaining(pars, envp);
 	ft_free_double_array(path);
-	exit(127);
+	exit(exit_code);
 }
 
 void	exe_cmd(t_pars *pars, char **envp)
