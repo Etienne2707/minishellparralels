@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 19:07:02 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 14:56:50 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 01:57:48 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	is_builtin(char **cmd_args, char **envp, int *exit, t_pars *pars)
 	if (ft_strncmp(cmd_args[0], "env", 4) == 0)
 		*exit = ft_env(pars, envp);
 	if (ft_strncmp(cmd_args[0], "exit", 5) == 0)
-		*exit = EXIT_SUCCESS;
+		*exit = ft_exit_pipeline(pars->cmd);
 	if (ft_strncmp(cmd_args[0], "pwd", 4) == 0)
 		*exit = ft_pwd(pars);
 	if (ft_strncmp(cmd_args[0], "export", 7) == 0)

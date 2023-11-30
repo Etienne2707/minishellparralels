@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:27:00 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 03:20:14 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 02:00:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,27 @@ int	ft_exit(t_pars *pars, char **args, char **envp, t_wd *wd)
 	ft_putstr_fd("exit\n", 1);
 	free_everything(pars, envp, wd);
 	exit(exit_code);
+}
+
+int	ft_exit_pipeline(char **args)
+{
+	int	exit_code;
+
+	if (args[1])
+		exit_code = ft_atoi(args[1]);
+	else
+		exit_code = g_exit_status;
+	if (args[1] && args[2])
+	{
+		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
+	else if (args[1] && (!is_arg_valid(args[1]) || ft_strlen(args[1]) > 20))
+	{
+		ft_putstr_fd("minishell: exit: ", 2);
+		ft_putstr_fd(args[1], 2);
+		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		return (2);
+	}
+	return (exit_code);
 }
