@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:48:24 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/30 01:58:00 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 02:24:34 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int			d_hd(char *str, int i);
 int			separator_in_quotes(char *str, int i);
 char		*add_quote(char *str, char *value);
 int			check_in_quote2(char *str, int index);
-char	*remove_space(char *str);
-int	ft_strlen_wspace(char *str);
+char		*remove_space(char *str);
+int			ft_strlen_wspace(char *str);
 
 // List
 void		list_am(t_token *token, t_pars **pars);

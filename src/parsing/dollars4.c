@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:52:55 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 16:27:28 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 02:24:56 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*add_quote(char *str, char *value)
 		return (NULL);
 	new[i++] = 34;
 	while (str[k] != '\0')
-		new[i++] = str[k++]; 
+		new[i++] = str[k++];
 	new[i++] = 34;
 	new[i] = '\0';
 	free(str);

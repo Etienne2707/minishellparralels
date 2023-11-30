@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dollars5.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/30 02:25:06 by mle-duc           #+#    #+#             */
+/*   Updated: 2023/11/30 02:25:42 by mle-duc          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_strlen_wspace(char *str)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -25,9 +37,9 @@ int	ft_strlen_wspace(char *str)
 
 char	*remove_space(char *str)
 {
-	int i;
-	int len;
-	char *new;
+	int		i;
+	int		len;
+	char	*new;
 
 	new = malloc(sizeof(char) * ft_strlen_wspace(str) + 1);
 	if (!new)
