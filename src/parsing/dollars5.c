@@ -6,11 +6,23 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:25:06 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/30 02:25:42 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 08:30:39 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_last_word(char *str, int i)
+{
+	while (str[i] == 32 && str[i] != 0)
+	{
+		i++;
+	}
+	if (str[i] == 0)
+		return (1);
+	else
+		return (0);
+}
 
 int	ft_strlen_wspace(char *str)
 {
@@ -19,7 +31,7 @@ int	ft_strlen_wspace(char *str)
 
 	i = 0;
 	len = 0;
-	while (str[i] != '\0')
+	while (i < ft_strlen(str) && str[i] != '\0')
 	{
 		if (str[i] == 32)
 		{
@@ -27,8 +39,6 @@ int	ft_strlen_wspace(char *str)
 				i++;
 			len++;
 		}
-		if (i >= ft_strlen(str))
-			break ;
 		i++;
 		len++;
 	}
@@ -46,17 +56,13 @@ char	*remove_space(char *str)
 		return (NULL);
 	len = 0;
 	i = 0;
-	while (str[i] != '\0')
+	while (i < ft_strlen(str) && str[i] != '\0')
 	{
-		if (str[i] == 32)
-		{
-			new[len++] = str[i++];
+		if (str[i] != 32 || (str[i] == 32 && !is_last_word(str, i)))
+			new[len++] = str[i];
+		if (str[i++] == 32)
 			while (str[i] == 32 && str[i] != '\0')
 				i++;
-		}
-		if (i >= ft_strlen(str))
-			break ;
-		new[len++] = str[i++];
 	}
 	new[len] = '\0';
 	free(str);
