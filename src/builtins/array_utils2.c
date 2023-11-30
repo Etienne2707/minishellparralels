@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:35:07 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/16 11:45:25 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 01:38:22 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	ft_pop_2(char **matrix, char ***new_matrix, int i, char *to_pop)
 	while (++j < i)
 	{
 		if (!(ft_strncmp(matrix[j], to_pop, after_equal(matrix[j]) - 1) == 0
-				&& matrix[j][ft_strlen(to_pop)] == '='))
+				&& (ft_strlen(to_pop) < after_equal(matrix[j])
+				&& matrix[j][ft_strlen(to_pop)] == '=')))
 		{
 			(*new_matrix)[k] = ft_strdup(matrix[j]);
 			if (!(*new_matrix)[k])
