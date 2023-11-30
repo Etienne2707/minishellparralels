@@ -101,6 +101,8 @@ int			d_hd(char *str, int i);
 int			separator_in_quotes(char *str, int i);
 char		*add_quote(char *str, char *value);
 int			check_in_quote2(char *str, int index);
+char	*remove_space(char *str);
+int	ft_strlen_wspace(char *str);
 
 // List
 void		list_am(t_token *token, t_pars **pars);

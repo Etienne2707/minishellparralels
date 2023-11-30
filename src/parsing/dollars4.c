@@ -103,12 +103,13 @@ char	*add_quote(char *str, char *value)
 	quote = check_in_quote2(value, get_index(value));
 	if (quote == 0)
 		return (str);
+	str = remove_space(str);
 	new = malloc(sizeof(char) * ft_strlen(str) + 3);
 	if (!new)
 		return (NULL);
 	new[i++] = 34;
 	while (str[k] != '\0')
-		new[i++] = str[k++];
+		new[i++] = str[k++]; 
 	new[i++] = 34;
 	new[i] = '\0';
 	free(str);
