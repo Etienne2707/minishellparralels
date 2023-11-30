@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 02:25:06 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/30 08:30:39 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 08:39:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_strlen_wspace(char *str)
 
 	i = 0;
 	len = 0;
+	while (str[i] != 0 && str[i] == 32)
+		i++;
 	while (i < ft_strlen(str) && str[i] != '\0')
 	{
 		if (str[i] == 32)
@@ -56,6 +58,8 @@ char	*remove_space(char *str)
 		return (NULL);
 	len = 0;
 	i = 0;
+	while (str[i] != 0 && str[i] == 32)
+		i++;
 	while (i < ft_strlen(str) && str[i] != '\0')
 	{
 		if (str[i] != 32 || (str[i] == 32 && !is_last_word(str, i)))
