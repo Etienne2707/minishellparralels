@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:53:22 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 23:35:51 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 09:57:28 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	exec_single(t_pars *pars, int nb_cmd, char ***envp, t_wd *wd)
 	}
 	if (nb_cmd == 1 && pars->cmd && is_builtin(pars->cmd))
 	{
-		if (pars->delimiter != NULL)
+		if (pars->delimiter != NULL && pars->outfile != -1
+			&& pars->infile != -1)
 			ft_heredoc(pars, NULL, 0);
 		if (pars->cmd && is_builtin(pars->cmd)
 			&& pars->outfile != -1 && pars->infile != -1)

@@ -6,7 +6,7 @@
 /*   By: educlos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:17:32 by educlos           #+#    #+#             */
-/*   Updated: 2023/11/28 12:43:13 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 10:06:46 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ void	get_outfile(t_token *token, char **arg, int i)
 	{
 		return ;
 	}
-	close(fd);
+	if (fd > 0)
+		close(fd);
 }

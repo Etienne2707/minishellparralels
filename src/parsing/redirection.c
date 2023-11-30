@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:45:25 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/28 12:42:40 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 10:05:05 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	get_append(t_token *token, char **arg, int i)
 	{
 		return ;
 	}
-	close(fd);
+	if (fd > 0)
+		close(fd);
 }
 
 char	*ft_remove_quote3(char *str)
