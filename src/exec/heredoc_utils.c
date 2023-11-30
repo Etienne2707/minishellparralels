@@ -6,7 +6,7 @@
 /*   By: mle-duc <mle-duc@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:01:45 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 18:39:31 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 09:17:04 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	handle_ctrl_d_heredoc(t_pars *pars, int j)
 	ft_putstr_fd("by end-of-file (wanted `", 2);
 	ft_putstr_fd(pars->delimiter[j], 2);
 	ft_putstr_fd("')\n", 2);
+	g_exit_status = -2;
 }
 
 void	heredoc_loop(t_pars *pars, int *pipefd, int i, char *str)
@@ -50,7 +51,7 @@ void	heredoc_loop(t_pars *pars, int *pipefd, int i, char *str)
 	j = -1;
 	fd = 0;
 	stdin_save = dup(STDIN_FILENO);
-	while (pars->delimiter[++j] != NULL && g_exit_status != -2)
+	while (pars->delimiter[++j] != NULL && errno != EBADF)
 	{
 		fd = open_heredoc_file(str);
 		line = readline("> ");

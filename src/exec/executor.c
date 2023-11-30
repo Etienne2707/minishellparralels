@@ -6,7 +6,7 @@
 /*   By: mle-duc <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:44:30 by mle-duc           #+#    #+#             */
-/*   Updated: 2023/11/29 19:11:15 by mle-duc          ###   ########.fr       */
+/*   Updated: 2023/11/30 09:34:34 by mle-duc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	close_pipes(int *pipefd, int nb_of_cmd)
 		close(pipefd[i++]);
 }
 
-void	wait_and_close(int *pipefd, int nb_cmd)
+void	wait_and_close(int *pipefd, int nb_cmd, int nb_child)
 {
 	int	i;
 	int	status;
@@ -56,10 +56,10 @@ void	wait_and_close(int *pipefd, int nb_cmd)
 	i = 0;
 	status = 0;
 	close_pipes(pipefd, nb_cmd);
-	while (i < nb_cmd)
+	while (i < nb_child)
 	{
 		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
+		if (WIFEXITED(status) && errno != EBADF && g_exit_status != -2)
 			g_exit_status = WEXITSTATUS(status);
 		i++;
 	}
@@ -88,23 +88,24 @@ int	executor(t_pars *pars, char ***envp, t_wd *wd)
 	int	*pipefd;
 	int	i;
 	int	nb_cmd;
-	int	boolean;
+	int	nb_child;
 
-	boolean = 0;
-	if (g_exit_status == -1)
-		boolean = 1;
 	nb_cmd = count_cmd(pars);
+	nb_child = 0;
 	if (exec_single(pars, nb_cmd, envp, wd))
 		return (0);
 	pipefd = create_pipes(nb_cmd);
 	launch_heredoc(pars, pipefd, nb_cmd);
 	i = -1;
-	while (++i < nb_cmd && (g_exit_status != -1 || boolean))
+	while (++i < nb_cmd && errno != EBADF)
 	{
 		if (pars)
+		{
+			nb_child++;
 			child(pipefd, pars, i, *envp);
+		}
 		pars = pars->next;
 	}
-	wait_and_close(pipefd, nb_cmd);
+	wait_and_close(pipefd, nb_cmd, nb_child);
 	return (0);
 }
